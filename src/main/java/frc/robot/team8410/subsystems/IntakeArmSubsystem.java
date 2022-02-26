@@ -6,7 +6,6 @@ package frc.robot.team8410.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;  
 
@@ -15,7 +14,7 @@ public class IntakeArmSubsystem extends SubsystemBase {
 
   private DutyCycleEncoder intakearm = new DutyCycleEncoder(1);
 
-  private final TalonSRX m_lift = new TalonSRX(4);
+  private final TalonSRX m_lift = new TalonSRX(4); 
 
   private final Joystick m_stick = new Joystick(5);
 
