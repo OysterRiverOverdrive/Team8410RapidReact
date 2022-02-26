@@ -13,6 +13,8 @@ public class HangerSubsystem extends SubsystemBase {
     PWMVictorSPX clipMotor1 = new PWMVictorSPX(8);
     PWMVictorSPX clipMotor2 = new PWMVictorSPX(9);
     MotorControllerGroup clipGroup = new MotorControllerGroup(clipMotor1, clipMotor2);
+
+    //using conforce spring + winch to rotate arm
     
     private DutyCycleEncoder arm_Encoder = new DutyCycleEncoder(0);
     private DutyCycleEncoder clip_Encoder = new DutyCycleEncoder(1);

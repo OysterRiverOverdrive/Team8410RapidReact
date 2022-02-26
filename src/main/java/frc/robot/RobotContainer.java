@@ -7,6 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.commands.stopHangCmd;
+import frc.robot.team8410.subsystems.HangerSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -15,6 +20,9 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private final HangerSubsystem hanger = new HangerSubsystem();
+  private final hangCmd hang = new hangCmd(hanger);
+  private final stopHangCmd stopHang = new stopHangCmd(hanger);
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -29,7 +37,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+    POVButton traverseButton = new POVButton(new Joystick(0), 0);
+    //sets POV Button at angle 0 (top of the dpad on xbox controller)
+    traverseButton.whenPressed(hang);
+    //when button is pressed, robot will hang
+    traverseButton.whenReleased(stopHang);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
