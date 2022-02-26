@@ -14,7 +14,24 @@ package frc.robot;
  */
 public final class Constants 
 {
+
    
+   public static int LEFT_MOTOR_1_CANID = 0; // first motor that runs drivetrain on the left side
+   public static int LEFT_MOTOR_2_CANID = 1;// second motor ont he left that runs drivetrain
+   public static int RIGHT_MOTOR_1_CANID = 2;// first motor that runs drivetrain on the right
+   public static int RIGHT_MOTOR_2_CANID = 3;// second motor that runs drivetrain on the right
+
+   public static int LIFTER_MOTOR_CANID = 4;// motor to raise intake 
+   public static int INTAKE_MOTOR_CANID = 5;// motor to run the intake rollers
+   public static int TOP_RIGHT_HANGER_MOTOR_CANID = 6;// the motor for hanger on the top right
+   public static int BOTTOM_RIGHT_HANGER_MOTOR_CANID = 7;// the motor for hanger on the bottom right
+   public static int TOP_LEFT_HANGER_MOTOR_CANID = 8;// the motor for hanger on the top left
+   public static int BOTTOM_LEFT_HANGER_MOTOR_CANID = 9;// the motor for hanger on the bottom left
+
+
+
+   
+
     
 
 
