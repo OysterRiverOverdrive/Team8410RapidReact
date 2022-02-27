@@ -15,13 +15,13 @@ import edu.wpi.first.wpilibj.Joystick;
 public class DrivetrainSubsystem extends SubsystemBase {
 
   // in our robot we have two motors on left
-  private final TalonSRX m_left1 = new TalonSRX(0);
-  private final TalonSRX m_left2 = new TalonSRX(1);
+  private final TalonSRX m_left1 = new TalonSRX(1);
+  private final TalonSRX m_left2 = new TalonSRX(2);
   //MotorControllerGroup liftSide = new MotorControllerGroup(m_left1, m_left2);
 
   // in our robot we have two motors on right
-  private final TalonSRX m_right1 = new TalonSRX(2);
-  private final TalonSRX m_right2 = new TalonSRX(3);
+  private final TalonSRX m_right1 = new TalonSRX(3);
+  private final TalonSRX m_right2 = new TalonSRX(4);
   //MotorControllerGroup m_right = new MotorControllerGroup(m_right1, m_right2);
 
   // we use diffrential drive
