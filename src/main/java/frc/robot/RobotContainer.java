@@ -13,6 +13,10 @@ import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.stopHangCmd;
 import frc.robot.team8410.subsystems.HangerSubsystem;
 
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.commands.TeleopDriveCommand;
+
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -23,12 +27,17 @@ public class RobotContainer {
   private final HangerSubsystem hanger = new HangerSubsystem();
   private final hangCmd hang = new hangCmd(hanger);
   private final stopHangCmd stopHang = new stopHangCmd(hanger);
+
+  private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+  private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    drivetrain.setDefaultCommand(teleopCommand);
   }
 
   /**
