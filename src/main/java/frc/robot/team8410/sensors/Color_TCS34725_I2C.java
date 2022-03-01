@@ -345,6 +345,7 @@ public class Color_TCS34725_I2C
             super(message);
         }
     }
+    
 
     
 }
