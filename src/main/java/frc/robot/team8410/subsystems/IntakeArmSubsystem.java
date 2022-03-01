@@ -15,7 +15,7 @@ public class IntakeArmSubsystem extends SubsystemBase {
 
   private DutyCycleEncoder intakearm = new DutyCycleEncoder(1);
 
-  private final TalonSRX m_lift = new TalonSRX(4); 
+  private final TalonSRX m_lift = new TalonSRX(4)
 
   private final Joystick m_stick = new Joystick(5);
 
