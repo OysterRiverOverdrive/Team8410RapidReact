@@ -1,0 +1,30 @@
+# This defines a "Github Workflow"
+# https://docs.github.com/en/actions/using-workflows/creating-starter-workflows-for-your-organization
+# 
+# This workflow will help by adding some checks when a pull request is created for things like 
+# making sure that a syntax error doesn't get introduced that prevents the code in 
+# the main branch from building.
+
+name: pr-checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # This build will run in a roborio docker container that provided by wpilib.
+    # Versions can be seen in:
+    # https://hub.docker.com/r/wpilib/roborio-cross-ubuntu/tags
+    container: wpilib/roborio-cross-ubuntu:2021-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Verify that the java code compiles
+        run: ./gradlew --console=verbose build
+
+      - name: Run the spotless check to make sure the format of the code looks fine
+        run: ./gradlew :spotlessCheck

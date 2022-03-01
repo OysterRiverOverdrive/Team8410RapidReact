@@ -4,10 +4,11 @@
 
 package frc.robot.team8410.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;  
 
 
 public class IntakeArmSubsystem extends SubsystemBase {
@@ -19,13 +20,30 @@ public class IntakeArmSubsystem extends SubsystemBase {
   private final Joystick m_stick = new Joystick(5);
 
   /** Creates a new IntakeArmSubsystem. */
-  public IntakeArmSubsystem() {}
+  public IntakeArmSubsystem() 
+  {
+
+  }
 
   @Override
-  public void periodic() {
+  public void periodic()
+   {
 
     intakearm.setDistancePerRotation(1);
 
     // This method will be called once per scheduler run
   }
+
+
+   public void raiseArm()
+   {
+    //
+   }
+
+
+   public void lowerArm()
+   {
+
+   }
+
 }
