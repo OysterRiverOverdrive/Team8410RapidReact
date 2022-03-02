@@ -70,7 +70,7 @@ public class Robot extends TimedRobot
 
     /*******/
     // This is where we will read the sensors and call the set method of the sensorValue object
-    // 
+    //  This also needs the ultrasonic values
 
     if(colorTCSSensor.isRed())
     {
