@@ -323,20 +323,29 @@ public class Color_TCS34725_I2C
         return "0x" + s;
     }
 
-   //@Override
-    public void initSendable(SendableBuilder builder) 
+   
+    public boolean isRedBall() 
     {
-        
-            try {
-                TCS34725_Values color = getRawData();
-                SmartDashboard.putNumber("R value",color.getR());
-                SmartDashboard.putNumber("G value",color.getG());
-                SmartDashboard.putNumber("B value",color.getB());
-                SmartDashboard.putNumber("C value",color.getC());
+         boolean retVal = false;
+
+        try {
+                TCS34725_Values colorVaues = getRawData();
+                double blue = colorVaues.getB();
+                double redOverBlue =blue/colorVaues.getR();
+
+                if (redOverBlue > 3)
+                {
+                    retVal = true;
+                }
+                else
+                    retVal = false;
+               
             } catch (Exception e) 
             {
-            e.printStackTrace();
+              e.printStackTrace();
             }
+
+            return retVal;
         
     }
 
@@ -346,6 +355,17 @@ public class Color_TCS34725_I2C
         }
     }
     
+
+    public boolean isRed()
+    {
+        boolean retVal = false;
+
+        
+
+
+
+        return retVal;
+    }
 
     
 }

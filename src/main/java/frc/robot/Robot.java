@@ -7,6 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.team8410.sensors.Color_RevroboticsVer3;
+import frc.robot.team8410.sensors.Color_TCS34725_I2C;
+import frc.robot.team8410.sensors.SensorValues;
+import frc.robot.team8410.diagnostics.Diagnostics8410;
+
 
 
 /**
@@ -19,6 +24,10 @@ public class Robot extends TimedRobot
 {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  private SensorValues sensorValues = new SensorValues();
+  private Color_RevroboticsVer3 colorRevSensor = new Color_RevroboticsVer3();
+  private Color_TCS34725_I2C colorTCSSensor = new Color_TCS34725_I2C();
+  private Diagnostics8410 diagnostics = new Diagnostics8410();
 
   
   /**
@@ -31,6 +40,17 @@ public class Robot extends TimedRobot
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    try
+    {
+      colorTCSSensor.initialize(2,1);
+      colorTCSSensor.enable();
+    }
+    catch(Exception e)
+    {
+       e.printStackTrace();
+    }
+
     
   }
 
@@ -47,6 +67,37 @@ public class Robot extends TimedRobot
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
+    /*******/
+    // This is where we will read the sensors and call the set method of the sensorValue object
+    // 
+
+    if(colorTCSSensor.isRed())
+    {
+      sensorValues.setBlueBall_TSCSEnsor(true);
+      sensorValues.setBlueBall_TSCSEnsor(false);
+    }
+    else
+    {
+      sensorValues.setBlueBall_TSCSEnsor(false);
+      sensorValues.setBlueBall_TSCSEnsor(true);
+    }
+     
+
+    if(colorRevSensor.isRed())
+    {
+      sensorValues.setRedBall_RevSensor(true);
+      sensorValues.setBlueBall_revSensor(false);
+    }
+    else
+    {
+      sensorValues.setRedBall_RevSensor(false);
+      sensorValues.setBlueBall_revSensor(true);
+    }
+     
+
+    diagnostics.setLEDsAndDashboard(sensorValues);
+
     CommandScheduler.getInstance().run();
   }
 
@@ -86,7 +137,10 @@ public class Robot extends TimedRobot
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() 
+  {
+
+  }
 
   @Override
   public void testInit() {
