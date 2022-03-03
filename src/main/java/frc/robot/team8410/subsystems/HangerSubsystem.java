@@ -1,6 +1,7 @@
 package frc.robot.team8410.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -15,11 +16,14 @@ public class HangerSubsystem extends SubsystemBase {
     MotorControllerGroup clipGroup = new MotorControllerGroup(clipMotor1, clipMotor2);
 
     //using conforce spring + winch to rotate arm
+    PWMVictorSPX winchMotor = new PWMVictorSPX(10);
     
     private DutyCycleEncoder arm_Encoder = new DutyCycleEncoder(0);
     private DutyCycleEncoder clip_Encoder = new DutyCycleEncoder(1);
-
+    private DutyCycleEncoder winch_Encoder = new DutyCycleEncoder(2);
     
+    //winch causes arm to rotate up
+
     public void armUp(double upDist){
         arm_Encoder.reset();
         if(arm_Encoder.getDistance() < upDist){
@@ -61,6 +65,17 @@ public class HangerSubsystem extends SubsystemBase {
         }
     }
 
+    //rotate method causes arm to rotate up
+    public void rotate(double rotateDist){
+        winch_Encoder.reset();
+        if(winch_Encoder.getDistance() < rotateDist){ 
+            winchMotor.set(1.0); //sets speed of winch motor to 1
+        }
+        else{
+            winchMotor.set(0.0); //sets speed of winch motor to 0
+        }
+    }
+
 
     public HangerSubsystem() {}
 
@@ -68,6 +83,7 @@ public class HangerSubsystem extends SubsystemBase {
     public void periodic() {
       arm_Encoder.setDistancePerRotation(1.0);
       clip_Encoder.setDistancePerRotation(1.0);
+      winch_Encoder.setDistancePerRotation(1.0);
     }
     // This method will be called once per scheduler run
 }
