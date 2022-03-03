@@ -18,6 +18,10 @@ import frc.robot.team8410.subsystems.HangerSubsystem;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 
+//package frc.robot.team8410.sensors;
+
+
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,12 +49,18 @@ public class RobotContainer {
 
     powerDistribution = new PowerDistribution(0, PowerDistribution.ModuleType.kCTRE);
 
+    // displaying subsystems
     SmartDashboard.putData(hanger);
     SmartDashboard.putData(drivetrain);
+
+    //display commands
+    SmartDashboard.putData(teleopCommand);
+    SmartDashboard.putData(hang);
+    SmartDashboard.putData(stopHang);
     SmartDashboard.putData(teleopCommand);
 
     
-
+    //Displaying power distribution
     SmartDashboard.putNumber("Temperature", powerDistribution.getTemperature());
     SmartDashboard.putNumber("Total Current", powerDistribution.getTotalCurrent());
     SmartDashboard.putNumber("Voltage", powerDistribution.getVoltage());
@@ -80,6 +90,12 @@ public class RobotContainer {
       SmartDashboard.putBoolean("Power is Fine", true);
     } else {
       SmartDashboard.putBoolean("Power is High", false);
+
+
+    
+    SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
+    
+
     }
   
   }
