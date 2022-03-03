@@ -4,6 +4,7 @@
 
 package frc.robot.team8410.subsystems;
 
+import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -16,18 +17,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DrivetrainSubsystem extends SubsystemBase {
 
   // in our robot we have two motors on left
-
+  
 
   //TODO 
   //ashish added Please use constants for CAN IDs
-  private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(0);
-  private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(1);
+  private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(Constants.LEFT_MOTOR_1_CANID);
+  private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(Constants.LEFT_MOTOR_2_CANID);
   MotorControllerGroup leftSide = new MotorControllerGroup(m_left1, m_left2);
 
 
   // in our robot we have two motors on right
-  private final WPI_TalonSRX m_right1 = new WPI_TalonSRX(2);
-  private final WPI_TalonSRX m_right2 = new WPI_TalonSRX(3);
+  private final WPI_TalonSRX m_right1 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_1_CANID);
+  private final WPI_TalonSRX m_right2 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_2_CANID);
   MotorControllerGroup rightSide = new MotorControllerGroup(m_right1, m_right2);
 
   // we use diffrential drive
