@@ -11,6 +11,10 @@ import frc.robot.team8410.diagnostics.Diagnostics8410;
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
+import frc.robot.team8410.sensors.UltrasonicBack;
+import frc.robot.team8410.sensors.UltrasonicLeft;
+import frc.robot.team8410.sensors.UltrasonicRight;
+
 
 
 
@@ -63,6 +67,7 @@ public class Robot extends TimedRobot
    */
   @Override
   public void robotPeriodic() {
+
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -71,6 +76,10 @@ public class Robot extends TimedRobot
     /*******/
     // This is where we will read the sensors and call the set method of the sensorValue object
     //  This also needs the ultrasonic values
+
+    UltrasonicBack.BACK_SENSOR_DISTANCE();
+    UltrasonicLeft.LEFT_SENSOR_DISTANCE();
+    UltrasonicRight.RIGHT_SENSOR_DISTANCE();
 
     if(colorTCSSensor.isRed())
     {
