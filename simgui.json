@@ -1,4 +1,33 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "Talon SRX[0]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[1]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[2]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon SRX[3]": {
+        "header": {
+          "open": true
+        }
+      }
+    },
+    "PWM Outputs": {
+      "window": {
+        "visible": true
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -9,20 +38,7 @@
       "/LiveWindow/Ungrouped/DigitalInput[1]": "Digital Input",
       "/LiveWindow/Ungrouped/MotorControllerGroup[1]": "Motor Controller",
       "/LiveWindow/Ungrouped/MotorControllerGroup[2]": "Motor Controller",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
-      "/SmartDashboard/DrivetrainSubsystem": "Subsystem",
-      "/SmartDashboard/HangerSubsystem": "Subsystem",
-      "/SmartDashboard/TeleopDriveCommand": "Command",
-      "/SmartDashboard/hangCmd": "Command",
-      "/SmartDashboard/stopHangCmd": "Command"
-    }
-  },
-  "NetworkTables": {
-    "SmartDashboard": {
-      "DrivetrainSubsystem": {
-        "open": true
-      },
-      "open": true
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   }
 }
