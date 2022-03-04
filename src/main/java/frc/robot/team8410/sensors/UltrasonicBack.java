@@ -9,7 +9,7 @@ public class UltrasonicBack
   private final static AnalogInput m_ultrasonic1 = new AnalogInput(kUltrasonicPort);
  
  //TODO: are we sure these values are inches
-   public static double getBaclSensorDistance()
+   public static double getBackSensorDistance()
    {
       return  m_ultrasonic1.getValue()*0.0536;
    } 
