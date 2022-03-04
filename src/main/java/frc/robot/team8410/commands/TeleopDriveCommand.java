@@ -11,7 +11,9 @@ public class TeleopDriveCommand extends CommandBase {
   /** Creates a new TeleopDriveCommand. */
 
   private final DrivetrainSubsystem driveSub;
-  public TeleopDriveCommand( DrivetrainSubsystem drive) {
+
+  public TeleopDriveCommand( DrivetrainSubsystem drive) 
+  {
     driveSub = drive;
     addRequirements(drive);
     // Use addRequirements() here to declare subsystem dependencies.

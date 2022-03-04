@@ -4,17 +4,12 @@
 
 package frc.robot.team8410.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
@@ -22,6 +17,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   // in our robot we have two motors on left
 
+
+  //TODO 
+  //ashish added Please use constants for CAN IDs
   private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(0);
   private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(1);
   MotorControllerGroup leftSide = new MotorControllerGroup(m_left1, m_left2);

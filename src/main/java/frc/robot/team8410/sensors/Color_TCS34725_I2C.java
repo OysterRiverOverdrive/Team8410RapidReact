@@ -12,13 +12,12 @@ package frc.robot.team8410.sensors;
 
 
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.util.sendable.SendableBuilder;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.*;
+
+import edu.wpi.first.wpilibj.*;
 
 /**
  * Driver for the TCS34725 RGB color sensor. Adapted for roboRio/WPILib
@@ -322,20 +321,29 @@ public class Color_TCS34725_I2C
         return "0x" + s;
     }
 
-   //@Override
-    public void initSendable(SendableBuilder builder) 
+   
+    public boolean isRedBall() 
     {
-        
-            try {
-                TCS34725_Values color = getRawData();
-                SmartDashboard.putNumber("R value",color.getR());
-                SmartDashboard.putNumber("G value",color.getG());
-                SmartDashboard.putNumber("B value",color.getB());
-                SmartDashboard.putNumber("C value",color.getC());
+         boolean retVal = false;
+
+        try {
+                TCS34725_Values colorVaues = getRawData();
+                double blue = colorVaues.getB();
+                double redOverBlue =blue/colorVaues.getR();
+
+                if (redOverBlue > 3)
+                {
+                    retVal = true;
+                }
+                else
+                    retVal = false;
+               
             } catch (Exception e) 
             {
-            e.printStackTrace();
+              e.printStackTrace();
             }
+
+            return retVal;
         
     }
 
@@ -343,6 +351,18 @@ public class Color_TCS34725_I2C
         public TransferAbortedException(String message) {
             super(message);
         }
+    }
+    
+
+    public boolean isRed()
+    {
+        boolean retVal = false;
+
+        
+
+
+
+        return retVal;
     }
 
     

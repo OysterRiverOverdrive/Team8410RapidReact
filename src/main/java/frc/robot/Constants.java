@@ -29,10 +29,4 @@ public final class Constants
    public static int BOTTOM_LEFT_HANGER_MOTOR_CANID = 9;// the motor for hanger on the bottom left
 
 
-
-   
-
-    
-
-
 }
