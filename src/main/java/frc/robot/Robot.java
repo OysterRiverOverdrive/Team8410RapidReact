@@ -77,35 +77,35 @@ public class Robot extends TimedRobot
     // This is where we will read the sensors and call the set method of the sensorValue object
     //  This also needs the ultrasonic values
 
-    sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
-    sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
-    sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
+    // sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
+    // sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
+    // sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
     
-    if(colorTCSSensor.isRed())
-    {
-      sensorValues.setBlueBall_TSCSEnsor(true);
-      sensorValues.setBlueBall_TSCSEnsor(false);
-    }
-    else
-    {
-      sensorValues.setBlueBall_TSCSEnsor(false);
-      sensorValues.setBlueBall_TSCSEnsor(true);
-    }
+    // if(colorTCSSensor.isRed())
+    // {
+    //   sensorValues.setBlueBall_TSCSEnsor(true);
+    //   sensorValues.setBlueBall_TSCSEnsor(false);
+    // }
+    // else
+    // {
+    //   sensorValues.setBlueBall_TSCSEnsor(false);
+    //   sensorValues.setBlueBall_TSCSEnsor(true);
+    // }
      
 
-    if(colorRevSensor.isRed())
-    {
-      sensorValues.setRedBall_RevSensor(true);
-      sensorValues.setBlueBall_revSensor(false);
-    }
-    else
-    {
-      sensorValues.setRedBall_RevSensor(false);
-      sensorValues.setBlueBall_revSensor(true);
-    }
+    // if(colorRevSensor.isRed())
+    // {
+    //   sensorValues.setRedBall_RevSensor(true);
+    //   sensorValues.setBlueBall_revSensor(false);
+    // }
+    // else
+    // {
+    //   sensorValues.setRedBall_RevSensor(false);
+    //   sensorValues.setBlueBall_revSensor(true);
+    // }
      
 
-    diagnostics.setLEDsAndDashboard(sensorValues);
+    // diagnostics.setLEDsAndDashboard(sensorValues);
 
     CommandScheduler.getInstance().run();
   }
