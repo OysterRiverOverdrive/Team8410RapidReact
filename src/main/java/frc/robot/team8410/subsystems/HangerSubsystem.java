@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class HangerSubsystem extends SubsystemBase {
     
-    PWMVictorSPX armMotor1 = new PWMVictorSPX(6);
-    PWMVictorSPX armMotor2 = new PWMVictorSPX(7);
+    PWMVictorSPX armMotor1 = new PWMVictorSPX(Constants.TOP_RIGHT_HANGER_MOTOR_CANID);
+    PWMVictorSPX armMotor2 = new PWMVictorSPX(Constants.TOP_LEFT_HANGER_MOTOR_CANID);
     MotorControllerGroup armGroup = new MotorControllerGroup(armMotor1, armMotor2);
-    PWMVictorSPX clipMotor1 = new PWMVictorSPX(8);
-    PWMVictorSPX clipMotor2 = new PWMVictorSPX(9);
+    PWMVictorSPX clipMotor1 = new PWMVictorSPX(Constants.BOTTOM_RIGHT_HANGER_MOTOR_CANID);
+    PWMVictorSPX clipMotor2 = new PWMVictorSPX(Constants.BOTTOM_LEFT_HANGER_MOTOR_CANID);
     MotorControllerGroup clipGroup = new MotorControllerGroup(clipMotor1, clipMotor2);
 
     //using conforce spring + winch to rotate arm
