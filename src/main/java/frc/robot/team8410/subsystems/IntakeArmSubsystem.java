@@ -46,4 +46,12 @@ public class IntakeArmSubsystem extends SubsystemBase {
 
    }
 
+// TODO
+//based on the design the arm has three states UP, DOWN and a resting state that is in between the UP and DOWN
+// so that the arm does not go ahead of the parameter limit - ashish added
+   public void restArm()
+   {
+
+   }
+
 }
