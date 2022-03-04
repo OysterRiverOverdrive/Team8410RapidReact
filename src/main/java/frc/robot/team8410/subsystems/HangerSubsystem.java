@@ -1,12 +1,15 @@
 package frc.robot.team8410.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class HangerSubsystem extends SubsystemBase {
+
+    //TODO
+    // Please use constants
     
     PWMVictorSPX armMotor1 = new PWMVictorSPX(Constants.TOP_RIGHT_HANGER_MOTOR_CANID);
     PWMVictorSPX armMotor2 = new PWMVictorSPX(Constants.TOP_LEFT_HANGER_MOTOR_CANID);
