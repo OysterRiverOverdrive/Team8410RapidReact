@@ -5,8 +5,10 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.team8410.subsystems.IntakeSubsystem;
 
 public class intakepushCmd extends CommandBase {
+  private IntakeSubsystem intake;
   /** Creates a new intakepullCmd. */
   public intakepushCmd() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -18,7 +20,9 @@ public class intakepushCmd extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    intake.intakePush();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

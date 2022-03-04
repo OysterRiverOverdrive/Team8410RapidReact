@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 
-public class IntakeArmSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
 
   // private DutyCycleEncoder intakearm = new DutyCycleEncoder(1);
 
@@ -29,19 +29,19 @@ public class IntakeArmSubsystem extends SubsystemBase {
   public void periodic() {
     
   }
-  public void intakepull () {
+  public void intakePull () {
     shooterUp.set(0.75);
     
   }
-  public void intakepush () {
+  public void intakePush () {
     shooterUp.set(-0.75);
     
   }
-  public void intakeraise () {
+  public void intakeRaise () {
     shooterArm.set(0.5);
     
   }
-  public void intakedrop () {
+  public void intakeDrop () {
     shooterArm.set(-0.5);
     
   }
