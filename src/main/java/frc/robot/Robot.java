@@ -77,10 +77,10 @@ public class Robot extends TimedRobot
     // This is where we will read the sensors and call the set method of the sensorValue object
     //  This also needs the ultrasonic values
 
-    UltrasonicBack.BACK_SENSOR_DISTANCE();
-    UltrasonicLeft.LEFT_SENSOR_DISTANCE();
-    UltrasonicRight.RIGHT_SENSOR_DISTANCE();
-
+    sensorValues.setUltrasonicBackInches(UltrasonicBack.getBaclSensorDistance());
+    sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
+    sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
+    
     if(colorTCSSensor.isRed())
     {
       sensorValues.setBlueBall_TSCSEnsor(true);

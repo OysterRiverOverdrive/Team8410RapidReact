@@ -12,13 +12,13 @@ public class SensorValues
     private int lidarDistanceInches;
 
     // holds the ultrasonic distance reading on the left side
-    private int ultrasonicLeftInches;
+    private double ultrasonicLeftInches;
 
      // holds the ultrasonic distance reading on the right side
-    private int ultrasonicRightInches;
+    private double ultrasonicRightInches;
     
      // holds the ultrasonic distance reading on the back of the robot
-    private int ultrasonicBackInches;
+    private double ultrasonicBackInches;
 
     // holds true if there is a red ball in front of the TCS sensor else  false  
     private boolean redBall_TSCSensor;
@@ -82,32 +82,32 @@ public class SensorValues
         this.redBall_TSCSensor = redBall_TSCSensor;
     }
 
-    public int getUltrasonicBackInches() 
+    public double getUltrasonicBackInches() 
     {
         return ultrasonicBackInches;
     }
 
-    public void setUltrasonicBackInches(int ultrasonicBackInches) 
+    public void setUltrasonicBackInches(double ultrasonicBackInches) 
     {
         this.ultrasonicBackInches = ultrasonicBackInches;
     }
 
-    public int getUltrasonicRightInches()
+    public double getUltrasonicRightInches()
     {
         return ultrasonicRightInches;
     }
 
-    public void setUltrasonicRightInches(int ultrasonicRightInches)
+    public void setUltrasonicRightInches(double ultrasonicRightInches)
     {
         this.ultrasonicRightInches = ultrasonicRightInches;
     }
 
-    public int getUltrasonicLeftInches()
+    public double getUltrasonicLeftInches()
     {
         return ultrasonicLeftInches;
     }
 
-    public void setUltrasonicLeftInches(int ultrasonicLeftInches)
+    public void setUltrasonicLeftInches(double ultrasonicLeftInches)
     {
         this.ultrasonicLeftInches = ultrasonicLeftInches;
     }
