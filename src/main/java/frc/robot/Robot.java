@@ -11,9 +11,6 @@ import frc.robot.team8410.diagnostics.Diagnostics8410;
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
-import frc.robot.team8410.sensors.UltrasonicBack;
-import frc.robot.team8410.sensors.UltrasonicLeft;
-import frc.robot.team8410.sensors.UltrasonicRight;
 
 
 
@@ -82,7 +79,9 @@ public class Robot extends TimedRobot
     sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
     sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
     sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
+
     
+  
     if(colorTCSSensor.isRed())
     {
       sensorValues.setBlueBall_TSCSEnsor(true);
@@ -108,6 +107,9 @@ public class Robot extends TimedRobot
      
 
     diagnostics.setLEDsAndDashboard(sensorValues);
+
+    CommandScheduler.getInstance().run();
+  }
 
     CommandScheduler.getInstance().run();
   }

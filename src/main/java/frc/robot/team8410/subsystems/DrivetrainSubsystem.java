@@ -6,10 +6,12 @@ package frc.robot.team8410.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 
@@ -21,18 +23,21 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //TODO 
   //ashish added Please use constants for CAN IDs
-  private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(0);
-  private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(1);
+  private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(Constants.LEFT_MOTOR_1_CANID);
+  private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(Constants.LEFT_MOTOR_2_CANID);
   MotorControllerGroup leftSide = new MotorControllerGroup(m_left1, m_left2);
 
 
   // in our robot we have two motors on right
-  private final WPI_TalonSRX m_right1 = new WPI_TalonSRX(2);
-  private final WPI_TalonSRX m_right2 = new WPI_TalonSRX(3);
+  private final WPI_TalonSRX m_right1 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_1_CANID);
+  private final WPI_TalonSRX m_right2 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_2_CANID);
   MotorControllerGroup rightSide = new MotorControllerGroup(m_right1, m_right2);
 
   // we use diffrential drive
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
+
+  //we also use the slew controled to help mitigate jerking
+  private final SlewRateLimiter slr = new SlewRateLimiter(0.5);
 
   // we use two joysticks.
   private final Joystick m_stick = new Joystick(0);
@@ -46,7 +51,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   public void driveTheBot ()
   {
-    m_robotDrive.arcadeDrive(m_stick.getRawAxis(4) * 0.75, m_stick.getRawAxis(1)*-0.85);
+    m_robotDrive.arcadeDrive(slr.calculate(m_stick.getRawAxis(4) * 0.75), m_stick.getRawAxis(1)*-0.85);
   }
 
   @Override
