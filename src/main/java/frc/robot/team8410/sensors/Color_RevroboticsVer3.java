@@ -28,9 +28,6 @@ public class Color_RevroboticsVer3
    */
 
 
-
-
-
   public boolean isRed()  // else its blue
   {
   
@@ -59,9 +56,4 @@ public class Color_RevroboticsVer3
    } 
    return retVal;
   } 
-  
-
-   
-
-  
 }
