@@ -6,13 +6,13 @@ package frc.robot.team8410.sensors;
 
 /** Add your docs here. */
 
-
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
-public class Color_RevroboticsVer3 
+public class Color_RevroboticsVer3
 {
 
   /**
@@ -28,10 +28,6 @@ public class Color_RevroboticsVer3
    */
 
 
-
-
-
-
   public boolean isRed()  // else its blue
   {
   
@@ -39,17 +35,25 @@ public class Color_RevroboticsVer3
 
     Color detectedColor = m_colorSensor.getColor();
     double redOverBlue = detectedColor.red/detectedColor.blue;
+
+
+    /*if (redOverBlue > 3) {
+      SmartDashboard.putBoolean("Ball is Red", true);
+    
+    } else {
+      SmartDashboard.putBoolean("Ball is Blue", false);
+    } */
   
     if (redOverBlue>3)
    {
-    //SmartDashboard.putString("Ball Color", "RED");
+    SmartDashboard.putString("Ball Color", "RED");
     retVal = true;
     } 
    else if(redOverBlue <1)
    {
-    //SmartDashboard.putString("Ball Color", "Blue");
+    SmartDashboard.putString("Ball Color", "Blue");
     retVal = false;
-   }
+   } 
    return retVal;
   } 
 }
