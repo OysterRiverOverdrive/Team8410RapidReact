@@ -11,6 +11,10 @@ import frc.robot.team8410.diagnostics.Diagnostics8410;
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
+import frc.robot.team8410.sensors.UltrasonicBack;
+import frc.robot.team8410.sensors.UltrasonicLeft;
+import frc.robot.team8410.sensors.UltrasonicRight;
+
 
 
 
@@ -111,8 +115,7 @@ public class Robot extends TimedRobot
     CommandScheduler.getInstance().run();
   }
 
-    CommandScheduler.getInstance().run();
-  }
+  
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
