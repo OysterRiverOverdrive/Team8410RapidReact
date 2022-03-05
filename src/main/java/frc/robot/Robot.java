@@ -15,10 +15,6 @@ import frc.robot.team8410.sensors.UltrasonicBack;
 import frc.robot.team8410.sensors.UltrasonicLeft;
 import frc.robot.team8410.sensors.UltrasonicRight;
 
-
-
-
-
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -83,9 +79,7 @@ public class Robot extends TimedRobot
     sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
     sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
     sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
-
     
-  
     if(colorTCSSensor.isRed())
     {
       sensorValues.setBlueBall_TSCSEnsor(true);
@@ -114,8 +108,6 @@ public class Robot extends TimedRobot
 
     CommandScheduler.getInstance().run();
   }
-
-  
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
