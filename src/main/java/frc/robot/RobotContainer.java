@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.commands.intakedropCmd;
+import frc.robot.team8410.commands.intakeriseCmd;
 import frc.robot.team8410.commands.stopHangCmd;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.HangerSubsystem;
-
+import frc.robot.team8410.subsystems.IntakeSubsystem;
 //package frc.robot.team8410.sensors;
 
 
@@ -36,6 +38,10 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
   private final PowerDistribution powerDistribution;
+
+  private final IntakeSubsystem liftIntake = new IntakeSubsystem();
+  private final intakeriseCmd lift = new intakeriseCmd(liftIntake);
+  private final intakedropCmd stopIntake = new intakedropCmd(liftIntake);
   
   // The robot's subsystems and commands are defined here...
 
