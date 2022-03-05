@@ -26,5 +26,5 @@ jobs:
       - name: Verify that the java code compiles
         run: ./gradlew --console=verbose build
 
-      - name: Run the spotless check to make sure the format of the code looks fine
-        run: ./gradlew :spotlessCheck
+      # - name: Run the spotless check to make sure the format of the code looks fine
+      #   run: ./gradlew :spotlessCheck

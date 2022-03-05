@@ -83,7 +83,6 @@ public class SensorValues
     {
         this.blueBall_revSensor = blueBall_revSensor;
     }
-
    
     
 
