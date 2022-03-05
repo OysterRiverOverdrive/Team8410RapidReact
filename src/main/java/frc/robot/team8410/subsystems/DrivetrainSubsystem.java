@@ -4,7 +4,7 @@
 
 package frc.robot.team8410.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
@@ -23,21 +23,28 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //TODO 
   //ashish added Please use constants for CAN IDs
-  private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(Constants.LEFT_MOTOR_1_CANID);
-  private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(Constants.LEFT_MOTOR_2_CANID);
+
+  private final WPI_VictorSPX m_left1 = new WPI_VictorSPX(0);
+  private final WPI_VictorSPX m_left2 = new WPI_VictorSPX(1);
+
   MotorControllerGroup leftSide = new MotorControllerGroup(m_left1, m_left2);
 
 
   // in our robot we have two motors on right
-  private final WPI_TalonSRX m_right1 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_1_CANID);
-  private final WPI_TalonSRX m_right2 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_2_CANID);
+
+  private final WPI_VictorSPX m_right1 = new WPI_VictorSPX(2);
+  private final WPI_VictorSPX m_right2 = new WPI_VictorSPX(3);
+
   MotorControllerGroup rightSide = new MotorControllerGroup(m_right1, m_right2);
 
   // we use diffrential drive
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
 
   //we also use the slew controled to help mitigate jerking
-  private final SlewRateLimiter slr = new SlewRateLimiter(0.5);
+
+   private final SlewRateLimiter slrForTurn ;//= new SlewRateLimiter(0.5);
+   private final SlewRateLimiter slrForDrive ;
+
 
   // we use two joysticks.
   private final Joystick m_stick = new Joystick(0);
@@ -46,16 +53,23 @@ public class DrivetrainSubsystem extends SubsystemBase {
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() 
   {
-
+    slrForTurn = new SlewRateLimiter(2);
+    slrForDrive = new SlewRateLimiter(1.8);
   }
 
   public void driveTheBot ()
   {
-    m_robotDrive.arcadeDrive(slr.calculate(m_stick.getRawAxis(4) * 0.75), m_stick.getRawAxis(1)*-0.85);
+
+    m_robotDrive.arcadeDrive(slrForTurn.calculate(m_stick.getRawAxis(4)*0.75),slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85));
+    System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
+   //m_robotDrive.arcadeDrive(m_stick.getRawAxis(2) * 0.75, m_stick.getRawAxis(3)*-0.85);
+  
+
+
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    // This method will be called once per scheduler run ''
   }
 }
