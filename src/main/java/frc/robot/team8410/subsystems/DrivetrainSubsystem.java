@@ -15,6 +15,7 @@ import frc.robot.Constants;
 
 
 
+
 public class DrivetrainSubsystem extends SubsystemBase {
 
   // in our robot we have two motors on left
@@ -40,6 +41,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   // we use two joysticks.
   private final Joystick m_stick = new Joystick(0);
+
+ 
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() 
   {
