@@ -9,16 +9,16 @@ package frc.robot.team8410.sensors;
 public class SensorValues 
 {
     // holds the LIDAR value in inches
-    private int lidarDistanceInches;
+    private double lidarDistanceInches;
 
     // holds the ultrasonic distance reading on the left side
-    private int ultrasonicLeftInches;
+    private double ultrasonicLeftInches;
 
      // holds the ultrasonic distance reading on the right side
-    private int ultrasonicRightInches;
+    private double ultrasonicRightInches;
     
      // holds the ultrasonic distance reading on the back of the robot
-    private int ultrasonicBackInches;
+    private double ultrasonicBackInches;
 
     // holds true if there is a red ball in front of the TCS sensor else  false  
     private boolean redBall_TSCSensor;
@@ -37,11 +37,43 @@ public class SensorValues
    
    // Getters and Setters
    
-    public int getLidarDistanceInches() 
+    public double getLidarDistanceInches() 
     {
         return lidarDistanceInches;
     }
-    
+   
+    public void setBlueBall_TSCSEnsor(boolean blueBall_TSCSEnsor) {
+        this.blueBall_TSCSEnsor = blueBall_TSCSEnsor;
+    }
+
+       public void setRedBall_TSCSensor(boolean redBall_TSCSensor) {
+        this.redBall_TSCSensor = redBall_TSCSensor;
+    }
+
+    public double getUltrasonicBackInches() {
+        return ultrasonicBackInches;
+    }
+
+    public void setUltrasonicBackInches(double ultrasonicBackInches) {
+        this.ultrasonicBackInches = ultrasonicBackInches;
+    }
+
+    public double getUltrasonicRightInches() {
+        return ultrasonicRightInches;
+    }
+
+    public void setUltrasonicRightInches(double ultrasonicRightInches) {
+        this.ultrasonicRightInches = ultrasonicRightInches;
+    }
+
+    public double getUltrasonicLeftInches() {
+        return ultrasonicLeftInches;
+    }
+
+    public void setUltrasonicLeftInches(double ultrasonicLeftInches) {
+        this.ultrasonicLeftInches = ultrasonicLeftInches;
+    }
+
     public boolean isBlueBall_revSensor() 
     {
         return blueBall_revSensor;
@@ -52,9 +84,12 @@ public class SensorValues
         this.blueBall_revSensor = blueBall_revSensor;
     }
 
-    public boolean isRedBall_RevSensor() 
-    {
-        return redBall_RevSensor;
-    }
+   
     
+
+    public void setRedBall_RevSensor(boolean redBall_revSensor)
+    {
+        this.redBall_RevSensor = redBall_revSensor;
+    }
+
 }
