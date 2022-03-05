@@ -12,9 +12,6 @@ import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
 
-
-
-
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -74,35 +71,35 @@ public class Robot extends TimedRobot
     // This is where we will read the sensors and call the set method of the sensorValue object
     //  This also needs the ultrasonic values
 
-    // sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
-    // sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
-    // sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
+    sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
+    sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
+    sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
     
-    // if(colorTCSSensor.isRed())
-    // {
-    //   sensorValues.setBlueBall_TSCSEnsor(true);
-    //   sensorValues.setBlueBall_TSCSEnsor(false);
-    // }
-    // else
-    // {
-    //   sensorValues.setBlueBall_TSCSEnsor(false);
-    //   sensorValues.setBlueBall_TSCSEnsor(true);
-    // }
+     if(colorTCSSensor.isRed())
+     {
+       sensorValues.setBlueBall_TSCSEnsor(true);
+       sensorValues.setBlueBall_TSCSEnsor(false);
+     }
+     else
+     {
+       sensorValues.setBlueBall_TSCSEnsor(false);
+       sensorValues.setBlueBall_TSCSEnsor(true);
+     }
      
 
-    // if(colorRevSensor.isRed())
-    // {
-    //   sensorValues.setRedBall_RevSensor(true);
-    //   sensorValues.setBlueBall_revSensor(false);
-    // }
-    // else
-    // {
-    //   sensorValues.setRedBall_RevSensor(false);
-    //   sensorValues.setBlueBall_revSensor(true);
-    // }
+     if(colorRevSensor.isRed())
+     {
+       sensorValues.setRedBall_RevSensor(true);
+       sensorValues.setBlueBall_revSensor(false);
+     }
+     else
+     {
+       sensorValues.setRedBall_RevSensor(false);
+       sensorValues.setBlueBall_revSensor(true);
+    }
      
 
-    // diagnostics.setLEDsAndDashboard(sensorValues);
+   diagnostics.setLEDsAndDashboard(sensorValues);
 
     CommandScheduler.getInstance().run();
   }

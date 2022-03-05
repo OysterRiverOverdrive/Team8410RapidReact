@@ -106,11 +106,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
     POVButton traverseButton = new POVButton(new Joystick(0), 0);
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
     traverseButton.whenPressed(hang);
-    //when button is pressed, robot will hang
     traverseButton.whenReleased(stopHang);
   }
 

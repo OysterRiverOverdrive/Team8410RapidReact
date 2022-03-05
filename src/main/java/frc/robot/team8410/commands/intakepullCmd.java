@@ -10,6 +10,7 @@ import frc.robot.team8410.subsystems.IntakeSubsystem;
 public class intakepullCmd extends CommandBase {
   private IntakeSubsystem intake;
   /** Creates a new intakepullCmd. */
+
   public intakepullCmd(IntakeSubsystem intakes) {
     intakes = intake;
     addRequirements(intakes);
