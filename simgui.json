@@ -1,33 +1,4 @@
 {
-  "HALProvider": {
-    "Other Devices": {
-      "Talon SRX[0]": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[1]": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[2]": {
-        "header": {
-          "open": true
-        }
-      },
-      "Talon SRX[3]": {
-        "header": {
-          "open": true
-        }
-      }
-    },
-    "PWM Outputs": {
-      "window": {
-        "visible": true
-      }
-    }
-  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
