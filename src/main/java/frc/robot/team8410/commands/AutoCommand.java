@@ -25,8 +25,8 @@ public class AutoCommand extends CommandBase {
   @Override
   public void execute() 
   {
-    driveSub.autoDriveStraight(20, 0.5);
-    driveSub.autoDriveStraight(50, -0.5);
+    //driveSub.autoDriveStraight(20, 0.5);
+   // driveSub.autoDriveStraight(50, -0.5);
   }
 
   // Called once the command ends or is interrupted.

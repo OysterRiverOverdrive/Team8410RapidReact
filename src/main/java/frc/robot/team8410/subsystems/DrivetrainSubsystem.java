@@ -7,11 +7,11 @@ package frc.robot.team8410.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Encoder;
 
 
 
@@ -61,7 +61,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     slrForTurn = new SlewRateLimiter(2);
     slrForDrive = new SlewRateLimiter(1.8);
 
-    leftSideEncoder.setDistancePerPulse(Math.PI*6/360);// pi * wheel dia / counts per a revulution
+    //leftSideEncoder.setDistancePerPulse(Math.PI*6/360);// pi * wheel dia / counts per a revulution
   }
 
   public void driveTheBot ()
