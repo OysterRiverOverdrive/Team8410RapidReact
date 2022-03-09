@@ -32,6 +32,8 @@ public class Color_TCS34725_I2C
 {
     protected I2C i2c;
 
+    public boolean statusIsGood = false;
+
     public final static int TCS34725_COMMAND_BIT = 0x80;
     public final static int TCS34725_COMMAND_AUTO_INCREMENT = 0x20;
     public final static int TCS34725_ADDRESS = 0x29;
@@ -149,7 +151,9 @@ public class Color_TCS34725_I2C
         setGain(gain);
         // Power on
         enable();
-        if (verbose) {
+        statusIsGood = true;
+        if (verbose) 
+        {
             System.out.println("TCS34725 initialized");
         }
     }
@@ -321,32 +325,38 @@ public class Color_TCS34725_I2C
         return "0x" + s;
     }
 
-   
-    public boolean isRedBall() 
+
+
+   public String getBallColor()
+   {
+       String retVal = "UNKNOWN";
+
+    try 
     {
-         boolean retVal = false;
+        TCS34725_Values colorVaues = getRawData();
+        double blue = colorVaues.getB();
+        double redOverBlue =colorVaues.getR()/blue;
 
-        try {
-                TCS34725_Values colorVaues = getRawData();
-                double blue = colorVaues.getB();
-                double redOverBlue =blue/colorVaues.getR();
-
-                if (redOverBlue > 3)
-                {
-                    retVal = true;
-                }
-                else
-                    retVal = false;
-               
-            } catch (Exception e) 
-            {
-              e.printStackTrace();
-            }
-
-            return retVal;
-        
+        if (redOverBlue > 3)
+        {
+            retVal = "RED";
+        }
+        else if(redOverBlue <1)
+        {
+            retVal = "BLUE";
+        }
+           
+       
+    } catch (Exception e) 
+    {
+      e.printStackTrace();
     }
+       return retVal;
+   }
 
+
+
+  
     public static class TransferAbortedException extends Exception {
         public TransferAbortedException(String message) {
             super(message);
@@ -354,16 +364,6 @@ public class Color_TCS34725_I2C
     }
     
 
-    public boolean isRed()
-    {
-        boolean retVal = false;
-
-        
-
-
-
-        return retVal;
-    }
-
+    
     
 }

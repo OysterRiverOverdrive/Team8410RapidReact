@@ -26,10 +26,12 @@ public class Robot extends TimedRobot
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private SensorValues sensorValues = new SensorValues();
-  private Color_RevroboticsVer3 colorRevSensor = new Color_RevroboticsVer3();
-  private Color_TCS34725_I2C colorTCSSensor = new Color_TCS34725_I2C();
+  private Color_RevroboticsVer3 colorRevSensor;
+  private Color_TCS34725_I2C colorTCSSensor;
   private Diagnostics8410 diagnostics = new Diagnostics8410();
 
+  private boolean isTCSSensorGood;
+  private boolean isRevColorSensorGood;
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -42,13 +44,37 @@ public class Robot extends TimedRobot
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    sensorValues = new SensorValues();
+    diagnostics = new Diagnostics8410();
+
+
     try
     {
+      //TODO this needs to be tested on real bot
+      colorTCSSensor = new Color_TCS34725_I2C();
       colorTCSSensor.initialize(2,1);
-      colorTCSSensor.enable();
+      isTCSSensorGood= true;
+      }
+    catch(Exception e)
+    {
+      // initialization of the sensor failed - do not read this value
+      isTCSSensorGood = false;
+      System.out.println("Could not initi TCS sensor");
+       e.printStackTrace();
+    }
+
+    try
+    {
+      // initialization of the sensor failed. Do not read this value
+      colorRevSensor = new Color_RevroboticsVer3();
+      isRevColorSensorGood= true;
     }
     catch(Exception e)
     {
+      isRevColorSensorGood= false;
+      System.out.println("Could not initi Rev sensor");
+    
+
        e.printStackTrace();
     }
 
@@ -80,27 +106,22 @@ public class Robot extends TimedRobot
     sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
     sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
     
-    if(colorTCSSensor.isRed())
+    if(isTCSSensorGood)
     {
-      sensorValues.setBlueBall_TSCSEnsor(true);
-      sensorValues.setBlueBall_TSCSEnsor(false);
+       sensorValues.setBallColor_TSCSensor(colorTCSSensor.getBallColor());
     }
     else
     {
-      sensorValues.setBlueBall_TSCSEnsor(false);
-      sensorValues.setBlueBall_TSCSEnsor(true);
+      sensorValues.setBallColor_TSCSensor("BAD");
     }
-     
 
-    if(colorRevSensor.isRed())
+    if(isRevColorSensorGood)
     {
-      sensorValues.setRedBall_RevSensor(true);
-      sensorValues.setBlueBall_revSensor(false);
+     sensorValues.setBallColor_RevSensor(colorRevSensor.getBallColor());
     }
     else
     {
-      sensorValues.setRedBall_RevSensor(false);
-      sensorValues.setBlueBall_revSensor(true);
+      sensorValues.setBallColor_RevSensor("BAD");
     }
      
 

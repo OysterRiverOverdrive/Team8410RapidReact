@@ -28,5 +28,9 @@ public final class Constants
    public static int TOP_LEFT_HANGER_MOTOR_CANID = 9;// the motor for hanger on the top left
    public static int BOTTOM_LEFT_HANGER_MOTOR_CANID = 10;// the motor for hanger on the bottom left
 
+   public static int BALL_IS_RED = 3; // this is the threshold for red color ball
+   public static int BALL_IS_BLUE = 1; // this is the threshold for Blue color ball
+   
+
 
 }

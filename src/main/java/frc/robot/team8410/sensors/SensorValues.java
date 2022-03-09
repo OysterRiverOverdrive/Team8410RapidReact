@@ -21,33 +21,31 @@ public class SensorValues
     private double ultrasonicBackInches;
 
     // holds true if there is a red ball in front of the TCS sensor else  false  
-    private boolean redBall_TSCSensor;
-
-     // holds true if there is a blue ball in front of the TCS sensor else  false  
-    private boolean blueBall_TSCSEnsor;
+    private String ballColor_TSCSensor;
 
      // holds true if there is a red ball in front of the Rev sensor else  false  
-    private boolean redBall_RevSensor;
+    private String ballColor_RevSensor;
 
-     // holds true if there is a blue ball in front of the Rev sensor else  false  
-    private boolean blueBall_revSensor;
-   
-
-
-   
    // Getters and Setters
-   
     public double getLidarDistanceInches() 
     {
         return lidarDistanceInches;
     }
    
-    public void setBlueBall_TSCSEnsor(boolean blueBall_TSCSEnsor) {
-        this.blueBall_TSCSEnsor = blueBall_TSCSEnsor;
+    public String getBallColor_TSCSensor() {
+        return ballColor_TSCSensor;
     }
 
-       public void setRedBall_TSCSensor(boolean redBall_TSCSensor) {
-        this.redBall_TSCSensor = redBall_TSCSensor;
+    public void setBallColor_TSCSensor(String ballColor_TSCSensor) {
+        this.ballColor_TSCSensor = ballColor_TSCSensor;
+    }
+
+    public String getBallColor_RevSensor() {
+        return ballColor_RevSensor;
+    }
+
+    public void setBallColor_RevSensor(String ballColor_RevSensor) {
+        this.ballColor_RevSensor = ballColor_RevSensor;
     }
 
     public double getUltrasonicBackInches() {
@@ -73,23 +71,4 @@ public class SensorValues
     public void setUltrasonicLeftInches(double ultrasonicLeftInches) {
         this.ultrasonicLeftInches = ultrasonicLeftInches;
     }
-
-    public boolean isBlueBall_revSensor() 
-    {
-        return blueBall_revSensor;
-    }
-    
-    public void setBlueBall_revSensor(boolean blueBall_revSensor)
-    {
-        this.blueBall_revSensor = blueBall_revSensor;
-    }
-
-   
-    
-
-    public void setRedBall_RevSensor(boolean redBall_revSensor)
-    {
-        this.redBall_RevSensor = redBall_revSensor;
-    }
-
 }
