@@ -15,10 +15,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 
-// import frc.robot.Constants;
-
-
-
 
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -66,6 +62,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     slrForDrive = new SlewRateLimiter(1.8);
 
     leftSideEncoder.setDistancePerPulse(Math.PI*6/360);// pi * wheel dia / counts per a revulution
+
   }
 
   public void driveTheBot ()
