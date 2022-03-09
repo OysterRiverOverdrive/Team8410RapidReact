@@ -25,9 +25,3 @@ jobs:
 
       - name: Verify that the java code compiles
         run: ./gradlew --console=verbose build
-
-      # Disabling spotless from the build check.
-      # This can be run as needed with `./gradlew :spotlessCheck` in the terminal
-      # but will not block pr merges. 
-      # - name: Run the spotless check to make sure the format of the code looks fine
-      #   run: ./gradlew :spotlessCheck
