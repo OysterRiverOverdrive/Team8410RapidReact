@@ -7,11 +7,12 @@ package frc.robot.team8410.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-// import frc.robot.Constants;
+
 
 
 
@@ -22,7 +23,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
 
   //TODO 
+
   //ashish added Please use constants for CAN IDs
+
+  private final Encoder leftSideEncoder = new Encoder(0, 1);
+  
 
   private final WPI_VictorSPX m_left1 = new WPI_VictorSPX(0);
   private final WPI_VictorSPX m_left2 = new WPI_VictorSPX(1);
@@ -55,6 +60,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   {
     slrForTurn = new SlewRateLimiter(2);
     slrForDrive = new SlewRateLimiter(1.8);
+
+    leftSideEncoder.setDistancePerPulse(Math.PI*6/360);// pi * wheel dia / counts per a revulution
+
   }
 
   public void driveTheBot ()
@@ -64,7 +72,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
     System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
    //m_robotDrive.arcadeDrive(m_stick.getRawAxis(2) * 0.75, m_stick.getRawAxis(3)*-0.85);
   
+  }
 
+  public void autoDriveStraight (double distanceToGo, double speed)
+  {
+    while (leftSideEncoder.getDistance()<distanceToGo)
+    {
+      m_robotDrive.arcadeDrive(speed, 0);
+    }
+    m_robotDrive.arcadeDrive(0, 0);
 
   }
 
