@@ -28,9 +28,9 @@ public class IntakeSubsystem extends SubsystemBase {
   // double joystickinput = m_joystick;
   
   @Override
-  public void periodic() {
-    
-  }
+  public void periodic() 
+  {
+     }
   public double getEncoder () {
     encoderDist = intakearm.get();
     return encoderDist;

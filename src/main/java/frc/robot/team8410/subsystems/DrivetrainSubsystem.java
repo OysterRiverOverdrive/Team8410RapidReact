@@ -71,7 +71,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void driveTheBot ()
   {
     m_robotDrive.arcadeDrive(slrForTurn.calculate(m_stick.getRawAxis(4)*0.75),slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85));
-    System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
+   // System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
    //m_robotDrive.arcadeDrive(m_stick.getRawAxis(2) * 0.75, m_stick.getRawAxis(3)*-0.85);
   
   }
@@ -86,7 +86,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   }
   @Override
-  public void periodic() {
+  public void periodic()
+   {
+    System.out.println("this is a test of subsys perodic ************************************"); 
+ 
     // This method will be called once per scheduler run ''
   }
 }
