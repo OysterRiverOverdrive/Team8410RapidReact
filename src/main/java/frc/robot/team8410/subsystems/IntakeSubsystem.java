@@ -8,13 +8,14 @@ package frc.robot.team8410.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
 
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  // private DutyCycleEncoder intakearm = new DutyCycleEncoder(1);
-
+  private DutyCycleEncoder intakearm = new DutyCycleEncoder(1);
+  private double encoderDist = 0;
   private final WPI_TalonSRX shooterUp = new WPI_TalonSRX(5);
   private final WPI_TalonSRX shooterArm = new WPI_TalonSRX(5);
 
@@ -29,6 +30,10 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     
+  }
+  public double getEncoder () {
+    encoderDist = intakearm.get();
+    return encoderDist;
   }
   public void intakePull () {
     shooterUp.set(0.75);

@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.team8410.commands.AutoCommand;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
@@ -25,6 +28,7 @@ public class RobotContainer {
  
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
+  private final AutoCommand autoCmd = new AutoCommand(drivetrain);
   
   // The robot's subsystems and commands are defined here...
 
@@ -58,6 +62,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;// TODO change this to the name of the auto command
+    return autoCmd;// TODO change this to the name of the auto command
   }
 }
