@@ -5,17 +5,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.commands.TeleopDriveCommand;
-import frc.robot.team8410.commands.hangCmd;
-import frc.robot.team8410.commands.stopHangCmd;
+import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-import frc.robot.team8410.subsystems.HangerSubsystem;
+import frc.robot.team8410.subsystems.WinchSubsystem;
+
 
 //package frc.robot.team8410.sensors;
 
@@ -29,13 +28,16 @@ import frc.robot.team8410.subsystems.HangerSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private final HangerSubsystem hanger = new HangerSubsystem();
-  private final hangCmd hang = new hangCmd(hanger);
-  private final stopHangCmd stopHang = new stopHangCmd(hanger);
+  
 
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
   private final PowerDistribution powerDistribution;
+
+  private final WinchSubsystem winch = new WinchSubsystem();
+  private final UnwindWinchCommand unwindWinch = new UnwindWinchCommand(winch);
+  private final XboxController joystick = new XboxController(0);
+
   
   // The robot's subsystems and commands are defined here...
 
@@ -45,17 +47,17 @@ public class RobotContainer {
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(teleopCommand);
-
+    
     powerDistribution = new PowerDistribution(0, PowerDistribution.ModuleType.kCTRE);
 
     // displaying subsystems
-    SmartDashboard.putData(hanger);
+    //SmartDashboard.putData(hanger);
     SmartDashboard.putData(drivetrain);
 
     //display commands
     SmartDashboard.putData(teleopCommand);
-    SmartDashboard.putData(hang);
-    SmartDashboard.putData(stopHang);
+    //SmartDashboard.putData(hang);
+    //SmartDashboard.putData(stopHang);
     SmartDashboard.putData(teleopCommand);
 
     
@@ -106,10 +108,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    POVButton traverseButton = new POVButton(new Joystick(0), 0);
+    //POVButton winchButton = new POVButton(joystick, 0);
+    JoystickButton winchButton = new JoystickButton(joystick, 1);
+    System.out.println("winch button pressed");
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
-    traverseButton.whenPressed(hang);
-    traverseButton.whenReleased(stopHang);
+    winchButton.whenPressed(unwindWinch);
+    
   }
 
   /**

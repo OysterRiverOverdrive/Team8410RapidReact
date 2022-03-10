@@ -1,10 +1,10 @@
 package frc.robot.team8410.subsystems;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class HangerSubsystem extends SubsystemBase {
 
@@ -14,9 +14,7 @@ public class HangerSubsystem extends SubsystemBase {
     PWMVictorSPX armMotor1 = new PWMVictorSPX(Constants.TOP_RIGHT_HANGER_MOTOR_CANID);
     PWMVictorSPX armMotor2 = new PWMVictorSPX(Constants.TOP_LEFT_HANGER_MOTOR_CANID);
     MotorControllerGroup armGroup = new MotorControllerGroup(armMotor1, armMotor2);
-    PWMVictorSPX clipMotor1 = new PWMVictorSPX(Constants.BOTTOM_RIGHT_HANGER_MOTOR_CANID);
     PWMVictorSPX clipMotor2 = new PWMVictorSPX(Constants.BOTTOM_LEFT_HANGER_MOTOR_CANID);
-    MotorControllerGroup clipGroup = new MotorControllerGroup(clipMotor1, clipMotor2);
 
     //using conforce spring + winch to rotate arm
     PWMVictorSPX winchMotor = new PWMVictorSPX(10);
