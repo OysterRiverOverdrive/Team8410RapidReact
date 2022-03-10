@@ -33,8 +33,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final Encoder leftSideEncoder = new Encoder(0, 1);
   
 
-  private final WPI_VictorSPX m_left1 = new WPI_VictorSPX(0);
-  private final WPI_VictorSPX m_left2 = new WPI_VictorSPX(1);
 
 
   MotorControllerGroup leftSide = new MotorControllerGroup(m_left1, m_left2);
