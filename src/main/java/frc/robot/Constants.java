@@ -33,4 +33,10 @@ public final class Constants
    
 
 
+   // these are when the goldfish bakes in the bakeChocolateGoldfish method
+   public static int BAKE_POWER_TEMPERATURE = 35;
+   public static int BAKE_POWER_CURRENT = 20;
+   public static int BAKE_POWER_VOLTAGE = 1;
+   public static int BAKE_TOTAL_POWER = 1;
+
 }
