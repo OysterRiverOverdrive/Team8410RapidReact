@@ -29,4 +29,10 @@ public final class Constants
    public static int BOTTOM_LEFT_HANGER_MOTOR_CANID = 10;// the motor for hanger on the bottom left
 
 
+   // these are when the goldfish bakes in the bakeChocolateGoldfish method
+   public static int BAKE_POWER_TEMPERATURE = 35;
+   public static int BAKE_POWER_CURRENT = 20;
+   public static int BAKE_POWER_VOLTAGE = 1;
+   public static int BAKE_TOTAL_POWER = 1;
+
 }

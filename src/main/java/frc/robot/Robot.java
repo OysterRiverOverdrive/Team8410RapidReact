@@ -104,7 +104,10 @@ public class Robot extends TimedRobot
     }
      
 
-    diagnostics.setLEDsAndDashboard(sensorValues);
+    diagnostics.bakeChocolateGoldfish(sensorValues);
+
+
+
 
     CommandScheduler.getInstance().run();
   }
