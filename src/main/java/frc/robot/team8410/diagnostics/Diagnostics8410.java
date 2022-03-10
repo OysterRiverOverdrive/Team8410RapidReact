@@ -4,11 +4,25 @@
 
 package frc.robot.team8410.diagnostics;
 
+
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.team8410.commands.TeleopDriveCommand;
+
 import frc.robot.team8410.sensors.SensorValues;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+//import frc.robot.team8410.subsystems.HangerSubsystem;
 
 /** Add your docs here. */
 public class Diagnostics8410 
 {
+
+ 
+   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
+
+   private final PowerDistribution powerDistribution = new PowerDistribution(0, PowerDistribution.ModuleType.kCTRE);
+   //powerDistribution
 
    public Diagnostics8410()
    {
@@ -24,7 +38,19 @@ public class Diagnostics8410
 
    }
 
+   public void bakeChocolateGoldfish( SensorValues sensorValues) {
+
+      
+       SmartDashboard.putNumber("Lidar Distance", sensorValues.getLidarDistanceInches());
+       SmartDashboard.putNumber("Ultrasonic Back", sensorValues.getUltrasonicBackInches());
+       SmartDashboard.putNumber("Ultrasonic Left", sensorValues.getUltrasonicLeftInches());
+       SmartDashboard.putNumber("Ultrasonic Right", sensorValues.getUltrasonicRightInches());
+
+
     
+    }
+       
+   }
 
 
-}
+
