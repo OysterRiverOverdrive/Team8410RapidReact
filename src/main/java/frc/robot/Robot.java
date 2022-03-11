@@ -123,6 +123,7 @@ public class Robot extends TimedRobot
 
    diagnostics.setLEDsAndDashboard(sensorValues);
 
+
     CommandScheduler.getInstance().run();
   }
 

@@ -18,12 +18,7 @@ public class Diagnostics8410
 {
 
  
-   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
-   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
-
-   private final PowerDistribution powerDistribution = new PowerDistribution(0, PowerDistribution.ModuleType.kCTRE);
-   //powerDistribution
-
+ 
    public Diagnostics8410()
    {
 
