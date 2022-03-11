@@ -21,8 +21,8 @@ public final class Constants
    public static int RIGHT_MOTOR_1_CANID = 3;// first motor that runs drivetrain on the right
    public static int RIGHT_MOTOR_2_CANID = 4;// second motor that runs drivetrain on the right
 
-   public static int LIFTER_MOTOR_CANID = 5;// motor to raise intake 
-   public static int INTAKE_MOTOR_CANID = 6;// motor to run the intake rollers
+   public static int INTAKE_LIFTER_MOTOR_CANID = 5;// motor to raise intake 
+   public static int INTAKE_ROLLER_MOTOR_CANID = 6;// motor to run the intake rollers
    public static int TOP_RIGHT_HANGER_MOTOR_CANID = 7;// the motor for hanger on the top right
    public static int BOTTOM_RIGHT_HANGER_MOTOR_CANID = 8;// the motor for hanger on the bottom right
    public static int TOP_LEFT_HANGER_MOTOR_CANID = 9;// the motor for hanger on the top left
@@ -30,6 +30,8 @@ public final class Constants
 
    public static int BALL_IS_RED = 3; // this is the threshold for red color ball
    public static int BALL_IS_BLUE = 1; // this is the threshold for Blue color ball
+
+   public static int INTAKE_ARM_POT_PORT_ID = 0; // Analog for intake ARM port
    
 
 
