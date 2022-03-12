@@ -9,19 +9,17 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.team8410.commands.TeleopDriveCommand;
+import frc.robot.team8410.commands.UnwindWinchCommand;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.AutoCommand;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
-import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.commands.RaiseIntakeCmd;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
-
-//package frc.robot.team8410.sensors;
-
-
+import frc.robot.Constants;
 
 
 /**
@@ -31,7 +29,7 @@ import edu.wpi.first.wpilibj.Joystick;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
- 
+
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
   private final AutoCommand autoCmd = new AutoCommand(drivetrain);
@@ -45,7 +43,9 @@ public class RobotContainer {
   
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
-  
+
+  private final WinchSubsystem winch = new WinchSubsystem();
+  private final UnwindWinchCommand unwindWinch = new UnwindWinchCommand(winch);
   
   // The robot's subsystems and commands are defined here...
 
@@ -54,11 +54,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    drivetrain.setDefaultCommand(teleopCommand);
- 
-    
-
-    
+    drivetrain.setDefaultCommand(teleopCommand);    
   
   }
 
@@ -68,18 +64,18 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings()
-   {
-
-
+  private void configureButtonBindings() {
+    //POVButton winchButton = new POVButton(joystick, 0);
+    JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
+    System.out.println("winch button pressed");
+    //sets POV Button at angle 0 (top of the dpad on xbox controller)
+    winchButton.whenPressed(unwindWinch);
 
      //POVButton winchButton = new POVButton(joystick, 0);
-     JoystickButton winchButton = new JoystickButton(joystick, 1);
+     JoystickButton intakeButton = new JoystickButton(joystick, Constants.INTAKE_BUTTON);
      System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
-     winchButton.whenPressed(raiseIntakeCmd);
-
-
+     intakeButton.whenPressed(raiseIntakeCmd);
   }
 
   /**
