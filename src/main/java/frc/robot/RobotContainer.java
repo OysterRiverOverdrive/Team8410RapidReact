@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.team8410.commands.AutoCommand;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
-import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+import frc.robot.team8410.commands.AutoDriveTargetCmd;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
@@ -46,6 +46,7 @@ public class RobotContainer {
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
   
+  private final AutoDriveTargetCmd autostraightCmd = new AutoDriveTargetCmd(drivetrain);
   
   // The robot's subsystems and commands are defined here...
 
