@@ -66,13 +66,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   }
 
-  public void driveTheBot ()
+  public void driveTheBot (double speed, double turn)
   {
-    m_robotDrive.arcadeDrive(slrForTurn.calculate(m_stick.getRawAxis(4)*0.75),slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85));
-   // System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
-   //m_robotDrive.arcadeDrive(m_stick.getRawAxis(2) * 0.75, m_stick.getRawAxis(3)*-0.85);
-  
-   
+
+    m_robotDrive.arcadeDrive(speed,turn);
+    
   }
 
   public void autoDriveStraight (double distanceToGo, double speed)

@@ -4,16 +4,22 @@
 
 package frc.robot.team8410.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
-public class AutoCommand extends CommandBase {
-  /** Creates a new AutoCommand. */
-  private final DrivetrainSubsystem driveSub;
-  public AutoCommand(DrivetrainSubsystem drive) 
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+public class AutoDriveCommand extends CommandBase {
+  /** Creates a new AutoDriveCommand. */
+  private final DrivetrainSubsystem drive;
+  double speedForDrive;
+  double distanceInInches;
+  
+  public AutoDriveCommand(DrivetrainSubsystem drv, double speed, double distance) 
   {
-    driveSub = drive;
-    addRequirements(drive);
+    drive = drv;
+    speedForDrive = speed;
+    distanceInInches = distance;
+    addRequirements(drv);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -25,10 +31,7 @@ public class AutoCommand extends CommandBase {
   @Override
   public void execute() 
   {
-
-    driveSub.autoDriveStraight(20, 0.5);
-    driveSub.autoDriveStraight(50, -0.5);
-
+    drive.autoDriveStraight(distanceInInches, speedForDrive);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,6 +41,6 @@ public class AutoCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

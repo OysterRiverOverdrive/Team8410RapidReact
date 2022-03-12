@@ -6,10 +6,10 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.team8410.commands.AutoCommand;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
@@ -29,14 +29,10 @@ public class RobotContainer {
  
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
-  private final AutoCommand autoCmd = new AutoCommand(drivetrain);
-  // creating an instance of this will allow for the subsystem perodic method to run in the Diagnostic subsystem
-  // so the diagnostic logic is in one place.
-  private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
-  
-  //private final IntakeSubsystem iSubSys = new IntakeSubsystem();
-  //private final intakedropCmd iCmd = new intakedropCmd(iSubSys);
-  
+
+
+  private final PowerDistribution powerDistribution = new PowerDistribution();
+
   
   // The robot's subsystems and commands are defined here...
 
@@ -70,6 +66,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return autoCmd;// TODO change this to the name of the auto command
+    return null;// TODO change this to the name of the auto command
   }
 }
