@@ -10,9 +10,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.team8410.commands.AutoCommand;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
 
 //package frc.robot.team8410.sensors;
 
@@ -30,12 +35,16 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
   private final AutoCommand autoCmd = new AutoCommand(drivetrain);
+
+ // private final XboxController joystick = new XboxController(0);
+ private final Joystick joystick = new Joystick(0);
+
   // creating an instance of this will allow for the subsystem perodic method to run in the Diagnostic subsystem
   // so the diagnostic logic is in one place.
-  private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
+ // private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
   
-  //private final IntakeSubsystem iSubSys = new IntakeSubsystem();
-  //private final intakedropCmd iCmd = new intakedropCmd(iSubSys);
+  private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
+  private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
   
   
   // The robot's subsystems and commands are defined here...
@@ -59,7 +68,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
+  private void configureButtonBindings()
+   {
+
+
+
+     //POVButton winchButton = new POVButton(joystick, 0);
+     JoystickButton winchButton = new JoystickButton(joystick, 1);
+     System.out.println("intake button pressed");
+     //sets POV Button at angle 0 (top of the dpad on xbox controller)
+     winchButton.whenPressed(raiseIntakeCmd);
+
 
   }
 

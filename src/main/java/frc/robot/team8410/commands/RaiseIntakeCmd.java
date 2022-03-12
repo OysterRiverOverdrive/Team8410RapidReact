@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -23,6 +24,7 @@ public class RaiseIntakeCmd extends CommandBase
   public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem) 
   {
     intakeArmSubSys = intakeSubSystem;
+    speed = 0;
     m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,20 +43,30 @@ public class RaiseIntakeCmd extends CommandBase
   public void execute()
   {
     currPOTVoltage = m_potentiometer.getAverageVoltage();
+
+SmartDashboard.putNumber("POT", currPOTVoltage);
+
     
-    if(currPOTVoltage <= 10)
+    if(currPOTVoltage <= 0.240)
     {
       speed = speed + .01;
+      if(speed >=.6)
+         speed = .6;
     }
 
-    else if(currPOTVoltage > 10 || currPOTVoltage <= 19)
+    else if(currPOTVoltage > 0.240 && currPOTVoltage <= 0.270)
     {
       speed = .6;
     }
-    if(currPOTVoltage >= 20)
+    if(currPOTVoltage >= 0.270)
     {
       speed = speed -1 ;
+      if(speed <=0)
+        speed = 0;
+      
     }
+
+    SmartDashboard.putNumber("Speed", speed);
  
     intakeArmSubSys.rise(speed); 
 
@@ -71,10 +83,12 @@ public class RaiseIntakeCmd extends CommandBase
     boolean retVal = false;
     currPOTVoltage = m_potentiometer.getAverageVoltage();
 
-    if(currPOTVoltage >= 40)
+    if(currPOTVoltage >= 0.29)
     {
 
       retVal = true;
+      intakeArmSubSys.stop();
+
     }
     return retVal;
   }
