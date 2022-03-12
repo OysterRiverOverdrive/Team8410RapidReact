@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.team8410.diagnostics.Diagnostics8410;
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
@@ -25,8 +24,7 @@ public class Robot extends TimedRobot
   private SensorValues sensorValues = new SensorValues();
   private Color_RevroboticsVer3 colorRevSensor;
   private Color_TCS34725_I2C colorTCSSensor;
-  private Diagnostics8410 diagnostics = new Diagnostics8410();
-
+ 
   private boolean isTCSSensorGood;
   private boolean isRevColorSensorGood;
   
@@ -42,7 +40,7 @@ public class Robot extends TimedRobot
     m_robotContainer = new RobotContainer();
 
     sensorValues = new SensorValues();
-    diagnostics = new Diagnostics8410();
+    
 
 
     try
@@ -121,7 +119,6 @@ public class Robot extends TimedRobot
     }
      
 
-   diagnostics.setLEDsAndDashboard(sensorValues);
 
 
     CommandScheduler.getInstance().run();
