@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.team8410.commands.AutoCommand;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
-import frc.robot.team8410.commands.AutoDriveTargetCmd;
+import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
@@ -46,7 +46,7 @@ public class RobotContainer {
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
   
-  private final AutoDriveTargetCmd autostraightCmd = new AutoDriveTargetCmd(drivetrain);
+  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
   
   // The robot's subsystems and commands are defined here...
 
@@ -56,7 +56,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(teleopCommand);
- 
+    JoystickButton triggerButton = new JoystickButton(joystick, 1);
+    triggerButton.whenPressed(autostraightCmd);
     
 
     
@@ -78,7 +79,7 @@ public class RobotContainer {
      JoystickButton winchButton = new JoystickButton(joystick, 1);
      System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
-     winchButton.whenPressed(raiseIntakeCmd);
+     winchButton.whenPressed(autostraightCmd);
 
 
   }
