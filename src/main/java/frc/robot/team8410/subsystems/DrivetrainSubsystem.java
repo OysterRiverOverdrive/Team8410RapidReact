@@ -85,9 +85,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
   public void autoDriveStraight_until_wall(double targetDist)
   {
-    while (targetDist>17.0)
+    while (targetDist>27.0)
     {
-      m_robotDrive.arcadeDrive(0.4, 0);
+      rightSide.setInverted(true);
+      m_robotDrive.arcadeDrive(0.7, 0);
       targetDist = UltrasonicFront.getFrontSensorDistance();
     }
     m_robotDrive.arcadeDrive(0, 0);
