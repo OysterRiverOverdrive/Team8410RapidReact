@@ -37,7 +37,8 @@ public final class Constants
    public static int BALL_IS_BLUE = 1; // this is the threshold for Blue color ball
 
    
-
+   public static int WINCH_BUTTON = 1;
+   public static int INTAKE_BUTTON = 2;
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
    public static int BAKE_POWER_TEMPERATURE = 35;
