@@ -58,7 +58,7 @@ public class Diagnostics8410
       SmartDashboard.putNumber("Voltage", powerDistribution.getVoltage());
       SmartDashboard.putNumber("Power", powerDistribution.getTotalPower());
     
-// make this to a constant
+
       if (powerDistribution.getTemperature() > 35) {
       SmartDashboard.putBoolean("Temp is High", false);
     } else {
