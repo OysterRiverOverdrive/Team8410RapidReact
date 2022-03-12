@@ -9,52 +9,66 @@ package frc.robot.team8410.sensors;
 public class SensorValues 
 {
     // holds the LIDAR value in inches
-    private int lidarDistanceInches;
+    private double lidarDistanceInches;
 
     // holds the ultrasonic distance reading on the left side
-    private int ultrasonicLeftInches;
+    private double ultrasonicLeftInches;
 
      // holds the ultrasonic distance reading on the right side
-    private int ultrasonicRightInches;
+    private double ultrasonicRightInches;
     
      // holds the ultrasonic distance reading on the back of the robot
-    private int ultrasonicBackInches;
+    private double ultrasonicBackInches;
 
     // holds true if there is a red ball in front of the TCS sensor else  false  
-    private boolean redBall_TSCSensor;
-
-     // holds true if there is a blue ball in front of the TCS sensor else  false  
-    private boolean blueBall_TSCSEnsor;
+    private String ballColor_TSCSensor;
 
      // holds true if there is a red ball in front of the Rev sensor else  false  
-    private boolean redBall_RevSensor;
+    private String ballColor_RevSensor;
 
-     // holds true if there is a blue ball in front of the Rev sensor else  false  
-    private boolean blueBall_revSensor;
-   
-
-
-   
    // Getters and Setters
-   
-    public int getLidarDistanceInches() 
+    public double getLidarDistanceInches() 
     {
         return lidarDistanceInches;
     }
-    
-    public boolean isBlueBall_revSensor() 
-    {
-        return blueBall_revSensor;
-    }
-    
-    public void setBlueBall_revSensor(boolean blueBall_revSensor)
-    {
-        this.blueBall_revSensor = blueBall_revSensor;
+   
+    public String getBallColor_TSCSensor() {
+        return ballColor_TSCSensor;
     }
 
-    public boolean isRedBall_RevSensor() 
-    {
-        return redBall_RevSensor;
+    public void setBallColor_TSCSensor(String ballColor_TSCSensor) {
+        this.ballColor_TSCSensor = ballColor_TSCSensor;
     }
-    
+
+    public String getBallColor_RevSensor() {
+        return ballColor_RevSensor;
+    }
+
+    public void setBallColor_RevSensor(String ballColor_RevSensor) {
+        this.ballColor_RevSensor = ballColor_RevSensor;
+    }
+
+    public double getUltrasonicBackInches() {
+        return ultrasonicBackInches;
+    }
+
+    public void setUltrasonicBackInches(double ultrasonicBackInches) {
+        this.ultrasonicBackInches = ultrasonicBackInches;
+    }
+
+    public double getUltrasonicRightInches() {
+        return ultrasonicRightInches;
+    }
+
+    public void setUltrasonicRightInches(double ultrasonicRightInches) {
+        this.ultrasonicRightInches = ultrasonicRightInches;
+    }
+
+    public double getUltrasonicLeftInches() {
+        return ultrasonicLeftInches;
+    }
+
+    public void setUltrasonicLeftInches(double ultrasonicLeftInches) {
+        this.ultrasonicLeftInches = ultrasonicLeftInches;
+    }
 }

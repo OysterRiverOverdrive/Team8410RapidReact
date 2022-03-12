@@ -7,13 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.team8410.diagnostics.Diagnostics8410;
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
-
-
-
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,10 +22,11 @@ public class Robot extends TimedRobot
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private SensorValues sensorValues = new SensorValues();
-  private Color_RevroboticsVer3 colorRevSensor = new Color_RevroboticsVer3();
-  private Color_TCS34725_I2C colorTCSSensor = new Color_TCS34725_I2C();
-  private Diagnostics8410 diagnostics = new Diagnostics8410();
-
+  private Color_RevroboticsVer3 colorRevSensor;
+  private Color_TCS34725_I2C colorTCSSensor;
+ 
+  private boolean isTCSSensorGood;
+  private boolean isRevColorSensorGood;
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -42,13 +39,37 @@ public class Robot extends TimedRobot
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    sensorValues = new SensorValues();
+    
+
+
     try
     {
+      //TODO this needs to be tested on real bot
+      colorTCSSensor = new Color_TCS34725_I2C();
       colorTCSSensor.initialize(2,1);
-      colorTCSSensor.enable();
+      isTCSSensorGood= true;
+      }
+    catch(Exception e)
+    {
+      // initialization of the sensor failed - do not read this value
+      isTCSSensorGood = false;
+      System.out.println("Could not initi TCS sensor");
+       e.printStackTrace();
+    }
+
+    try
+    {
+      // initialization of the sensor failed. Do not read this value
+      colorRevSensor = new Color_RevroboticsVer3();
+      isRevColorSensorGood= true;
     }
     catch(Exception e)
     {
+      isRevColorSensorGood= false;
+      System.out.println("Could not initi Rev sensor");
+    
+
        e.printStackTrace();
     }
 
@@ -72,37 +93,33 @@ public class Robot extends TimedRobot
 
     /*******/
     // This is where we will read the sensors and call the set method of the sensorValue object
-    //  This also needs the ultrasonic values
+    //  Commented out until problem is found
 
-    // sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
-    // sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
-    // sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
+    //sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
+    //sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
+    //sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
     
-    // if(colorTCSSensor.isRed())
-    // {
-    //   sensorValues.setBlueBall_TSCSEnsor(true);
-    //   sensorValues.setBlueBall_TSCSEnsor(false);
-    // }
-    // else
-    // {
-    //   sensorValues.setBlueBall_TSCSEnsor(false);
-    //   sensorValues.setBlueBall_TSCSEnsor(true);
-    // }
+
+    if(isTCSSensorGood)
+    {
+       sensorValues.setBallColor_TSCSensor(colorTCSSensor.getBallColor());
+    }
+    else
+    {
+      sensorValues.setBallColor_TSCSensor("BAD");
+    }
+
+    if(isRevColorSensorGood)
+    {
+     sensorValues.setBallColor_RevSensor(colorRevSensor.getBallColor());
+    }
+    else
+    {
+      sensorValues.setBallColor_RevSensor("BAD");
+    }
      
 
-    // if(colorRevSensor.isRed())
-    // {
-    //   sensorValues.setRedBall_RevSensor(true);
-    //   sensorValues.setBlueBall_revSensor(false);
-    // }
-    // else
-    // {
-    //   sensorValues.setRedBall_RevSensor(false);
-    //   sensorValues.setBlueBall_revSensor(true);
-    // }
-     
 
-    // diagnostics.setLEDsAndDashboard(sensorValues);
 
     CommandScheduler.getInstance().run();
   }

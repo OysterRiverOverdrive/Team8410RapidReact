@@ -19,7 +19,7 @@ If your pull request is blocked by a message like `All checks have failed` and `
 
 #### Running gradle commands
 
-To run a command like `./gradlew :spotlessApply`, 
+To run a command like `./gradlew spotlessApply`, 
 
 * From the WPI editor:
 * Press CTRL+` which will open the terminal in the project.
