@@ -5,12 +5,15 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.IntakeSubsystem;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
-public class intakepullCmd extends CommandBase {
-  private IntakeSubsystem intake;
-  /** Creates a new intakepullCmd. */
-  public intakepullCmd() {
+public class AutoCommand extends CommandBase {
+  /** Creates a new AutoCommand. */
+  private final DrivetrainSubsystem driveSub;
+  public AutoCommand(DrivetrainSubsystem drive) 
+  {
+    driveSub = drive;
+    addRequirements(drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -20,8 +23,12 @@ public class intakepullCmd extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    intake.intakePull();
+  public void execute() 
+  {
+
+    driveSub.autoDriveStraight(20, 0.5);
+    driveSub.autoDriveStraight(50, -0.5);
+
   }
 
   // Called once the command ends or is interrupted.
