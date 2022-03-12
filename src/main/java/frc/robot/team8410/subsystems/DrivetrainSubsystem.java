@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.team8410.sensors.UltrasonicFront;
 
 
-// This one is for the Practice Robot
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
@@ -26,7 +26,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //TODO 
 
-  //ashish added Please use constants for  IDs
+  //ashish added Please use constants for CAN IDs
 
   private final Encoder leftSideEncoder = new Encoder(0, 1);
   
@@ -69,10 +69,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void driveTheBot ()
   {
     m_robotDrive.arcadeDrive(slrForTurn.calculate(m_stick.getRawAxis(4)*0.75),slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85));
-   // System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
+    System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
    //m_robotDrive.arcadeDrive(m_stick.getRawAxis(2) * 0.75, m_stick.getRawAxis(3)*-0.85);
   
-   
   }
 
   public void autoDriveStraight (double distanceToGo, double speed)
@@ -84,10 +83,19 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_robotDrive.arcadeDrive(0, 0);
 
   }
+  public void autoDriveStraight_until_wall(double targetDist)
+  {
+    while (targetDist>27.0)
+    {
+      rightSide.setInverted(true);
+      m_robotDrive.arcadeDrive(0.7, 0);
+      targetDist = UltrasonicFront.getFrontSensorDistance();
+    }
+    m_robotDrive.arcadeDrive(0, 0);
+
+  }
   @Override
-  public void periodic()
-   {
-  
+  public void periodic() {
     // This method will be called once per scheduler run ''
   }
 }
