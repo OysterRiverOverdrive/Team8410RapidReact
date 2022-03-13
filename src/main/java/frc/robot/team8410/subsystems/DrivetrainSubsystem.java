@@ -85,14 +85,27 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
   public void autoDriveStraight_until_wall(double targetDist)
   {
-    while (targetDist>27.0)
+    double stopDistance = 27.0;
+    double cautionDistance = 50.0;
+    double maxDriveSpeed = 1.0;
+    while (targetDist > stopDistance)
     {
       rightSide.setInverted(true);
-      m_robotDrive.arcadeDrive(0.7, 0);
+
+      if () {
+        // If the distance is greater than cautionDistance, go maxDriveSpeed.
+        m_robotDrive.arcadeDrive(maxDriveSpeed, 0);
+      } else if  () {
+        // If less than or equal to cautionDistance, progressively go slower ... somehow.
+
+
+      } else {
+        // If at or stop distance stop and exit loop.
+        m_robotDrive.arcadeDrive(0, 0);
+        break;
+      }
       targetDist = UltrasonicFront.getFrontSensorDistance();
     }
-    m_robotDrive.arcadeDrive(0, 0);
-
   }
   @Override
   public void periodic() {
