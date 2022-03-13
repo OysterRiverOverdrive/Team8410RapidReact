@@ -83,8 +83,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_robotDrive.arcadeDrive(0, 0);
 
   }
+  public double calculateApproachSpeed(double targetDist, int approach)
+  {
+    return 1.0;
+  }
+
   public void autoDriveStraight_until_wall(double targetDist, int approach)
-  
   {
     double stopDistance = 25.0;
     double cautionDistance = 50.0;
