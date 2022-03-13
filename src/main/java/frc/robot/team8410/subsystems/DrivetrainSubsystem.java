@@ -106,9 +106,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
         if (approachAlgorithm = 0) {
           // speed = (slope*targetDist)+intercept;
           // If less than or equal to cautionDistance, progressively go slower ... somehow.
-        } else if 
+        } else if (approachAlgorithm = 1){
         slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
         speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
+        
+        } else {
+
+        };
         m_robotDrive.arcadeDrive(speed, 0);
 
       } else {
