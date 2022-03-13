@@ -90,6 +90,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     double maxDriveSpeed = 1.0;
     double speed = 0;
     double slope = 0;
+    int approachAlgorithm = 0;
     // double intercept = 0;
     // slope = maxDriveSpeed/(cautionDistance-stopDistance);
     // intercept = -1*(slope*stopDistance);
@@ -101,8 +102,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
         // If the distance is greater than cautionDistance, go maxDriveSpeed.
         m_robotDrive.arcadeDrive(maxDriveSpeed, 0);
       } else if  (targetDist <= cautionDistance) {
-        // speed = (slope*targetDist)+intercept;
-        // If less than or equal to cautionDistance, progressively go slower ... somehow.
+
+        if (approachAlgorithm = 0) {
+          // speed = (slope*targetDist)+intercept;
+          // If less than or equal to cautionDistance, progressively go slower ... somehow.
+        } else if 
         slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
         speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
         m_robotDrive.arcadeDrive(speed, 0);
