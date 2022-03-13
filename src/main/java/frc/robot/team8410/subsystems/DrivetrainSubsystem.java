@@ -85,19 +85,27 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
   public void autoDriveStraight_until_wall(double targetDist)
   {
-    double stopDistance = 27.0;
+    double stopDistance = 25.0;
     double cautionDistance = 50.0;
     double maxDriveSpeed = 1.0;
+    double speed = 0;
+    double slope = 0;
+    // double intercept = 0;
+    // slope = maxDriveSpeed/(cautionDistance-stopDistance);
+    // intercept = -1*(slope*stopDistance);
     while (targetDist > stopDistance)
     {
       rightSide.setInverted(true);
 
-      if () {
+      if (targetDist > cautionDistance) {
         // If the distance is greater than cautionDistance, go maxDriveSpeed.
         m_robotDrive.arcadeDrive(maxDriveSpeed, 0);
-      } else if  () {
+      } else if  (targetDist <= cautionDistance) {
+        // speed = (slope*targetDist)+intercept;
         // If less than or equal to cautionDistance, progressively go slower ... somehow.
-
+        slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
+        speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
+        m_robotDrive.arcadeDrive(speed, 0);
 
       } else {
         // If at or stop distance stop and exit loop.
