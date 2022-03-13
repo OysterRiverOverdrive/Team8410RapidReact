@@ -83,34 +83,39 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_robotDrive.arcadeDrive(0, 0);
 
   }
-  public void autoDriveStraight_until_wall(double targetDist)
+  public void autoDriveStraight_until_wall(double targetDist, int approach)
+  
   {
     double stopDistance = 25.0;
     double cautionDistance = 50.0;
     double maxDriveSpeed = 1.0;
     double speed = 0;
     double slope = 0;
-    int approachAlgorithm = 0;
-    // double intercept = 0;
-    // slope = maxDriveSpeed/(cautionDistance-stopDistance);
-    // intercept = -1*(slope*stopDistance);
+    double intercept = 0;
     while (targetDist > stopDistance)
     {
       rightSide.setInverted(true);
 
-      if (targetDist > cautionDistance) {
+      if (targetDist <= cautionDistance) {
         // If the distance is greater than cautionDistance, go maxDriveSpeed.
         m_robotDrive.arcadeDrive(maxDriveSpeed, 0);
       } else if  (targetDist <= cautionDistance) {
+ 
+        if (approach == 0) {
+          // Linear
+          slope = maxDriveSpeed/(cautionDistance-stopDistance);
+          intercept = -1*(slope*stopDistance);
+          speed = (slope*targetDist)+intercept;
 
-        if (approachAlgorithm = 0) {
-          // speed = (slope*targetDist)+intercept;
-          // If less than or equal to cautionDistance, progressively go slower ... somehow.
-        } else if (approachAlgorithm = 1){
-        slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
-        speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
+        } else if (approach == 1){
+          // Parabola
+          slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
+          speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
         
         } else {
+          // Inverse parabola
+          slope = -1*(maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance)));
+          speed = (slope*((targetDist-stopDistance)*(targetDist-stopDistance)))+1;
 
         };
         m_robotDrive.arcadeDrive(speed, 0);

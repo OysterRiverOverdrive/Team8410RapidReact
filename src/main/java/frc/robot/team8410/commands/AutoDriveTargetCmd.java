@@ -31,7 +31,7 @@ public class AutoDriveTargetCmd extends CommandBase {
   @Override
   public void execute() 
   {
-    driveSub.autoDriveStraight_until_wall(targetDist);
+    driveSub.autoDriveStraight_until_wall(targetDist, 0);
   }
 
   // Called once the command ends or is interrupted.
