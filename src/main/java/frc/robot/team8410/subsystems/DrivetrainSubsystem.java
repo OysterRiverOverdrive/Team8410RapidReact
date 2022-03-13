@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.team8410.sensors.UltrasonicFront;
 
 
-// This one is for the Practice Robot
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
@@ -26,7 +26,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //TODO 
 
-  //ashish added Please use constants for  IDs
+  //ashish added Please use constants for CAN IDs
 
   private final Encoder leftSideEncoder = new Encoder(0, 1);
   
@@ -69,10 +69,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void driveTheBot ()
   {
     m_robotDrive.arcadeDrive(slrForTurn.calculate(m_stick.getRawAxis(4)*0.75),slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85));
-   // System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
+    System.out.println(slrForDrive.calculate(m_stick.getRawAxis(3)*-0.85));
    //m_robotDrive.arcadeDrive(m_stick.getRawAxis(2) * 0.75, m_stick.getRawAxis(3)*-0.85);
   
-   
   }
 
   public void autoDriveStraight (double distanceToGo, double speed)
@@ -84,10 +83,40 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_robotDrive.arcadeDrive(0, 0);
 
   }
+  public void autoDriveStraight_until_wall(double targetDist)
+  {
+    double stopDistance = 25.0;
+    double cautionDistance = 50.0;
+    double maxDriveSpeed = 1.0;
+    double speed = 0;
+    double slope = 0;
+    // double intercept = 0;
+    // slope = maxDriveSpeed/(cautionDistance-stopDistance);
+    // intercept = -1*(slope*stopDistance);
+    while (targetDist > stopDistance)
+    {
+      rightSide.setInverted(true);
+
+      if (targetDist > cautionDistance) {
+        // If the distance is greater than cautionDistance, go maxDriveSpeed.
+        m_robotDrive.arcadeDrive(maxDriveSpeed, 0);
+      } else if  (targetDist <= cautionDistance) {
+        // speed = (slope*targetDist)+intercept;
+        // If less than or equal to cautionDistance, progressively go slower ... somehow.
+        slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
+        speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
+        m_robotDrive.arcadeDrive(speed, 0);
+
+      } else {
+        // If at or stop distance stop and exit loop.
+        m_robotDrive.arcadeDrive(0, 0);
+        break;
+      }
+      targetDist = UltrasonicFront.getFrontSensorDistance();
+    }
+  }
   @Override
-  public void periodic()
-   {
-  
+  public void periodic() {
     // This method will be called once per scheduler run ''
   }
 }
