@@ -7,6 +7,7 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.sensors.UltrasonicFront;
+import frc.robot.Constants;
 
 public class AutoDriveTargetCmd extends CommandBase {
   /** Creates a new TeleopDriveCommand. */
@@ -31,7 +32,7 @@ public class AutoDriveTargetCmd extends CommandBase {
   @Override
   public void execute() 
   {
-    driveSub.autoDriveStraight_until_wall(targetDist, 0);
+    driveSub.autoDriveStraight_until_wall(targetDist, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
   }
 
   // Called once the command ends or is interrupted.

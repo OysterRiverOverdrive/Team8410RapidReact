@@ -84,7 +84,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   }
 
-  public double calculateApproachSpeed(double targetDist, int approach)
+  public double calculateApproachSpeed(double targetDist, int approachAlg)
   {
     double speed = 0;
     double slope = 0;
@@ -93,46 +93,46 @@ public class DrivetrainSubsystem extends SubsystemBase {
     if (targetDist >= Constants.DRIVER_ASSIST_CAUTION_DISTANCE) {
       // If the distance is greater than cautionDistance, go maxDriveSpeed.
       return Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED;
-    } else if  (targetDist <= Constants.DRIVER_ASSIST_CAUTION_DISTANCE) {
 
-      if (approach == 0) {
-        // Linear
-        slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/(Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
-        intercept = -1*(slope*Constants.DRIVER_ASSIST_STOP_DISTANCE);
-        speed = (slope*targetDist)+intercept;
-
-      } else if (approach == 1){
-        // Parabola
-        slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE));
-        speed = slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
-      
-      } else {
-        // Inverse parabola
-        slope = -1*(Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)));
-        speed = (slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)))+1;
-
-      };
-      return speed;
-
+    } else if (targetDist <= Constants.DRIVER_ASSIST_STOP_DISTANCE) {
+      // If at or inside the stop distance, stop.
+      return 0.0;
     }
 
-  // If at or stop distance stop and exit loop.
-    return 0;
+    if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR) {
+      // Linear
+      slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/(Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
+      intercept = -1*(slope*Constants.DRIVER_ASSIST_STOP_DISTANCE);
+      speed = (slope*targetDist)+intercept;
+
+    } else if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB){
+      // Parabola
+      slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE));
+      speed = slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
+    
+    } else {
+      // Inverse parabola
+      slope = -1*(Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)));
+      speed = (slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)))+1;
+
+    };
+    return speed;
   }
 
-  public void autoDriveStraight_until_wall(double targetDist, int approach)
+  public void autoDriveStraight_until_wall(double targetDist, int approachAlg)
   {
     while (targetDist > Constants.DRIVER_ASSIST_STOP_DISTANCE)
     {
       rightSide.setInverted(true);
 
-      double speed = calculateApproachSpeed(targetDist, approach);
+      double speed = calculateApproachSpeed(targetDist, approachAlg);
       m_robotDrive.arcadeDrive(speed, 0);
 
       targetDist = UltrasonicFront.getFrontSensorDistance();
     }
     m_robotDrive.arcadeDrive(0, 0);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run ''

@@ -10,10 +10,10 @@ public class TestDrivetrainSubsystem {
     //test to check approach speed
     @Test
     public void testCalculateApproachSpeed() {
-        double speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_CAUTION_DISTANCE, 1);
-        assertEquals(1, speed, "should get max speed at caution distance");
+        double speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_CAUTION_DISTANCE + 0.001, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
+        assertEquals(Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED, speed, "should get max speed at caution distance");
 
-        speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE, 1);
+        speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE - 0.001, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
         assertEquals(0, speed, "should stop at stop distance");
     }
  }
