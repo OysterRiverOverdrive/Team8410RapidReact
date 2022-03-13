@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.team8410.sensors.UltrasonicFront;
-
+import frc.robot.Constants;
 
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -83,54 +83,55 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_robotDrive.arcadeDrive(0, 0);
 
   }
+
   public double calculateApproachSpeed(double targetDist, int approach)
   {
-    return 1.0;
+    double speed = 0;
+    double slope = 0;
+    double intercept = 0;
+
+    if (targetDist >= Constants.DRIVER_ASSIST_CAUTION_DISTANCE) {
+      // If the distance is greater than cautionDistance, go maxDriveSpeed.
+      return Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED;
+    } else if  (targetDist <= Constants.DRIVER_ASSIST_CAUTION_DISTANCE) {
+
+      if (approach == 0) {
+        // Linear
+        slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/(Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
+        intercept = -1*(slope*Constants.DRIVER_ASSIST_STOP_DISTANCE);
+        speed = (slope*targetDist)+intercept;
+
+      } else if (approach == 1){
+        // Parabola
+        slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE));
+        speed = slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
+      
+      } else {
+        // Inverse parabola
+        slope = -1*(Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)));
+        speed = (slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)))+1;
+
+      };
+      return speed;
+
+    }
+
+  // If at or stop distance stop and exit loop.
+    return 0;
   }
 
   public void autoDriveStraight_until_wall(double targetDist, int approach)
   {
-    double stopDistance = 25.0;
-    double cautionDistance = 50.0;
-    double maxDriveSpeed = 1.0;
-    double speed = 0;
-    double slope = 0;
-    double intercept = 0;
-    while (targetDist > stopDistance)
+    while (targetDist > Constants.DRIVER_ASSIST_STOP_DISTANCE)
     {
       rightSide.setInverted(true);
 
-      if (targetDist <= cautionDistance) {
-        // If the distance is greater than cautionDistance, go maxDriveSpeed.
-        m_robotDrive.arcadeDrive(maxDriveSpeed, 0);
-      } else if  (targetDist <= cautionDistance) {
- 
-        if (approach == 0) {
-          // Linear
-          slope = maxDriveSpeed/(cautionDistance-stopDistance);
-          intercept = -1*(slope*stopDistance);
-          speed = (slope*targetDist)+intercept;
+      double speed = calculateApproachSpeed(targetDist, approach);
+      m_robotDrive.arcadeDrive(speed, 0);
 
-        } else if (approach == 1){
-          // Parabola
-          slope = maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance));
-          speed = slope*((targetDist-stopDistance)*(targetDist-stopDistance));
-        
-        } else {
-          // Inverse parabola
-          slope = -1*(maxDriveSpeed/((cautionDistance - stopDistance)*(cautionDistance - stopDistance)));
-          speed = (slope*((targetDist-stopDistance)*(targetDist-stopDistance)))+1;
-
-        };
-        m_robotDrive.arcadeDrive(speed, 0);
-
-      } else {
-        // If at or stop distance stop and exit loop.
-        m_robotDrive.arcadeDrive(0, 0);
-        break;
-      }
       targetDist = UltrasonicFront.getFrontSensorDistance();
     }
+    m_robotDrive.arcadeDrive(0, 0);
   }
   @Override
   public void periodic() {
