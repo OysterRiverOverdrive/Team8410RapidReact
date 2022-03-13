@@ -25,6 +25,9 @@ public class TestDrivetrainSubsystem {
         speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
         assertTrue(speed < 0.4, "should be slow just outside the stop distance: "+speed);
 
+        speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
+        assertTrue(speed > Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED, "speed greater than min "+speed);
+
         // Check speeds using parabolic.
         speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - 1, Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB);
         assertTrue(speed > 0.8, "should still be fast just inside the caution distance: "+speed);
@@ -32,11 +35,17 @@ public class TestDrivetrainSubsystem {
         speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB);
         assertTrue(speed < 0.4, "should be slow just outside the stop distance: "+speed);
 
+        speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB);
+        assertTrue(speed > Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED, "speed greater than min "+speed);
+
         // Check speeds using inverse parabolic.
         speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - 1, Constants.DRIVER_ASSIST_APPROACH_ALG_INVPARAB);
         assertTrue(speed > 0.8, "should still be fast just inside the caution distance: "+speed);
 
         speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_INVPARAB);
         assertTrue(speed < 0.4, "should be slow just outside the stop distance: "+speed);
+
+        speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_INVPARAB);
+        assertTrue(speed > Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED, "speed greater than min "+speed);
     }
  }

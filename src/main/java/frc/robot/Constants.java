@@ -48,9 +48,9 @@ public final class Constants
 
    // Parameters to adjust driver assist algorithms. 
    public static double DRIVER_ASSIST_STOP_DISTANCE = 25.0; // inches
-   public static double DRIVER_ASSIST_CAUTION_DISTANCE = 50.0; // inches
-   public static double DRIVER_ASSIST_MAX_DRIVE_SPEED = 1.0; // 0.2 <= |speed| <= 1 (motors won't respond with a speed between -0.2 and 0.2)
-   public static double DRIVER_ASSIST_MIN_DRIVE_SPEED = 0.21; // 0.2 <= |speed| <= 1 (motors won't respond with a speed between -0.2 and 0.2)
+   public static double DRIVER_ASSIST_CAUTION_DISTANCE = 100.0; // inches
+   public static double DRIVER_ASSIST_MAX_DRIVE_SPEED = 1.0; // 0.21 <= |speed| <= 1 (motors won't respond with a speed between -0.21 and 0.21)
+   public static double DRIVER_ASSIST_MIN_DRIVE_SPEED = 0.21; // 0.21 <= |speed| <= 1 (motors won't respond with a speed between -0.21 and 0.21)
    public static int DRIVER_ASSIST_APPROACH_ALG_LINEAR = 0; // Speed linearly drops off between the caution and stop distances.
    public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1; // Speed quickly drops off and then slowly approach the stop distance.
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2; // Speed drops off at at the last moment.

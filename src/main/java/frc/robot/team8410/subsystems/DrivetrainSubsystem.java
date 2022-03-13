@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.team8410.sensors.UltrasonicFront;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -101,19 +102,19 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR) {
       // Linear
-      slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/(Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
-      intercept = -1*(slope*Constants.DRIVER_ASSIST_STOP_DISTANCE);
+      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED)/(Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
+      intercept = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - (slope*Constants.DRIVER_ASSIST_CAUTION_DISTANCE);
       speed = (slope*targetDist)+intercept;
 
     } else if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB){
       // Parabola
-      slope = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE));
+      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED)/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE))+0.21;
       speed = slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
     
     } else {
       // Inverse parabola
-      slope = -1*(Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)));
-      speed = (slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)))+1;
+      slope = -1*((Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED)/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)));
+      speed = (slope*((targetDist-Constants.DRIVER_ASSIST_CAUTION_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_CAUTION_DISTANCE)))+Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED;
 
     };
     return speed;
@@ -123,6 +124,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   {
     while (targetDist > Constants.DRIVER_ASSIST_STOP_DISTANCE)
     {
+      SmartDashboard.putNumber("Ultrasonic", targetDist);
+      SmartDashboard.putNumber("Alg", approachAlg);
       rightSide.setInverted(true);
 
       double speed = calculateApproachSpeed(targetDist, approachAlg);
