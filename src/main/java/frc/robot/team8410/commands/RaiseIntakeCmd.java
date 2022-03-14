@@ -44,7 +44,7 @@ public class RaiseIntakeCmd extends CommandBase
   {
     currPOTVoltage = m_potentiometer.getAverageVoltage();
 
-SmartDashboard.putNumber("POT", currPOTVoltage);
+    SmartDashboard.putNumber("POT", currPOTVoltage);
 
     
     if(currPOTVoltage <= 0.240)
