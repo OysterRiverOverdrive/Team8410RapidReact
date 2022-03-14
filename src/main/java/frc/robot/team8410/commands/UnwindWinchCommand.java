@@ -58,8 +58,8 @@ public class UnwindWinchCommand extends CommandBase {
 
     if(Math.abs(winchEncoder.getDistance()) >= 5)
     {
-            //TODO check # of rotations needed
-            winch.stopMotor();
+      //TODO check # of rotations needed
+      winch.stopMotor();
       retVal = true;
     }
     return retVal;

@@ -17,8 +17,8 @@ public class OneStageExtendCmd extends CommandBase {
   public OneStageExtendCmd(OneStageClimber oneStage) {
     oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
     oneStageRightEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_RIGHT_ENCODER_PORT);
-    oneStageLeftEncoder.setDistancePerRotation(1.0);
-    oneStageRightEncoder.setDistancePerRotation(1.0);
+    oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402); //double check this value
+    oneStageRightEncoder.setDistancePerRotation(Math.PI * 0.787402);
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.oneStage = oneStage;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -45,7 +45,7 @@ public class OneStageExtendCmd extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
     //System.out.println(Math.abs(twoStageEncoder.getDistance()));
-    if(Math.abs(oneStageLeftEncoder.getDistance()) >= 5 && Math.abs(oneStageRightEncoder.getDistance()) >= 5)
+    if(Math.abs(oneStageLeftEncoder.getDistance()) >= 3 && Math.abs(oneStageRightEncoder.getDistance()) >= 3)
     {
       //TODO check # of rotations needed
       oneStage.stopMotor();

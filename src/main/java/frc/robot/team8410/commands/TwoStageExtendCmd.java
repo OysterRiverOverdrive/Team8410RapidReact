@@ -16,7 +16,7 @@ public class TwoStageExtendCmd extends CommandBase {
  
   public TwoStageExtendCmd(TwoStageClimber twoStage) {
     twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
-    twoStageEncoder.setDistancePerRotation(1.0);
+    twoStageEncoder.setDistancePerRotation(Math.PI * 0.787204); //circumference of two stage is 0.787204 pi inches
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.twoStage = twoStage; 
 
@@ -47,7 +47,7 @@ public class TwoStageExtendCmd extends CommandBase {
     boolean retVal = false;
     System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if(Math.abs(twoStageEncoder.getDistance()) >= 5)
+    if(Math.abs(twoStageEncoder.getDistance()) >= 28.5) //two stage needs to extend 28.5 in
     {
       //TODO check # of rotations needed
       twoStage.stopMotor();

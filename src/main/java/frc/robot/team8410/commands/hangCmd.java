@@ -17,12 +17,23 @@ public class hangCmd extends SequentialCommandGroup {
   public hangCmd(WinchSubsystem winch, TwoStageClimber twoStage, OneStageClimber oneStage) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new UnwindWinchCommand(winch),
+    addCommands(
+    //need to figure out how to program the start
+    new UnwindWinchCommand(winch),
+    new TwoStageExtendCmd(twoStage), 
+    new WindWinchCommand(winch),
+    new TwoStageDescendCmd(twoStage),
+    new OneStageExtendCmd(oneStage),
+    new WindWinchCommand(winch),
+    new OneStageDescendCmd(oneStage),
+    //this proccess is repeated two times
+    new UnwindWinchCommand(winch),
     new TwoStageExtendCmd(twoStage), 
     new WindWinchCommand(winch),
     new TwoStageDescendCmd(twoStage),
     new OneStageExtendCmd(oneStage),
     new WindWinchCommand(winch),
     new OneStageDescendCmd(oneStage));
+
   }
 }
