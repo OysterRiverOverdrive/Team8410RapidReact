@@ -46,4 +46,13 @@ public final class Constants
    public static int BAKE_POWER_VOLTAGE = 1;
    public static int BAKE_TOTAL_POWER = 1;
 
+   // Parameters to adjust driver assist algorithms. 
+   public static double DRIVER_ASSIST_STOP_DISTANCE = 25.0; // inches
+   public static double DRIVER_ASSIST_CAUTION_DISTANCE = 50.0; // inches
+   public static double DRIVER_ASSIST_MAX_DRIVE_SPEED = 1.0; // range 0-1
+   public static double DRIVER_ASSIST_MIN_DRIVE_SPEED = 0.21; // range 0-1
+   public static int DRIVER_ASSIST_APPROACH_ALG_LINEAR = 0;
+   public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1;
+   public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
+
 }
