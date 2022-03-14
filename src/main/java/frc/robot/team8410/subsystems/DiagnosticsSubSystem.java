@@ -5,6 +5,11 @@
 package frc.robot.team8410.subsystems;
 
 
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.util.Color;
+
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.team8410.commands.TeleopDriveCommand;
@@ -26,6 +31,12 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   
   private final AddressableLED m_led= new AddressableLED(4);
   private final AddressableLEDBuffer m_ledBuffer= new AddressableLEDBuffer(72);
+
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+
+    Color detectedColor = m_colorSensor.getColor();
+    double redOverBlue = detectedColor.red/detectedColor.blue;
 
 
   public DiagnosticsSubSystem() 
@@ -158,8 +169,15 @@ public void bakeVanillaGoldfish()
 
     for (var i = 0; i < m_ledBuffer.getLength(); i++) {
       
+
+      m_ledBuffer.setRGB(i, 0, 255, 0);
+      //m_ledBuffer.setRGB(i, 255, 17, 221);
+      //use for atunomus
     }
   }
+
+
+  
 
 
   if (powerDistribution.getTemperature() > 35) {
@@ -182,7 +200,7 @@ public void bakeVanillaGoldfish()
   
 
 
-  if (powerDistribution.getTotalPower() > 50) {
+ /* if (powerDistribution.getTotalPower() > 50) {
 
 
     for (int i = 8; i < 13; i++) {
@@ -200,10 +218,10 @@ public void bakeVanillaGoldfish()
       m_ledBuffer.setRGB(i, 127, 0, 128);
     }
    
-  }
+  } */
 
   
-}
+} 
 
 
 
