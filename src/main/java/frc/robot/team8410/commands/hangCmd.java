@@ -18,22 +18,29 @@ public class hangCmd extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    //need to figure out how to program the start
-    new UnwindWinchCommand(winch),
-    new TwoStageExtendCmd(twoStage), 
-    new WindWinchCommand(winch),
-    new TwoStageDescendCmd(twoStage),
-    new OneStageExtendCmd(oneStage),
-    new WindWinchCommand(winch),
-    new OneStageDescendCmd(oneStage),
-    //this proccess is repeated two times
-    new UnwindWinchCommand(winch),
-    new TwoStageExtendCmd(twoStage), 
-    new WindWinchCommand(winch),
-    new TwoStageDescendCmd(twoStage),
-    new OneStageExtendCmd(oneStage),
-    new WindWinchCommand(winch),
-    new OneStageDescendCmd(oneStage));
-
+    
+    //ground to mid
+    new UnwindWinchCommand(winch, 1.0),
+    new TwoStageExtendCmd(twoStage, 15.79),
+    new WindWinchCommand(winch, 1.0),    //TODO verify distances
+    new TwoStageDescendCmd(twoStage, 15.79),
+    new OneStageExtendCmd(oneStage, 3.0),
+    new OneStageDescendCmd(oneStage, 3.0),
+    //mid to high
+    new UnwindWinchCommand(winch, 5.0),
+    new TwoStageExtendCmd(twoStage, 28.5), 
+    new WindWinchCommand(winch, 5.0),
+    new TwoStageDescendCmd(twoStage, 28.5),
+    new OneStageExtendCmd(oneStage, 3.0),
+    new WindWinchCommand(winch, 5.0),
+    new OneStageDescendCmd(oneStage, 3.0),
+    //high to traversal
+    new UnwindWinchCommand(winch, 5.0),
+    new TwoStageExtendCmd(twoStage, 28.5), 
+    new WindWinchCommand(winch, 5.0),
+    new TwoStageDescendCmd(twoStage, 28.5),
+    new OneStageExtendCmd(oneStage, 3.0),
+    new WindWinchCommand(winch, 5.0),
+    new OneStageDescendCmd(oneStage, 3.0));
   }
 }

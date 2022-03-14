@@ -13,12 +13,14 @@ public class WindWinchCommand extends CommandBase {
   /** Creates a new WinchWindCommand. */
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
+  private double windWinchDist;
 
-  public WindWinchCommand(WinchSubsystem winch) {
+  public WindWinchCommand(WinchSubsystem winch, double windWinchDist) {
     winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);
     winchEncoder.setDistancePerRotation(1.0);
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.winch = winch; 
+    this.windWinchDist = windWinchDist;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -45,7 +47,7 @@ public class WindWinchCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
     System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+Math.abs(winchEncoder.getDistance()));
-    if(Math.abs(winchEncoder.getDistance()) >= 5)
+    if(Math.abs(winchEncoder.getDistance()) >= windWinchDist)
     {
       //TODO check # of rotations needed
       winch.stopMotor();
