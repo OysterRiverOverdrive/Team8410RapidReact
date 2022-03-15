@@ -19,10 +19,6 @@ import frc.robot.team8410.commands.stopHangCmd;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.HangerSubsystem;
 import frc.robot.team8410.subsystems.IntakeSubsystem;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 //package frc.robot.team8410.sensors;
 
 
