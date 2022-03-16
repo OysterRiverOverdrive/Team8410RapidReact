@@ -11,6 +11,7 @@ public class TestDrivetrainSubsystem {
     //test to check approach speed
     @Test
     public void testCalculateApproachSpeed() {
+        
         // Check the extremes.
         double speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_CAUTION_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
         assertEquals(Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED, speed, "should get max speed outside caution distance");
@@ -47,5 +48,6 @@ public class TestDrivetrainSubsystem {
 
         speed = drivetrain.calculateApproachSpeed(Constants.DRIVER_ASSIST_STOP_DISTANCE + 1, Constants.DRIVER_ASSIST_APPROACH_ALG_INVPARAB);
         assertTrue(speed > Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED, "speed greater than min "+speed);
+    
     }
  }

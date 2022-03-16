@@ -18,7 +18,7 @@ import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.WinchSubsystem;
-import frc.robot.team8410.commands.AutoCommand;
+
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.DriverAutoCmd;
@@ -28,7 +28,7 @@ import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.commands.AutoCommand;
+
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
@@ -58,7 +58,7 @@ public class RobotContainer {
   private final PowerDistribution powerDistribution = new PowerDistribution();
 
 
-  private final AutoCommand autoCmd = new AutoCommand(drivetrain);
+  
 
  // private final XboxController joystick = new XboxController(0);
  private final Joystick joystick = new Joystick(0);
