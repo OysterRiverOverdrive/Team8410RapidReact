@@ -7,10 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.team8410.diagnostics.Diagnostics8410;
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
+// import frc.robot.team8410.sensors.UltrasonicFront;
+// import frc.robot.team8410.sensors.UltrasonicLeft;
+// import frc.robot.team8410.sensors.UltrasonicRight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -25,8 +27,7 @@ public class Robot extends TimedRobot
   private SensorValues sensorValues = new SensorValues();
   private Color_RevroboticsVer3 colorRevSensor;
   private Color_TCS34725_I2C colorTCSSensor;
-  private Diagnostics8410 diagnostics = new Diagnostics8410();
-
+ 
   private boolean isTCSSensorGood;
   private boolean isRevColorSensorGood;
   
@@ -42,7 +43,7 @@ public class Robot extends TimedRobot
     m_robotContainer = new RobotContainer();
 
     sensorValues = new SensorValues();
-    diagnostics = new Diagnostics8410();
+    
 
 
     try
@@ -95,11 +96,6 @@ public class Robot extends TimedRobot
 
     /*******/
     // This is where we will read the sensors and call the set method of the sensorValue object
-    //  Commented out until problem is found
-
-    //sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
-    //sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
-    //sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
     
 
     if(isTCSSensorGood)
@@ -121,7 +117,6 @@ public class Robot extends TimedRobot
     }
      
 
-   diagnostics.setLEDsAndDashboard(sensorValues);
 
 
     CommandScheduler.getInstance().run();
