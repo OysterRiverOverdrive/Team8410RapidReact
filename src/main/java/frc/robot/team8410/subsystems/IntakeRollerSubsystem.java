@@ -13,7 +13,7 @@ public class IntakeRollerSubsystem extends SubsystemBase {
   /** Creates a new IntakeRollerSubsystem. */
   
   private final WPI_VictorSPX m_roller = new WPI_VictorSPX(6);
-  private final Joystick joystick = new Joystick;
+  private final Joystick joystick = new Joystick(0);
   
   public IntakeRollerSubsystem() {
 
