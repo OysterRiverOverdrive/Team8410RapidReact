@@ -8,6 +8,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.Constants;
 
 
 public class TeleopDriveCommand extends CommandBase {
@@ -16,7 +17,8 @@ public class TeleopDriveCommand extends CommandBase {
   private final DrivetrainSubsystem driveSub;
   private final SlewRateLimiter slrForTurn = new SlewRateLimiter(2);
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(1.8);
-  private final Joystick m_stick = new Joystick(0);
+
+  private final Joystick m_stick = new Joystick(Constants.JOYSTICK_PORT);
 
   public TeleopDriveCommand( DrivetrainSubsystem drive) 
   {
@@ -33,8 +35,8 @@ public class TeleopDriveCommand extends CommandBase {
   @Override
   public void execute() 
   {
-      final double speed = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
-      final double turn = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+      double speed = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
+      double turn = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
       driveSub.driveTheBot(speed, turn);
 
     

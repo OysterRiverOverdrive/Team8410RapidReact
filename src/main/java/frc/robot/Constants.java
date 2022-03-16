@@ -33,12 +33,17 @@ public final class Constants
 
    public static int INTAKE_ARM_POT_PORT_ID = 0; // Analog for intake ARM port
    
-
+   public static int JOYSTICK_PORT = 0;
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
    public static int BAKE_POWER_TEMPERATURE = 35;
    public static int BAKE_POWER_CURRENT = 20;
    public static int BAKE_POWER_VOLTAGE = 1;
    public static int BAKE_TOTAL_POWER = 1;
+
+   public static int LEFT_ENCODER_0 = 0;
+   public static int LEFT_ENCODER_1 = 1;
+   public static int RIGHT_ENCODER_2 = 2;
+   public static int RIGHT_ENCODER_3 = 3;
 
 }
