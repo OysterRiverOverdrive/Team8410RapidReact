@@ -65,7 +65,7 @@ public class RaiseIntakeCmd extends CommandBase
       
     }
 
-    SmartDashboard.putNumber("Speed", speed);
+    SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
  
     intakeArmSubSys.rise(speed); 
 
