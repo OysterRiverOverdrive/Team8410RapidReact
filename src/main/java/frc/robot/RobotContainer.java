@@ -35,6 +35,7 @@ import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
 
 
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -56,7 +57,13 @@ public class RobotContainer {
   
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
+
   private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
+  
+
+  private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
+
+
   private final WinchSubsystem winch = new WinchSubsystem();
   private final UnwindWinchCommand unwindWinch = new UnwindWinchCommand(winch);
   

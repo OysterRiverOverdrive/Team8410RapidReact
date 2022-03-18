@@ -41,6 +41,7 @@ public final class Constants
    public static int INTAKE_BUTTON = 2;
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
+   public static int PDP_CAN_ID = 0;
    public static int BAKE_POWER_TEMPERATURE = 35;
    public static int BAKE_POWER_CURRENT = 20;
    public static int BAKE_POWER_VOLTAGE = 1;
