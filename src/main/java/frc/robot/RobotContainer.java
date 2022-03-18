@@ -22,6 +22,17 @@ import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.commands.AutoCommand;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
+import frc.robot.team8410.commands.TeleopDriveCommand;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+
+//package frc.robot.team8410.sensors;
+
 
 
 
@@ -85,8 +96,14 @@ public class RobotContainer {
     JoystickButton AutoButton = new JoystickButton(joystick, 1);
      System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
+
      AutoButton.whenPressed(autostraightCmd);
      intakeButton.whenPressed(raiseIntakeCmd);
+
+     winchButton.whenPressed(raiseIntakeCmd);
+
+     //winchButton.whenReleased(stop);
+
   }
 
   /**

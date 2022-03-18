@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-
 public class RaiseIntakeCmd extends CommandBase 
 {
 
@@ -45,9 +44,8 @@ public class RaiseIntakeCmd extends CommandBase
     currPOTVoltage = m_potentiometer.getAverageVoltage();
 
     SmartDashboard.putNumber("POT", currPOTVoltage);
-
     
-    if(currPOTVoltage <= 0.240)
+    if(currPOTVoltage <= 0.240) // put in constants
     {
       speed = speed + .01;
       if(speed >=.6)
