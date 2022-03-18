@@ -25,6 +25,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final WPI_VictorSPX m_left1 = new WPI_VictorSPX(0);
   private final WPI_VictorSPX m_left2 = new WPI_VictorSPX(1);
 
+  
+
   //TODO 
 
   //ashish added Please use constants for CAN IDs
@@ -62,6 +64,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   {
     slrForTurn = new SlewRateLimiter(2);
     slrForDrive = new SlewRateLimiter(1.8);
+
+
+    
 
     leftSideEncoder.setDistancePerPulse(Math.PI*6/360);// pi * wheel dia / counts per a revulution
 
