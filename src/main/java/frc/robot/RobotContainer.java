@@ -69,16 +69,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //POVButton hangButton = new POVButton(joystick, 0);
-    JoystickButton hangButton = new JoystickButton(joystick, Constants.HANG_BUTTON);
-    System.out.println("hang button pressed");
+    POVButton hangButton = new POVButton(joystick, 0);
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
+    //JoystickButton hangButton = new JoystickButton(joystick, Constants.HANG_BUTTON);
+    System.out.println("hang button pressed");
     hangButton.whenPressed(hang);
 
      //POVButton winchButton = new POVButton(joystick, 0);
      JoystickButton intakeButton = new JoystickButton(joystick, Constants.INTAKE_BUTTON);
      System.out.println("intake button pressed");
-     //sets POV Button at angle 0 (top of the dpad on xbox controller)
      intakeButton.whenPressed(raiseIntakeCmd);
   }
 
