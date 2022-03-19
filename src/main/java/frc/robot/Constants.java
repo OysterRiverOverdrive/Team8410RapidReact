@@ -45,6 +45,7 @@ public final class Constants
 
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
+   public static int PDP_CAN_ID = 0;
    public static int BAKE_POWER_TEMPERATURE = 35;
    public static int BAKE_POWER_CURRENT = 20;
    public static int BAKE_POWER_VOLTAGE = 1;
@@ -57,10 +58,10 @@ public final class Constants
    public static int RIGHT_ENCODER_3 = 3;
 
    // Parameters to adjust driver assist algorithms. 
-   public static double DRIVER_ASSIST_STOP_DISTANCE = 25.0; // inches
-   public static double DRIVER_ASSIST_CAUTION_DISTANCE = 50.0; // inches
-   public static double DRIVER_ASSIST_MAX_DRIVE_SPEED = 1.0; // range 0-1
-   public static double DRIVER_ASSIST_MIN_DRIVE_SPEED = 0.21; // range 0-1
+   public static double DRIVER_ASSIST_STOP_DISTANCE = 20.0; // inches
+   public static double DRIVER_ASSIST_CAUTION_DISTANCE = 150.0; // inches
+   public static double DRIVER_ASSIST_MAX_DRIVE_SPEED = 0.8; // range 0-1
+   public static double DRIVER_ASSIST_MIN_DRIVE_SPEED = 0.3; // range 0-1
    public static int DRIVER_ASSIST_APPROACH_ALG_LINEAR = 0;
    public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1;
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
