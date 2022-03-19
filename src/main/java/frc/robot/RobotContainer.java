@@ -6,24 +6,29 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+
+import frc.robot.team8410.commands.AutoSequeCmd;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.WinchSubsystem;
-import frc.robot.team8410.commands.AutoCommand;
+
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.DriverAutoCmd;
+
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.commands.AutoCommand;
+
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
@@ -46,7 +51,15 @@ public class RobotContainer {
 
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
-  private final AutoCommand autoCmd = new AutoCommand(drivetrain);
+
+  private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
+
+
+
+  private final PowerDistribution powerDistribution = new PowerDistribution();
+
+
+  
 
  // private final XboxController joystick = new XboxController(0);
  private final Joystick joystick = new Joystick(0);
@@ -66,11 +79,13 @@ public class RobotContainer {
 
   private final WinchSubsystem winch = new WinchSubsystem();
   private final UnwindWinchCommand unwindWinch = new UnwindWinchCommand(winch);
+
   
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+  public RobotContainer() 
+  {
     // Configure the button bindings
     configureButtonBindings();
 
@@ -113,6 +128,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return autoCmd;// TODO change this to the name of the auto command
+    return auto;// TODO change this to the name of the auto command
   }
 }
