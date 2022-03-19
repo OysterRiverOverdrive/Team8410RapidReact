@@ -34,7 +34,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   private final PowerDistribution powerDistribution = new PowerDistribution(Constants.PDP_CAN_ID, PowerDistribution.ModuleType.kCTRE);
   
   private final AddressableLED m_led= new AddressableLED(4);
-  private final AddressableLEDBuffer m_ledBuffer= new AddressableLEDBuffer(72);
+  private final AddressableLEDBuffer m_ledBuffer= new AddressableLEDBuffer(144);
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
@@ -44,7 +44,9 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
   private boolean isTCSSensorGood;
   private boolean isRevColorSensorGood;
- 
+
+  Color detectedColor = m_colorSensor.getColor();
+  double redOverBlue = detectedColor.red/detectedColor.blue;
  
   public DiagnosticsSubSystem() 
   {
@@ -83,6 +85,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
        e.printStackTrace();
      }
  
+     
 
    }
  
@@ -110,13 +113,15 @@ public class DiagnosticsSubSystem extends SubsystemBase {
       sensorValues.setBallColor_RevSensor("BAD");
     }
 
+    //displaying sensor values
     SmartDashboard.putNumber("Lidar Distance", sensorValues.getLidarDistanceInches());
     SmartDashboard.putNumber("Ultrasonic Back", sensorValues.getUltrasonicBackInches());
     SmartDashboard.putNumber("Ultrasonic Left", sensorValues.getUltrasonicLeftInches());
     SmartDashboard.putNumber("Ultrasonic Right", sensorValues.getUltrasonicRightInches());
 
 
-
+    //displaying sybsystem status
+    //SmartDashboard.putData("Drivetrain Subsystem", DrivetrainSubsystem);
  
    //displaying power distribution
    SmartDashboard.putNumber("Temperature", powerDistribution.getTemperature());
@@ -124,6 +129,8 @@ public class DiagnosticsSubSystem extends SubsystemBase {
    SmartDashboard.putNumber("Voltage", powerDistribution.getVoltage());
    SmartDashboard.putNumber("Power", powerDistribution.getTotalPower());
  
+
+   //displaying powerdistribution stuff on smartdashboard
 
    if (powerDistribution.getTemperature() > 35) {
    SmartDashboard.putBoolean("Temp is High", false);
@@ -153,31 +160,24 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
 
  
- SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
+ //SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
 
 
   }
 }
 
-  private void setRBG(int index, int r, int b, int g)
-  {
-   
-   m_led.setData(m_ledBuffer);
-
- }
-
   
 
 public void bakeVanillaGoldfish()
 {
-   // do   led
+   // code 4 LED stuff
 
 
 
    if (powerDistribution.getTotalPower() < 1) {
 
 
-    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+    for (var i = 0; i < 35; i++) {
     
       m_ledBuffer.setRGB(i, 255, 0, 0);
    }
@@ -185,20 +185,34 @@ public void bakeVanillaGoldfish()
 
   } else {
 
-    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+    for (var i = 36; i < 73; i++) {
       
 
       m_ledBuffer.setRGB(i, 0, 255, 0);
       //m_ledBuffer.setRGB(i, 255, 17, 221);
-      //use for atunomus
+      //use for atunomus, pink color
     }
   }
 
+if (redOverBlue > 3) {
 
+    for (var i = 73; i < 109; i++) {
+      m_ledBuffer.setRGB(i, 255, 0, 0);
+    }
+
+} else if (redOverBlue < 1) {
+
+  for (var i = 109; i < 145; i++) {
+    
+
+    m_ledBuffer.setRGB(i, 0, 0, 255);
+
+  }
+}
   
 
 
-  if (powerDistribution.getTemperature() > 35) {
+ /* if (powerDistribution.getTemperature() > 35) {
 
     for (int i = 3; i < 9; i++) {
 
@@ -212,8 +226,10 @@ public void bakeVanillaGoldfish()
 
       m_ledBuffer.setRGB(i, 0, 255, 0);
     }
-  }
+  } */
 
+
+  
 
   
 
