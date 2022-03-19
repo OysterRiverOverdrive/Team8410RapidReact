@@ -107,19 +107,38 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR) {
       // Linear
-      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED)/(Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
-      intercept = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - (slope*Constants.DRIVER_ASSIST_CAUTION_DISTANCE);
-      speed = (slope*targetDist)+intercept;
+      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) / 
+        (Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
+      intercept = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - (slope * Constants.DRIVER_ASSIST_CAUTION_DISTANCE);
+      speed = (slope * targetDist) + intercept;
 
     } else if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB){
       // Parabola
-      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED)/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE))+0.21;
-      speed = slope*((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
+      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
+        (
+          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE) * 
+          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)
+        ) 
+        + Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED;
+
+      speed = slope * ((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
     
     } else {
       // Inverse parabola
-      slope = -1*((Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED)/((Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)*(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)));
-      speed = (slope*((targetDist-Constants.DRIVER_ASSIST_CAUTION_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_CAUTION_DISTANCE)))+Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED;
+      slope = -1 * (
+        (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) / 
+        (
+          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE) * 
+          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)
+        )
+      );
+
+      speed = (
+        slope * (
+          (targetDist - Constants.DRIVER_ASSIST_CAUTION_DISTANCE) * 
+          (targetDist-Constants.DRIVER_ASSIST_CAUTION_DISTANCE)
+        )
+      ) + Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED;
 
     };
     return speed;
