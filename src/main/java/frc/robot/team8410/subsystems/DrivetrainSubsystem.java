@@ -105,39 +105,92 @@ public class DrivetrainSubsystem extends SubsystemBase {
       return 0.0;
     }
 
+    // The following section defines the speed profile between the caution
+    // and stop distances where the profiles go through the following
+    // two points.
+    // 
+    // (x1, y1) = (stop distance, min drive speed)
+    // (x2, y2) = (caution distance, max drive speed)
+
     if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR) {
-      // Linear
+      // Linear - The speed is proportional to the distance away.
+      // 
+      // y = m * x + b
+      // speed = m * (distance from target) + b
+
+      // m = (y2 - y1) / (x2 - x1)
       slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) / 
         (Constants.DRIVER_ASSIST_CAUTION_DISTANCE-Constants.DRIVER_ASSIST_STOP_DISTANCE);
+
+      // b = y2 - (m * x2)
       intercept = Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - (slope * Constants.DRIVER_ASSIST_CAUTION_DISTANCE);
+
+      // y = m * x + b
       speed = (slope * targetDist) + intercept;
 
     } else if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB){
       // Parabola
-      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
-        (
-          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE) * 
-          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)
-        ) 
-        + Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED;
+      // 
+      // This is a parabola that opens up and centered on (x1, y1) the stop distance and
+      // min speed.  This drops the speed off quickly initially, and slowly approaches the stop point.
+      // 
+      // A standard parabola is:
+      //   y = x^2
+      // The vertex of the parabola can be translated left/right and up/down by (h, k) respectively with:
+      //   y = a(x - h)^2 + k
+      // 
+      // We'll shift the parabola over to the caution distance and max speed with h = x1 and k = y1.
+      //   y = slope (x - x1)^2 + y1
+      // 
+      // Where the final algorithm will be:
+      //   speed = slope (target distance - x1)^2 + y1
 
-      speed = slope * ((targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE)*(targetDist-Constants.DRIVER_ASSIST_STOP_DISTANCE));
+      // The parabola above will go through (x1, y1) and we'll adjust the a (slope) value to curve
+      // it down to (x2, y2).
+      // 
+      // y = slope (x - x1)^2 + y1
+      // y - y1 = slope (x - x1)^2
+      // (y - y1) / (x - x1)^2 = slope 
+      // slope = (y - y1) / (x - x1)^2 
+      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
+        Math.pow(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE, 2);
+
+      // speed = slope (target distance - x1)^2 + y1
+      speed = (
+        slope * Math.pow(targetDist - Constants.DRIVER_ASSIST_STOP_DISTANCE, 2)
+      ) + Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED;
     
     } else {
-      // Inverse parabola
-      slope = -1 * (
-        (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED-Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) / 
-        (
-          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE) * 
-          (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE)
-        )
-      );
+      // Inverse Parabola
+      // 
+      // This is an upside down parabola with a vertex (x2, y2) the caution distance and max
+      // speed.  The speed stays higer longer and quickly drops off when close to the stop
+      // distance.
+      // 
+      // A standard parabola is:
+      //   y = x^2
+      // The vertex of the parabola can be translated left/right and up/down by (h, k) respectively with:
+      //   y = a(x - h)^2 + k
+      // 
+      // We'll shift the parabola over to the caution distance and max speed with h = x2 and k = y2.
+      //   y = slope (x - x2)^2 + y2
+      // 
+      // Where the final algorithm will be:
+      //   speed = slope (target distance - x2)^2 + y2
 
+      // The parabola above will go through (x2, y2) and we'll adjust the a (slope) value to curve
+      // it down to (x1, y1).
+      // 
+      // y = slope (x - x2)^2 + y2
+      // y - y2 = slope (x - x2)^2
+      // (y - y2) / (x - x2)^2 = slope 
+      // slope = (y - y2) / (x - x2)^2 
+      slope = (Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED - Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED) / 
+        Math.pow(Constants.DRIVER_ASSIST_STOP_DISTANCE - Constants.DRIVER_ASSIST_CAUTION_DISTANCE, 2);
+
+      // speed = slope (target distance - x2)^2 + y2
       speed = (
-        slope * (
-          (targetDist - Constants.DRIVER_ASSIST_CAUTION_DISTANCE) * 
-          (targetDist-Constants.DRIVER_ASSIST_CAUTION_DISTANCE)
-        )
+        slope * Math.pow(targetDist - Constants.DRIVER_ASSIST_CAUTION_DISTANCE, 2)
       ) + Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED;
 
     };
