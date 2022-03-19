@@ -172,22 +172,32 @@ public void bakeVanillaGoldfish()
    // code 4 LED stuff
 
 
-
    if (powerDistribution.getTotalPower() < 1) {
 
+    // if robot is dead, the LEDs will be red
 
-    for (var i = 0; i < 35; i++) {
+    for (var i = 0; i < m_ledBuffer.getLength() / 4; i++) {
     
       m_ledBuffer.setRGB(i, 255, 0, 0);
    }
 
 
+  } else if (powerDistribution.getTotalPower() < 10) {
+
+    // if robot is running low on power, LEDs will be yellow
+      for (var i = 0; i < m_ledBuffer.getLength() / 4; i++) {
+
+        m_ledBuffer.setRGB(i, 255, 238, 0);
+      }
+
   } else {
 
-    for (var i = 36; i < 73; i++) {
+    for (var i = 36; 2* i < m_ledBuffer.getLength() / 4; i++) {
       
-
+      // if robot is fine, LEDs will be green
       m_ledBuffer.setRGB(i, 0, 255, 0);
+
+
       //m_ledBuffer.setRGB(i, 255, 17, 221);
       //use for atunomus, pink
     }
@@ -195,13 +205,13 @@ public void bakeVanillaGoldfish()
 
 if (redOverBlue > 3) {
 
-    for (var i = 73; i < 109; i++) {
+    for (var i = 73; 3* i < m_ledBuffer.getLength() / 4; i++) {
       m_ledBuffer.setRGB(i, 255, 0, 0);
     }
 
 } else if (redOverBlue < 1) {
 
-  for (var i = 109; i < 145; i++) {
+  for (var i = 109; 4* i < m_ledBuffer.getLength() / 4; i++) {
     
 
     m_ledBuffer.setRGB(i, 0, 0, 255);
