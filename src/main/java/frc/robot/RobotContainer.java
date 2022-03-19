@@ -59,12 +59,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+  public RobotContainer() 
+  {
     // Configure the button bindings
     configureButtonBindings();
-
     drivetrain.setDefaultCommand(teleopCommand);
-
   }
 
   /**
@@ -73,7 +72,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
+  private void configureButtonBindings() 
+  {
     //POVButton winchButton = new POVButton(joystick, 0);
     JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
     System.out.println("winch button pressed");
