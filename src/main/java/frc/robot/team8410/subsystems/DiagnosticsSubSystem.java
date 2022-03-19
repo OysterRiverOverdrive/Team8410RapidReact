@@ -120,8 +120,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
     SmartDashboard.putNumber("Ultrasonic Right", sensorValues.getUltrasonicRightInches());
 
 
-    //displaying sybsystem status
-    //SmartDashboard.putData("Drivetrain Subsystem", DrivetrainSubsystem);
+
  
    //displaying power distribution
    SmartDashboard.putNumber("Temperature", powerDistribution.getTemperature());
@@ -190,7 +189,7 @@ public void bakeVanillaGoldfish()
 
       m_ledBuffer.setRGB(i, 0, 255, 0);
       //m_ledBuffer.setRGB(i, 255, 17, 221);
-      //use for atunomus, pink color
+      //use for atunomus, pink
     }
   }
 
