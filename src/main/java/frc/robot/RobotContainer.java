@@ -107,9 +107,6 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
-    //POVButton winchButton = new POVButton(joystick, 0);
-    JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
-    // System.out.println("winch button pressed");
     POVButton hangButton = new POVButton(joystick, 0);
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
     System.out.println("hang button pressed");
@@ -126,7 +123,6 @@ public class RobotContainer {
      intakeButtonrise.whenPressed(raiseIntakeCmd);
      intakeButtonlower.whenPressed(lowerIntakeCmd);
 
-     winchButton.whenPressed(raiseIntakeCmd);
      Trigger rollerPullButton = new Trigger() {
       @Override
       public boolean get() {
