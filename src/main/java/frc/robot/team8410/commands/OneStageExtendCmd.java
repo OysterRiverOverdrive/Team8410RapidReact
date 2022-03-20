@@ -14,16 +14,18 @@ public class OneStageExtendCmd extends CommandBase {
   private OneStageClimber oneStage;
   private DutyCycleEncoder oneStageLeftEncoder;
   private DutyCycleEncoder oneStageRightEncoder;
-  public OneStageExtendCmd(OneStageClimber oneStage) {
+  private double oneStageExtendDist;
+  
+  public OneStageExtendCmd(OneStageClimber oneStage, double oneStageExtendDist) {
     oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
     oneStageRightEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_RIGHT_ENCODER_PORT);
-    oneStageLeftEncoder.setDistancePerRotation(1.0);
-    oneStageRightEncoder.setDistancePerRotation(1.0);
+    oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402); //double check this value
+    oneStageRightEncoder.setDistancePerRotation(Math.PI * 0.787402);
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.oneStage = oneStage;
-    // Use addRequirements() here to declare subsystem dependencies.
+    this.oneStageExtendDist = oneStageExtendDist;
 
-    
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -45,7 +47,8 @@ public class OneStageExtendCmd extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
     //System.out.println(Math.abs(twoStageEncoder.getDistance()));
-    if(Math.abs(oneStageLeftEncoder.getDistance()) >= 5 && Math.abs(oneStageRightEncoder.getDistance()) >= 5)
+
+    if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageExtendDist && Math.abs(oneStageRightEncoder.getDistance()) >= oneStageExtendDist)
     {
       //TODO check # of rotations needed
       oneStage.stopMotor();

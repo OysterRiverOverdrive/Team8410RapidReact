@@ -36,7 +36,7 @@ public final class Constants
    public static int BALL_IS_RED = 3; // this is the threshold for red color ball
    public static int BALL_IS_BLUE = 1; // this is the threshold for Blue color ball
 
-   
+ 
 
    public static int JOYSTICK_PORT = 0;
 
@@ -48,14 +48,12 @@ public final class Constants
    public static int JOYSTICK_RIGHT_TRIGGER = 3;
 
 
-
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
    public static int PDP_CAN_ID = 0;
    public static int BAKE_POWER_TEMPERATURE = 35;
    public static int BAKE_POWER_CURRENT = 20;
    public static int BAKE_POWER_VOLTAGE = 1;
    public static int BAKE_TOTAL_POWER = 1;
-
 
    public static int LEFT_ENCODER_0 = 0;
    public static int LEFT_ENCODER_1 = 1;
@@ -71,6 +69,5 @@ public final class Constants
    public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1;
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
    public boolean armTrue = true;
-
 
 }

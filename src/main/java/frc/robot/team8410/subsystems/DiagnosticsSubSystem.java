@@ -34,7 +34,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   private final PowerDistribution powerDistribution = new PowerDistribution(Constants.PDP_CAN_ID, PowerDistribution.ModuleType.kCTRE);
   
   private final AddressableLED m_led= new AddressableLED(4);
-  private final AddressableLEDBuffer m_ledBuffer= new AddressableLEDBuffer(72);
+  private final AddressableLEDBuffer m_ledBuffer= new AddressableLEDBuffer(144);
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
@@ -44,7 +44,9 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
   private boolean isTCSSensorGood;
   private boolean isRevColorSensorGood;
- 
+
+  Color detectedColor = m_colorSensor.getColor();
+  double redOverBlue = detectedColor.red/detectedColor.blue;
  
   public DiagnosticsSubSystem() 
   {
@@ -54,7 +56,8 @@ public class DiagnosticsSubSystem extends SubsystemBase {
     // Default to a length of 60, start empty output
     // Length is expensive to set, so only set it once, then just update data
      m_led.setLength(m_ledBuffer.getLength());
-
+     m_led.setData(m_ledBuffer);
+     m_led.start();
      try
      {
        //TODO this needs to be tested on real bot
@@ -83,6 +86,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
        e.printStackTrace();
      }
  
+     
 
    }
  
@@ -110,6 +114,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
       sensorValues.setBallColor_RevSensor("BAD");
     }
 
+    //displaying sensor values
     SmartDashboard.putNumber("Lidar Distance", sensorValues.getLidarDistanceInches());
     SmartDashboard.putNumber("Ultrasonic Back", sensorValues.getUltrasonicBackInches());
     SmartDashboard.putNumber("Ultrasonic Left", sensorValues.getUltrasonicLeftInches());
@@ -124,6 +129,8 @@ public class DiagnosticsSubSystem extends SubsystemBase {
    SmartDashboard.putNumber("Voltage", powerDistribution.getVoltage());
    SmartDashboard.putNumber("Power", powerDistribution.getTotalPower());
  
+
+   //displaying powerdistribution stuff on smartdashboard
 
    if (powerDistribution.getTemperature() > 35) {
    SmartDashboard.putBoolean("Temp is High", false);
@@ -153,52 +160,138 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
 
  
- SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
+ //SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
+
+  bakeVanillaGoldfish();
 
 
   }
 }
 
-  private void setRBG(int index, int r, int b, int g)
-  {
-   
-   m_led.setData(m_ledBuffer);
-
- }
-
   
 
 public void bakeVanillaGoldfish()
 {
-   // do   led
-
+   // code 4 LED stuff
 
 
    if (powerDistribution.getTotalPower() < 1) {
 
+    // if robot is dead, the LED Q1 will be red
 
-    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+    for (var i = 0 * m_ledBuffer.getLength() / 4; i < m_ledBuffer.getLength() / 4; i++) {
     
       m_ledBuffer.setRGB(i, 255, 0, 0);
-   }
+   } 
 
+   for (var i = 1 * m_ledBuffer.getLength() / 4; i < 2 * m_ledBuffer.getLength() / 4; i++) {
+      
+    // if robot is fine, LEDs Q2 will be green
+    m_ledBuffer.setRGB(i, 0, 0, 0);
+
+
+    //m_ledBuffer.setRGB(i, 255, 17, 221);
+    //use for atunomus, pink
+  }
+
+
+  } else if (powerDistribution.getTotalPower() < 10) {
+
+    // if robot is running low on power, LEDs Q1 will be yellow
+      for (var i = 0 * m_ledBuffer.getLength(); i < m_ledBuffer.getLength() / 4; i++) {
+
+        m_ledBuffer.setRGB(i, 255, 238, 0);
+  
+      }
+
+      for (var i = 1 * m_ledBuffer.getLength() / 4; i < 2 * m_ledBuffer.getLength() / 4; i++) {
+      
+        // if robot is fine, LEDs Q2 will be green
+        m_ledBuffer.setRGB(i, 0, 0, 0);
+  
+  
+        //m_ledBuffer.setRGB(i, 255, 17, 221);
+        //use for atunomus, pink
+      }
 
   } else {
 
-    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+    for (var i = 1 * m_ledBuffer.getLength() / 4; i < 2 * m_ledBuffer.getLength() / 4; i++) {
       
-
+      // if robot is fine, LEDs Q2 will be green
       m_ledBuffer.setRGB(i, 0, 255, 0);
+
+
       //m_ledBuffer.setRGB(i, 255, 17, 221);
-      //use for atunomus
+      //use for atunomus, pink
     }
+
+    for (var i = 0 * m_ledBuffer.getLength(); i < m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 0, 0, 0);
+
+    }
+  }
+
+if (colorTCSSensor.getBallColor() == "RED") {
+
+  //Q3
+
+    for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
+      m_ledBuffer.setRGB(i, 255, 0, 0);
+    }
+
+} else if (colorTCSSensor.getBallColor() == "Blue") {
+
+  for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
+    
+
+    m_ledBuffer.setRGB(i, 0, 0, 255);
+
+  }
+
+} else {
+
+  for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
+    
+
+    m_ledBuffer.setRGB(i, 0, 0, 0);
+
+  }
+
+}
+
+
+
+  if (colorRevSensor.getBallColor() == "RED") {
+
+    //Q4
+
+    for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 255, 0, 0);
+
+    }
+  } else if (colorRevSensor.getBallColor() == "BLUE") {
+
+    for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 0, 0, 255);
+    }
+  } else {
+
+    for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 0, 0, 0);
+    }
+
   }
 
 
   
 
 
-  if (powerDistribution.getTemperature() > 35) {
+ /* if (powerDistribution.getTemperature() > 35) {
 
     for (int i = 3; i < 9; i++) {
 
@@ -212,8 +305,10 @@ public void bakeVanillaGoldfish()
 
       m_ledBuffer.setRGB(i, 0, 255, 0);
     }
-  }
+  } */
 
+
+  
 
   
 
