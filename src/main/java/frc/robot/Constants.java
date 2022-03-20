@@ -41,7 +41,8 @@ public final class Constants
    public static int JOYSTICK_PORT = 0;
 
    public static int WINCH_BUTTON = 1;
-   public static int INTAKE_BUTTON = 2;
+   public static int INTAKE_BUTTON_RISE = 2;
+   public static int INTAKE_BUTTON_LOWER = 3;
 
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
@@ -65,6 +66,7 @@ public final class Constants
    public static int DRIVER_ASSIST_APPROACH_ALG_LINEAR = 0;
    public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1;
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
+   public boolean armTrue = true;
 
 
 }
