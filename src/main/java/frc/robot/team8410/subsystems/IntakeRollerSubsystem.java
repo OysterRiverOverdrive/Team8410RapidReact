@@ -15,12 +15,23 @@ public class IntakeRollerSubsystem extends SubsystemBase {
   /** Creates a new IntakeRollerSubsystem. */
   
   private final WPI_TalonSRX m_roller = new WPI_TalonSRX(6);
-  private final Joystick joystick = new Joystick(0);
+  
   
   public IntakeRollerSubsystem() {
-
-
     
+  }
+  public void pull()
+  {
+    m_roller.set(0.8);
+  }
+
+  public void push()
+  {
+    m_roller.set(-0.8);
+  }
+  public void stop()
+  {
+    m_roller.set(0);
   }
 
   @Override
