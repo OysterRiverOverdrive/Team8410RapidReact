@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.team8410.subsystems;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -10,7 +11,7 @@ import frc.robot.Constants;
 
 public class TwoStageClimber extends SubsystemBase {
   /** Creates a new TwoStageClimber. */
-  PWMVictorSPX twoStageMotor = new PWMVictorSPX(Constants.TWO_STAGE_HANGER_MOTOR_CANID);
+  WPI_TalonSRX twoStageMotor = new WPI_TalonSRX(Constants.TWO_STAGE_HANGER_MOTOR_CANID);
   public TwoStageClimber() {}
 
   @Override
