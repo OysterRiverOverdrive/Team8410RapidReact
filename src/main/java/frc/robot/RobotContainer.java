@@ -90,6 +90,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    double rightTrigger = joystick.getRawAxis(2);
+    double leftTrigger = joystick.getRawAxis(3);
     //POVButton winchButton = new POVButton(joystick, 0);
     JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
     System.out.println("winch button pressed");
