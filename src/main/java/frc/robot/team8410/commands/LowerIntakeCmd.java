@@ -10,7 +10,7 @@ import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RaiseIntakeCmd extends CommandBase 
+public class LowerIntakeCmd extends CommandBase 
 {
   private AnalogInput m_potentiometer;
   private IntakeArmSubSystem intakeArmSubSys;
@@ -18,7 +18,7 @@ public class RaiseIntakeCmd extends CommandBase
   private double speed;
 
   /** Creates a new RaiseIntakeCmd. */
-  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem) 
+  public LowerIntakeCmd(IntakeArmSubSystem intakeSubSystem) 
   {
     intakeArmSubSys = intakeSubSystem;
     speed = 0;
@@ -43,14 +43,14 @@ public class RaiseIntakeCmd extends CommandBase
 
     SmartDashboard.putNumber("POT", currPOTVoltage);
     
-    if(currPOTVoltage <= 0.240) // put in constants
+    if(currPOTVoltage >= 0.240) // put in constants
     {
       speed = speed + .01;
       if(speed >=.6)
          speed = .6;
     }
 
-    else if(currPOTVoltage > 0.240 && currPOTVoltage <= 0.270)
+    else if(currPOTVoltage < 0.240 && currPOTVoltage >= 0.270)
     {
       speed = .6;
     }
@@ -64,7 +64,7 @@ public class RaiseIntakeCmd extends CommandBase
 
     SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
  
-    intakeArmSubSys.rise(speed); 
+    intakeArmSubSys.lower(speed); 
 
   }
 

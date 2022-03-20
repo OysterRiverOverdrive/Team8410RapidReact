@@ -35,8 +35,8 @@ public class TeleopDriveCommand extends CommandBase {
   @Override
   public void execute() 
   {
-      double speed = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
-      double turn = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+      double turn = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
+      double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
       driveSub.driveTheBot(speed, turn);
 
     

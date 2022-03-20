@@ -35,6 +35,10 @@ public class IntakeArmSubSystem extends SubsystemBase
     intakeLifterMotor.set(speed);
   }
 
+  public void lower(double speed)
+  {
+    intakeLifterMotor.set(speed);
+  }
 
   // stop the motor
   public void stop()
