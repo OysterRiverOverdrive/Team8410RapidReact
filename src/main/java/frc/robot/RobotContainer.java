@@ -29,6 +29,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 
+import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.subsystems.OneStageClimber;
+import frc.robot.team8410.subsystems.TwoStageClimber;
+
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
@@ -37,7 +41,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
 //package frc.robot.team8410.sensors;
-
 
 
 
@@ -61,8 +64,8 @@ public class RobotContainer {
 
   
 
- // private final XboxController joystick = new XboxController(0);
- private final Joystick joystick = new Joystick(0);
+  // private final XboxController joystick = new XboxController(0);
+  private final Joystick joystick = new Joystick(0);
 
   // creating an instance of this will allow for the subsystem perodic method to run in the Diagnostic subsystem
   // so the diagnostic logic is in one place.
@@ -71,16 +74,16 @@ public class RobotContainer {
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
 
-  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
-  
-
-  private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
-
 
   private final WinchSubsystem winch = new WinchSubsystem();
-  private final UnwindWinchCommand unwindWinch = new UnwindWinchCommand(winch);
+  private final TwoStageClimber twoStage = new TwoStageClimber();
+  private final OneStageClimber oneStage = new OneStageClimber();
+  private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
 
-  
+  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
+ 
+  private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
+
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -88,6 +91,7 @@ public class RobotContainer {
   {
     // Configure the button bindings
     configureButtonBindings();
+
 
     drivetrain.setDefaultCommand(teleopCommand);
 
@@ -100,25 +104,21 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //POVButton winchButton = new POVButton(joystick, 0);
-    JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
-    System.out.println("winch button pressed");
+    POVButton hangButton = new POVButton(joystick, 0);
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
-    winchButton.whenPressed(unwindWinch);
+    System.out.println("hang button pressed");
+    hangButton.whenPressed(hang);
 
      //POVButton winchButton = new POVButton(joystick, 0);
      JoystickButton intakeButton = new JoystickButton(joystick, Constants.INTAKE_BUTTON);
     JoystickButton AutoButton = new JoystickButton(joystick, 1);
      System.out.println("intake button pressed");
-     //sets POV Button at angle 0 (top of the dpad on xbox controller)
+     
 
      AutoButton.whenPressed(autostraightCmd);
      intakeButton.whenPressed(raiseIntakeCmd);
 
-     winchButton.whenPressed(raiseIntakeCmd);
-
-     //winchButton.whenReleased(stop);
-
+   
   }
 
   /**
