@@ -101,7 +101,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Joystick joystick = new Joystick(0);
+    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
     //POVButton winchButton = new POVButton(joystick, 0);
     JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
     // System.out.println("winch button pressed");
@@ -123,7 +123,7 @@ public class RobotContainer {
      Trigger rollerPullButton = new Trigger() {
       @Override
       public boolean get() {
-        return joystick.getRawAxis(2) > 0.2;
+        return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
       }
      };
       rollerPullButton.whenActive(rollerPull);
@@ -131,7 +131,7 @@ public class RobotContainer {
       Trigger rollerPushButton = new Trigger() {
         @Override
         public boolean get() {
-          return joystick.getRawAxis(3) > 0.2;
+          return joystick.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
         }
        };
         rollerPushButton.whenActive(rollerPush);

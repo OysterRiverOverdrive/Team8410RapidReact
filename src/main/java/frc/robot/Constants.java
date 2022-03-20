@@ -44,6 +44,9 @@ public final class Constants
    public static int DRIVER_ASSIST_BUTTON = 8;
    public static int INTAKE_BUTTON_RISE = 5;
    public static int INTAKE_BUTTON_LOWER = 6;
+   public static int JOYSTICK_LEFT_TRIGGER = 2;
+   public static int JOYSTICK_RIGHT_TRIGGER = 3;
+
 
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
