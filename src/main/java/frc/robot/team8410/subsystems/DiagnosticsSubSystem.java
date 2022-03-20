@@ -161,6 +161,8 @@ public class DiagnosticsSubSystem extends SubsystemBase {
  
  //SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
 
+  bakeVanillaGoldfish();
+
 
   }
 }
