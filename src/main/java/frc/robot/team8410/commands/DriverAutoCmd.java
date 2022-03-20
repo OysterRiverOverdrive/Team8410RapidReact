@@ -16,6 +16,6 @@ public class DriverAutoCmd extends SequentialCommandGroup {
   public DriverAutoCmd(DrivetrainSubsystem drive, IntakeArmSubSystem intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoDriveTargetCmd(drive));
+    addCommands(new RaiseIntakeCmd(intake), new AutoDriveTargetCmd(drive));
   }
 }

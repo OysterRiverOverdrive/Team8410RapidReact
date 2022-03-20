@@ -41,8 +41,9 @@ public final class Constants
    public static int JOYSTICK_PORT = 0;
 
    public static int WINCH_BUTTON = 1;
-   public static int INTAKE_BUTTON_RISE = 2;
-   public static int INTAKE_BUTTON_LOWER = 3;
+   public static int DRIVER_ASSIST_BUTTON = 8;
+   public static int INTAKE_BUTTON_RISE = 5;
+   public static int INTAKE_BUTTON_LOWER = 6;
 
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method

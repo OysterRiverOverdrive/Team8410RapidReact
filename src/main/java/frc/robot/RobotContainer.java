@@ -99,7 +99,7 @@ public class RobotContainer {
      //POVButton winchButton = new POVButton(joystick, 0);
     JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
     JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
-    JoystickButton AutoButton = new JoystickButton(joystick, 1);
+    JoystickButton AutoButton = new JoystickButton(joystick, Constants.DRIVER_ASSIST_BUTTON);
      System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
 
