@@ -174,7 +174,7 @@ public void bakeVanillaGoldfish()
 
    if (powerDistribution.getTotalPower() < 1) {
 
-    // if robot is dead, the LEDs will be red
+    // if robot is dead, the LED Q1 will be red
 
     for (var i = 0 * m_ledBuffer.getLength() / 4; i < m_ledBuffer.getLength() / 4; i++) {
     
@@ -184,7 +184,7 @@ public void bakeVanillaGoldfish()
 
   } else if (powerDistribution.getTotalPower() < 10) {
 
-    // if robot is running low on power, LEDs will be yellow
+    // if robot is running low on power, LEDs Q1 will be yellow
       for (var i = 0 * m_ledBuffer.getLength(); i < m_ledBuffer.getLength() / 4; i++) {
 
         m_ledBuffer.setRGB(i, 255, 238, 0);
@@ -192,9 +192,9 @@ public void bakeVanillaGoldfish()
 
   } else {
 
-    for (var i = 1 * m_ledBuffer.getLength() / 4; 2* i < m_ledBuffer.getLength() / 4; i++) {
+    for (var i = 1 * m_ledBuffer.getLength() / 4; i < 2 * m_ledBuffer.getLength() / 4; i++) {
       
-      // if robot is fine, LEDs will be green
+      // if robot is fine, LEDs Q2 will be green
       m_ledBuffer.setRGB(i, 0, 255, 0);
 
 
@@ -203,20 +203,41 @@ public void bakeVanillaGoldfish()
     }
   }
 
-if (redOverBlue > 3) {
+if (colorTCSSensor.getBallColor() == "RED") {
 
-    for (var i = 2 * m_ledBuffer.getLength() / 4; 3* i < m_ledBuffer.getLength() / 4; i++) {
+  //Q3
+
+    for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
       m_ledBuffer.setRGB(i, 255, 0, 0);
     }
 
-} else if (redOverBlue < 1) {
+} else if (colorTCSSensor.getBallColor() == "Blue") {
 
-  for (var i = 3 * m_ledBuffer.getLength() / 4; 4* i < m_ledBuffer.getLength() / 4; i++) {
+  for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
     
 
     m_ledBuffer.setRGB(i, 0, 0, 255);
 
   }
+
+
+  if (colorRevSensor.getBallColor() == "RED") {
+
+    //Q4
+
+    for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 255, 0, 0);
+      
+    }
+  } else if (colorRevSensor.getBallColor() == "BLUE") {
+
+    for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 0, 0, 255);
+    }
+  }
+
 }
   
 
