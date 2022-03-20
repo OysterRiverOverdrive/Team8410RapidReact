@@ -20,6 +20,7 @@ import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.DriverAutoCmd;
+import frc.robot.team8410.commands.LowerIntakeCmd;
 import frc.robot.team8410.commands.UnwindWinchCommand;
 
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
@@ -63,6 +64,7 @@ public class RobotContainer {
   
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
+  private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem);
   private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
   private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
   private final WinchSubsystem winch = new WinchSubsystem();
@@ -95,13 +97,15 @@ public class RobotContainer {
     winchButton.whenPressed(unwindWinch);
 
      //POVButton winchButton = new POVButton(joystick, 0);
-     JoystickButton intakeButton = new JoystickButton(joystick, Constants.INTAKE_BUTTON);
+    JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
+    JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     JoystickButton AutoButton = new JoystickButton(joystick, 1);
      System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
 
      AutoButton.whenPressed(autostraightCmd);
-     intakeButton.whenPressed(raiseIntakeCmd);
+     intakeButtonrise.whenPressed(raiseIntakeCmd);
+     intakeButtonlower.whenPressed(lowerIntakeCmd);
 
      winchButton.whenPressed(raiseIntakeCmd);
 
