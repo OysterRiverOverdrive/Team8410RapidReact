@@ -52,7 +52,7 @@ public class TwoStageExtendCmd extends CommandBase {
 
     if(Math.abs(twoStageEncoder.getDistance()) >= twoStageExtendDist) //two stage needs to extend 28.5 in
     {
-      //TODO check # of rotations needed
+     //TODO check # of rotations needed
       twoStage.stopMotor();
       retVal = true;
     }

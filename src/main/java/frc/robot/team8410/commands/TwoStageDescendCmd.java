@@ -48,7 +48,7 @@ public class TwoStageDescendCmd extends CommandBase {
     if(Math.abs(twoStageEncoder.getDistance()) >= twoStageDescendDist) //two stage needs to descend 28.5 in
     {
       //TODO check # of rotations needed
-      twoStage.stopMotor();
+     twoStage.stopMotor();
       retVal = true;
     }
     return retVal;

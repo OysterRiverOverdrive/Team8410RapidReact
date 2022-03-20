@@ -45,5 +45,5 @@ public final class Constants
    public static int BAKE_POWER_CURRENT = 20;
    public static int BAKE_POWER_VOLTAGE = 1;
    public static int BAKE_TOTAL_POWER = 1;
-
+   
 }

@@ -15,7 +15,6 @@ public class UnwindWinchCommand extends CommandBase {
   private DutyCycleEncoder winchEncoder;
   private double unwindWinchDist;
   
-  
   public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist) 
   {
     winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);
@@ -49,7 +48,8 @@ public class UnwindWinchCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted){}
+
 
   // Returns true when the command should end.
   @Override
@@ -66,4 +66,6 @@ public class UnwindWinchCommand extends CommandBase {
     }
     return retVal;
   }
+
 }
+
