@@ -179,7 +179,17 @@ public void bakeVanillaGoldfish()
     for (var i = 0 * m_ledBuffer.getLength() / 4; i < m_ledBuffer.getLength() / 4; i++) {
     
       m_ledBuffer.setRGB(i, 255, 0, 0);
-   }
+   } 
+
+   for (var i = 1 * m_ledBuffer.getLength() / 4; i < 2 * m_ledBuffer.getLength() / 4; i++) {
+      
+    // if robot is fine, LEDs Q2 will be green
+    m_ledBuffer.setRGB(i, 0, 0, 0);
+
+
+    //m_ledBuffer.setRGB(i, 255, 17, 221);
+    //use for atunomus, pink
+  }
 
 
   } else if (powerDistribution.getTotalPower() < 10) {
@@ -188,6 +198,17 @@ public void bakeVanillaGoldfish()
       for (var i = 0 * m_ledBuffer.getLength(); i < m_ledBuffer.getLength() / 4; i++) {
 
         m_ledBuffer.setRGB(i, 255, 238, 0);
+  
+      }
+
+      for (var i = 1 * m_ledBuffer.getLength() / 4; i < 2 * m_ledBuffer.getLength() / 4; i++) {
+      
+        // if robot is fine, LEDs Q2 will be green
+        m_ledBuffer.setRGB(i, 0, 0, 0);
+  
+  
+        //m_ledBuffer.setRGB(i, 255, 17, 221);
+        //use for atunomus, pink
       }
 
   } else {
@@ -200,6 +221,12 @@ public void bakeVanillaGoldfish()
 
       //m_ledBuffer.setRGB(i, 255, 17, 221);
       //use for atunomus, pink
+    }
+
+    for (var i = 0 * m_ledBuffer.getLength(); i < m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 0, 0, 0);
+
     }
   }
 
@@ -220,6 +247,18 @@ if (colorTCSSensor.getBallColor() == "RED") {
 
   }
 
+} else {
+
+  for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
+    
+
+    m_ledBuffer.setRGB(i, 0, 0, 0);
+
+  }
+
+}
+
+
 
   if (colorRevSensor.getBallColor() == "RED") {
 
@@ -228,7 +267,7 @@ if (colorTCSSensor.getBallColor() == "RED") {
     for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
 
       m_ledBuffer.setRGB(i, 255, 0, 0);
-      
+
     }
   } else if (colorRevSensor.getBallColor() == "BLUE") {
 
@@ -236,9 +275,16 @@ if (colorTCSSensor.getBallColor() == "RED") {
 
       m_ledBuffer.setRGB(i, 0, 0, 255);
     }
+  } else {
+
+    for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
+
+      m_ledBuffer.setRGB(i, 0, 0, 0);
+    }
+
   }
 
-}
+
   
 
 
