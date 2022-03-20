@@ -21,6 +21,7 @@ public class TwoStageDescendCmd extends CommandBase {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.twoStage = twoStage;
     this.twoStageDescendDist = twoStageDescendDist;
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

@@ -45,6 +45,7 @@ public class OneStageDescendCmd extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
     //System.out.println(Math.abs(twoStageEncoder.getDistance()));
+
     if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageDescendDist && Math.abs(oneStageRightEncoder.getDistance()) >= oneStageDescendDist)
     {
       //TODO check # of rotations needed

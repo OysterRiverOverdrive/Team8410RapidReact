@@ -22,7 +22,6 @@ public class TwoStageExtendCmd extends CommandBase {
     this.twoStage = twoStage; 
     this.twoStageExtendDist = twoStageExtendDist;
 
-
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -49,6 +48,7 @@ public class TwoStageExtendCmd extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
     System.out.println(Math.abs(twoStageEncoder.getDistance()));
+
 
     if(Math.abs(twoStageEncoder.getDistance()) >= twoStageExtendDist) //two stage needs to extend 28.5 in
     {

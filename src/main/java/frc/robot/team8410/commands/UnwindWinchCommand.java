@@ -48,8 +48,8 @@ public class UnwindWinchCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted){}
 
+  public void end(boolean interrupted){}
 
   // Returns true when the command should end.
   @Override
@@ -57,6 +57,7 @@ public class UnwindWinchCommand extends CommandBase {
   {
     boolean retVal = false;
     System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+Math.abs(winchEncoder.getDistance()));
+
 
     if(Math.abs(winchEncoder.getDistance()) >= unwindWinchDist)
     {
@@ -68,4 +69,3 @@ public class UnwindWinchCommand extends CommandBase {
   }
 
 }
-

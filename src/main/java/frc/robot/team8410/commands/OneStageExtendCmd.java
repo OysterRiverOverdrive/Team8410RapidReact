@@ -15,6 +15,7 @@ public class OneStageExtendCmd extends CommandBase {
   private DutyCycleEncoder oneStageLeftEncoder;
   private DutyCycleEncoder oneStageRightEncoder;
   private double oneStageExtendDist;
+  
   public OneStageExtendCmd(OneStageClimber oneStage, double oneStageExtendDist) {
     oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
     oneStageRightEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_RIGHT_ENCODER_PORT);
@@ -23,9 +24,8 @@ public class OneStageExtendCmd extends CommandBase {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.oneStage = oneStage;
     this.oneStageExtendDist = oneStageExtendDist;
-    // Use addRequirements() here to declare subsystem dependencies.
 
-    
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -47,6 +47,7 @@ public class OneStageExtendCmd extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
     //System.out.println(Math.abs(twoStageEncoder.getDistance()));
+
     if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageExtendDist && Math.abs(oneStageRightEncoder.getDistance()) >= oneStageExtendDist)
     {
       //TODO check # of rotations needed

@@ -17,13 +17,14 @@ public class hangCmd extends SequentialCommandGroup {
   public hangCmd(WinchSubsystem winch, TwoStageClimber twoStage, OneStageClimber oneStage) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+
     addCommands(
     //ground to mid
     new UnwindWinchCommand(winch, 1.0),
     new TwoStageExtendCmd(twoStage, 15.79),
     new WindWinchCommand(winch, 1.0),    //TODO verify distances
     new TwoStageDescendCmd(twoStage, 15.79),
-    new OneStageExtendCmd(oneStage, 3.0), //probably need to revise this
+    new OneStageExtendCmd(oneStage, 3.0), 
     new OneStageDescendCmd(oneStage, 3.0),
     //mid to highs
     new UnwindWinchCommand(winch, 5.0),
@@ -44,3 +45,4 @@ public class hangCmd extends SequentialCommandGroup {
     
   }
 }
+

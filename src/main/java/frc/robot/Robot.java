@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.team8410.sensors.Color_RevroboticsVer3;
-import frc.robot.team8410.sensors.Color_TCS34725_I2C;
-import frc.robot.team8410.sensors.SensorValues;
+
+
+// import frc.robot.team8410.sensors.UltrasonicFront;
+// import frc.robot.team8410.sensors.UltrasonicLeft;
+// import frc.robot.team8410.sensors.UltrasonicRight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,12 +23,6 @@ public class Robot extends TimedRobot
 {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private SensorValues sensorValues = new SensorValues();
-  private Color_RevroboticsVer3 colorRevSensor;
-  private Color_TCS34725_I2C colorTCSSensor;
- 
-  private boolean isTCSSensorGood;
-  private boolean isRevColorSensorGood;
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -39,40 +35,6 @@ public class Robot extends TimedRobot
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    sensorValues = new SensorValues();
-    
-
-
-    try
-    {
-      //TODO this needs to be tested on real bot
-      colorTCSSensor = new Color_TCS34725_I2C();
-      colorTCSSensor.initialize(2,1);
-      isTCSSensorGood= true;
-      }
-    catch(Exception e)
-    {
-      // initialization of the sensor failed - do not read this value
-      isTCSSensorGood = false;
-      System.out.println("Could not initi TCS sensor");
-       e.printStackTrace();
-    }
-
-    try
-    {
-      // initialization of the sensor failed. Do not read this value
-      colorRevSensor = new Color_RevroboticsVer3();
-      isRevColorSensorGood= true;
-    }
-    catch(Exception e)
-    {
-      isRevColorSensorGood= false;
-      System.out.println("Could not initi Rev sensor");
-    
-
-       e.printStackTrace();
-    }
-
     
   }
 
@@ -84,43 +46,12 @@ public class Robot extends TimedRobot
    * SmartDashboard integrated updating.
    */
   @Override
-  public void robotPeriodic() {
-
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
+  public void robotPeriodic() 
+  {
+  // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-
-    /*******/
-    // This is where we will read the sensors and call the set method of the sensorValue object
-    //  Commented out until problem is found
-
-    //sensorValues.setUltrasonicBackInches(UltrasonicBack.getBackSensorDistance());
-    //sensorValues.setUltrasonicLeftInches(UltrasonicLeft.getLeftSensorDistance());
-    //sensorValues.setUltrasonicRightInches(UltrasonicRight.getRightSensorDistance());
-    
-
-    if(isTCSSensorGood)
-    {
-       sensorValues.setBallColor_TSCSensor(colorTCSSensor.getBallColor());
-    }
-    else
-    {
-      sensorValues.setBallColor_TSCSensor("BAD");
-    }
-
-    if(isRevColorSensorGood)
-    {
-     sensorValues.setBallColor_RevSensor(colorRevSensor.getBallColor());
-    }
-    else
-    {
-      sensorValues.setBallColor_RevSensor("BAD");
-    }
-     
-
-
-
     CommandScheduler.getInstance().run();
   }
 
