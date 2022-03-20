@@ -17,15 +17,20 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 
+
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.commands.RollerPull;
+import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.UnwindWinchCommand;
 
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
 
 
@@ -63,6 +68,9 @@ public class RobotContainer {
  // private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
   
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
+  private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
+  private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
+  private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem);
   private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
@@ -80,6 +88,9 @@ public class RobotContainer {
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(teleopCommand);
+    
+
+    
 
   }
 
@@ -90,11 +101,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    double rightTrigger = joystick.getRawAxis(2);
-    double leftTrigger = joystick.getRawAxis(3);
+    Joystick joystick = new Joystick(0);
     //POVButton winchButton = new POVButton(joystick, 0);
     JoystickButton winchButton = new JoystickButton(joystick, Constants.WINCH_BUTTON);
-    System.out.println("winch button pressed");
+    // System.out.println("winch button pressed");
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
     winchButton.whenPressed(unwindWinch);
 
@@ -102,7 +112,7 @@ public class RobotContainer {
     JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
     JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     JoystickButton AutoButton = new JoystickButton(joystick, Constants.DRIVER_ASSIST_BUTTON);
-     System.out.println("intake button pressed");
+    // System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
 
      AutoButton.whenPressed(autostraightCmd);
@@ -110,8 +120,24 @@ public class RobotContainer {
      intakeButtonlower.whenPressed(lowerIntakeCmd);
 
      winchButton.whenPressed(raiseIntakeCmd);
+     Trigger rollerPullButton = new Trigger() {
+      @Override
+      public boolean get() {
+        return joystick.getRawAxis(2) > 0.2;
+      }
+     };
+      rollerPullButton.whenActive(rollerPull);
 
-     //winchButton.whenReleased(stop);
+      Trigger rollerPushButton = new Trigger() {
+        @Override
+        public boolean get() {
+          return joystick.getRawAxis(3) > 0.2;
+        }
+       };
+        rollerPushButton.whenActive(rollerPush);
+
+   
+    //  winchButton.whenReleased(stop);
 
   }
 
