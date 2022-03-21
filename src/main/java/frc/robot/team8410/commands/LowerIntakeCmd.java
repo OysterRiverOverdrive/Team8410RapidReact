@@ -45,18 +45,18 @@ public class LowerIntakeCmd extends CommandBase
     
     if(currPOTVoltage >= 0.240) // put in constants
     {
-      speed = speed + .01;
-      if(speed >=.6)
-         speed = .6;
+      speed = speed + 0.01;
+      if(speed >=-0.6)
+         speed = -0.6;
     }
 
     else if(currPOTVoltage < 0.240 && currPOTVoltage >= 0.270)
     {
-      speed = .6;
+      speed = -0.6;
     }
-    if(currPOTVoltage >= 0.270)
+    if(currPOTVoltage >= 0.270)//tweak
     {
-      speed = speed -1 ;
+      speed = speed - 0.01 ;
       if(speed <=0)
         speed = 0;
       
@@ -79,7 +79,7 @@ public class LowerIntakeCmd extends CommandBase
     boolean retVal = false;
     currPOTVoltage = m_potentiometer.getAverageVoltage();
 
-    if(currPOTVoltage >= 0.29)
+    if(currPOTVoltage <= 0.23)//Value needs to be tweaked
     {
 
       retVal = true;
