@@ -43,20 +43,22 @@ public class RaiseIntakeCmd extends CommandBase
 
     SmartDashboard.putNumber("POT", currPOTVoltage);
     
-    if(currPOTVoltage <= 0.240) // put in constants
+    if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
     {
+      // Make the speed more positive until reaching (max speed)
       speed = speed + .01;
-      if(speed >=.6)
-         speed = .6;
+      if(speed >= Constants.INTAKE_RAISE_MAX_SPEED)
+         speed = Constants.INTAKE_RAISE_MAX_SPEED;
     }
 
-    else if(currPOTVoltage > 0.240 && currPOTVoltage <= 0.270)
+    else if(currPOTVoltage > Constants.INTAKE_POT_LOW_CAUTION && currPOTVoltage <= Constants.INTAKE_POT_HIGH_CAUTION)
     {
-      speed = .6;
+      speed = Constants.INTAKE_RAISE_MAX_SPEED;
     }
-    if(currPOTVoltage >= 0.270)
+    if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION)
     {
-      speed = speed -1 ;
+      // Slowly bring the speed back to zero.
+      speed = speed - 0.01 ;
       if(speed <=0)
         speed = 0;
       
@@ -79,7 +81,7 @@ public class RaiseIntakeCmd extends CommandBase
     boolean retVal = false;
     currPOTVoltage = m_potentiometer.getAverageVoltage();
 
-    if(currPOTVoltage >= 0.29)
+    if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
     {
 
       retVal = true;
