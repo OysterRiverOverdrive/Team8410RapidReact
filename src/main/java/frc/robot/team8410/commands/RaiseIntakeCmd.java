@@ -18,9 +18,10 @@ public class RaiseIntakeCmd extends CommandBase
   private double speed;
 
   /** Creates a new RaiseIntakeCmd. */
-  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem) 
+  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, double POTVoltage) 
   {
     intakeArmSubSys = intakeSubSystem;
+    currPOTVoltage = POTVoltage;
     speed = 0;
     //m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
     addRequirements(intakeSubSystem);
@@ -39,7 +40,7 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public void execute()
   {
-    currPOTVoltage = m_potentiometer.getAverageVoltage();
+    //currPOTVoltage = m_potentiometer.getAverageVoltage();
 
     SmartDashboard.putNumber("POT", currPOTVoltage);
     

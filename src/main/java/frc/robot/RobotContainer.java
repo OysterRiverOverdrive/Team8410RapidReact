@@ -35,6 +35,11 @@ import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
 
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
+import edu.wpi.first.wpilibj.AnalogInput;
+
+
 
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -97,6 +102,9 @@ private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubs
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
 private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
 private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
+private final AnalogInput POT = new AnalogInput(0);
+private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
+private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, POT.getAverageVoltage());
 
   // The robot's subsystems and commands are defined here...
 
@@ -177,6 +185,12 @@ private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
        };
         rollerPushButton.whenActive(rollerPush);
         rollerPushButton.whenInactive(rollerStop);
+
+
+        JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
+        intakeButtonrise.whenPressed(raiseIntakeCmd);
+
+
 
 
 
