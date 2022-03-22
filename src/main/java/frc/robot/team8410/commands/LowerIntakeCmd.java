@@ -9,9 +9,11 @@ import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.team8410.sensors.PotSensor;
 
 public class LowerIntakeCmd extends CommandBase 
 {
+  private PotSensor pot;
   private AnalogInput m_potentiometer;
   private IntakeArmSubSystem intakeArmSubSys;
   private double currPOTVoltage ;
@@ -39,9 +41,9 @@ public class LowerIntakeCmd extends CommandBase
   @Override
   public void execute()
   {
-    currPOTVoltage = m_potentiometer.getAverageVoltage();
+    currPOTVoltage = pot.getPOTVoltage();
 
-    SmartDashboard.putNumber("POT", currPOTVoltage);
+    // SmartDashboard.putNumber("POT", currPOTVoltage);
     
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION)
     {
@@ -64,7 +66,7 @@ public class LowerIntakeCmd extends CommandBase
       
     }
 
-    SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
+    // SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
  
     intakeArmSubSys.lower(speed); 
 
@@ -79,7 +81,7 @@ public class LowerIntakeCmd extends CommandBase
   public boolean isFinished() 
   {
     boolean retVal = false;
-    currPOTVoltage = m_potentiometer.getAverageVoltage();
+    currPOTVoltage = pot.getPOTVoltage();
 
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)//Value needs to be tweaked
     {
