@@ -22,7 +22,7 @@ public class RaiseIntakeCmd extends CommandBase
   {
     intakeArmSubSys = intakeSubSystem;
     speed = 0;
-    m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
+    //m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -78,16 +78,17 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public boolean isFinished() 
   {
-    boolean retVal = false;
-    currPOTVoltage = m_potentiometer.getAverageVoltage();
+   // boolean retVal = false;
+    //currPOTVoltage = m_potentiometer.getAverageVoltage();
 
-    if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
-    {
+    //if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
+    //{
 
-      retVal = true;
-      intakeArmSubSys.stop();
+      //retVal = true;
+      //intakeArmSubSys.stop();
 
-    }
-    return retVal;
+    //}
+    //return retVal;
+    return false;
   }
 }

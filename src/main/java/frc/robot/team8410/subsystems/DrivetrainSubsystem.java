@@ -33,6 +33,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_right2 = new WPI_TalonSRX(Constants.RIGHT_MOTOR_2_CANID);
 
   MotorControllerGroup rightSide = new MotorControllerGroup(m_right1, m_right2);
+  
+  
 
   // we use diffrential drive
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
@@ -43,6 +45,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() 
   {
+    rightSide.setInverted(true);
 
 
   }
