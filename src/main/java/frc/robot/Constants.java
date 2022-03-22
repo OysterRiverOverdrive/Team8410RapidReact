@@ -74,6 +74,5 @@ public final class Constants
    public static int DRIVER_ASSIST_APPROACH_ALG_LINEAR = 0;
    public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1;
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
-   public boolean armTrue = true;
 
 }
