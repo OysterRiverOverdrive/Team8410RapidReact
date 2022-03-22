@@ -29,6 +29,10 @@ import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 */
+
+import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import frc.robot.team8410.commands.RollerPull;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
@@ -84,6 +88,10 @@ public class RobotContainer {
   private final OneStageClimber oneStage = new OneStageClimber();
   private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
 */
+
+private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
+private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
+
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -143,6 +151,18 @@ public class RobotContainer {
    
     //  winchButton.whenReleased(stop);
     */
+
+    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+
+    Trigger rollerPullButton = new Trigger() {
+      @Override
+      public boolean get() {
+        return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
+      }
+     };
+      rollerPullButton.whenActive(rollerPull);
+
+
 
   }
 

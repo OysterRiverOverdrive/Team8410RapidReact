@@ -22,7 +22,7 @@ public class IntakeRollerSubsystem extends SubsystemBase {
   }
   public void pull()
   {
-    m_roller.set(0.8);
+    m_roller.set(1);// was 0.8 speed
   }
 
   public void push()
