@@ -9,21 +9,20 @@ import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.team8410.sensors.PotSensor;
 
 public class RaiseIntakeCmd extends CommandBase 
 {
-  private AnalogInput m_potentiometer;
+  private PotSensor pot;
   private IntakeArmSubSystem intakeArmSubSys;
-  private double currPOTVoltage ;
   private double speed;
 
   /** Creates a new RaiseIntakeCmd. */
-  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, double POTVoltage) 
+  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, PotSensor potSensor) 
   {
     intakeArmSubSys = intakeSubSystem;
-    currPOTVoltage = POTVoltage;
+    pot = potSensor;
     speed = 0;
-    //m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -32,17 +31,16 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public void initialize() 
   {
-    
-
+    speed = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute()
   {
-    //currPOTVoltage = m_potentiometer.getAverageVoltage();
+    double currPOTVoltage = pot.getPOTVoltage();
 
-    SmartDashboard.putNumber("POT", currPOTVoltage);
+    // SmartDashboard.putNumber("POT", currPOTVoltage);
     
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
     {
@@ -65,7 +63,7 @@ public class RaiseIntakeCmd extends CommandBase
       
     }
 
-    SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
+    // SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
  
     intakeArmSubSys.rise(speed); 
 
@@ -79,17 +77,16 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public boolean isFinished() 
   {
-   // boolean retVal = false;
-    //currPOTVoltage = m_potentiometer.getAverageVoltage();
+    boolean retVal = false;
+    double currPOTVoltage = pot.getPOTVoltage();
 
-    //if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
-    //{
+    if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
+    {
 
-      //retVal = true;
-      //intakeArmSubSys.stop();
+      retVal = true;
+      intakeArmSubSys.stop();
 
-    //}
-    //return retVal;
-    return false;
+    }
+    return retVal;
   }
 }
