@@ -7,8 +7,6 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.team8410.sensors.PotSensor;
 
 public class RaiseIntakeCmd extends CommandBase 
@@ -39,8 +37,6 @@ public class RaiseIntakeCmd extends CommandBase
   public void execute()
   {
     double currPOTVoltage = pot.getPOTVoltage();
-
-    // SmartDashboard.putNumber("POT", currPOTVoltage);
     
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
     {
@@ -63,8 +59,6 @@ public class RaiseIntakeCmd extends CommandBase
       
     }
 
-    // SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
- 
     intakeArmSubSys.rise(speed); 
 
   }
