@@ -33,6 +33,7 @@ import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
+import frc.robot.team8410.commands.RollerStop;
 
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
@@ -101,13 +102,11 @@ public class RobotContainer {
 private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
 private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
+private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
 private final PotSensor potSensor = new PotSensor();
 
 private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
-
-
-
 
   // The robot's subsystems and commands are defined here...
 
@@ -178,6 +177,7 @@ private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSys
       }
      };
       rollerPullButton.whenActive(rollerPull);
+      rollerPullButton.whenInactive(rollerStop);
 
      Trigger rollerPushButton = new Trigger() {
         @Override
@@ -186,6 +186,7 @@ private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSys
         }
        };
         rollerPushButton.whenActive(rollerPush);
+        rollerPushButton.whenInactive(rollerStop);
 
 
         JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
