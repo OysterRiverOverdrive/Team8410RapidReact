@@ -15,5 +15,10 @@ public class TwoStageEncoder {
   twoStageExtendDist = Math.abs(twoStageEncoder.getDistance());
   return twoStageExtendDist;
   }
+  public void encoderReset(){
+    DutyCycleEncoder twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
+    twoStageEncoder.reset();
+    twoStageEncoder.isConnected();
+  }
 
 }

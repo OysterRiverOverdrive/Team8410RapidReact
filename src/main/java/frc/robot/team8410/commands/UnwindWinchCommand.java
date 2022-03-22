@@ -4,21 +4,18 @@
 
 package frc.robot.team8410.commands;
 
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.team8410.subsystems.WinchSubsystem;
+import frc.robot.team8410.sensors.WinchEncoder;
 
 public class UnwindWinchCommand extends CommandBase {
   /** Creates a new UnwindWinch. */
   private WinchSubsystem winch;
-  private DutyCycleEncoder winchEncoder;
+  private WinchEncoder winchEncoder;
   private double unwindWinchDist;
   
   public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist) 
   {
-    winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);
-    winchEncoder.setDistancePerRotation(1.0);
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.winch = winch; 
     this.unwindWinchDist = unwindWinchDist;
@@ -28,12 +25,7 @@ public class UnwindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  
-
-    winchEncoder.reset();
-    
-    winchEncoder.isConnected();
-    
+    winchEncoder.encoderReset();   
 
   }
 
@@ -56,10 +48,10 @@ public class UnwindWinchCommand extends CommandBase {
   public boolean isFinished() 
   {
     boolean retVal = false;
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+Math.abs(winchEncoder.getDistance()));
+    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+winchEncoder.getWinchEncoder());
 
 
-    if(Math.abs(winchEncoder.getDistance()) >= unwindWinchDist)
+    if(winchEncoder.getWinchEncoder() >= unwindWinchDist)
     {
       //TODO check # of rotations needed
       winch.stopMotor();

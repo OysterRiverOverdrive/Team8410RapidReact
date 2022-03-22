@@ -44,8 +44,8 @@ public class OneStageExtendCmd extends CommandBase {
     boolean retVal = false;
     //System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if(Math.abs(oneStageLeftEncoder.get1LeftSideEncoder()) >= oneStageExtendDist 
-    && Math.abs(oneStageRightEncoder.get1RightSideEncoder()) >= oneStageExtendDist)
+    if(oneStageLeftEncoder.get1LeftSideEncoder() >= oneStageExtendDist 
+    && oneStageRightEncoder.get1RightSideEncoder() >= oneStageExtendDist)
     {
       //TODO check # of rotations needed
       oneStage.stopMotor();

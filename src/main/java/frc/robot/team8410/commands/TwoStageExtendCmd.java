@@ -26,8 +26,7 @@ public class TwoStageExtendCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // twoStageEncoder.reset();
-    // twoStageEncoder.isConnected();
+    twoStageEncoder.encoderReset();;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,7 +44,7 @@ public class TwoStageExtendCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println(Math.abs(twoStageEncoder.getTwoStageEncoder()));
+    System.out.println(twoStageEncoder.getTwoStageEncoder());
 
 
     if(twoStageEncoder.getTwoStageEncoder() >= twoStageExtendDist) //two stage needs to extend 28.5 in
