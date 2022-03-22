@@ -11,32 +11,35 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-import frc.robot.team8410.commands.AutoSequeCmd;
-import edu.wpi.first.wpilibj.PowerDistribution;
+//import frc.robot.team8410.commands.AutoSequeCmd;
+//import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-import frc.robot.team8410.subsystems.WinchSubsystem;
+//import frc.robot.team8410.subsystems.WinchSubsystem;
 
 
-import frc.robot.team8410.commands.RaiseIntakeCmd;
-import frc.robot.team8410.commands.TeleopDriveCommand;
+/*
 import frc.robot.team8410.commands.DriverAutoCmd;
-import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.commands.UnwindWinchCommand;
+import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+*/
+
+import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
-import frc.robot.team8410.commands.UnwindWinchCommand;
-
-import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+import frc.robot.team8410.commands.RollerStop;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
+import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.sensors.PotSensor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants;
+import frc.robot.team8410.commands.TeleopDriveCommand;
 
 
-import frc.robot.team8410.commands.hangCmd;
+/*import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.subsystems.OneStageClimber;
-import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.subsystems.TwoStageClimber;*/
 
 
 //package frc.robot.team8410.sensors;
@@ -54,11 +57,11 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
 
-  private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
+  //private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
 
 
 
-  private final PowerDistribution powerDistribution = new PowerDistribution();
+  //  ashish commented private final PowerDistribution powerDistribution = new PowerDistribution();
 
 
   
@@ -70,7 +73,7 @@ public class RobotContainer {
   // so the diagnostic logic is in one place.
  // private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
   
-  private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
+  /*private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
   private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
   private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
@@ -82,6 +85,17 @@ public class RobotContainer {
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
   private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
+*/
+
+private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
+private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
+private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
+private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
+private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
+private final PotSensor potSensor = new PotSensor();
+
+private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
+private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
 
   // The robot's subsystems and commands are defined here...
 
@@ -106,41 +120,51 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+   /* Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
     POVButton hangButton = new POVButton(joystick, 0);
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
     System.out.println("hang button pressed");
     hangButton.whenPressed(hang);
 
      //POVButton winchButton = new POVButton(joystick, 0);
-    JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
-    JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     JoystickButton AutoButton = new JoystickButton(joystick, Constants.DRIVER_ASSIST_BUTTON);
     // System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
 
      AutoButton.whenPressed(autostraightCmd);
-     intakeButtonrise.whenPressed(raiseIntakeCmd);
-     intakeButtonlower.whenPressed(lowerIntakeCmd);
+   
+    //  winchButton.whenReleased(stop);
+    */
 
-     Trigger rollerPullButton = new Trigger() {
+    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+
+    Trigger rollerPullButton = new Trigger() {
       @Override
       public boolean get() {
         return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
       }
      };
       rollerPullButton.whenActive(rollerPull);
+      rollerPullButton.whenInactive(rollerStop);
 
-      Trigger rollerPushButton = new Trigger() {
+     Trigger rollerPushButton = new Trigger() {
         @Override
         public boolean get() {
           return joystick.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
         }
        };
         rollerPushButton.whenActive(rollerPush);
+        rollerPushButton.whenInactive(rollerStop);
 
-   
-    //  winchButton.whenReleased(stop);
+
+        JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
+        JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
+        intakeButtonrise.whenPressed(raiseIntakeCmd);
+        intakeButtonlower.whenPressed(lowerIntakeCmd);
+
+
+
+
 
   }
 
@@ -151,6 +175,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return auto;// TODO change this to the name of the auto command
+    return null;// TODO change this to the name of the auto command
   }
 }
