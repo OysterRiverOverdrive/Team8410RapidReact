@@ -18,33 +18,22 @@ import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 //import frc.robot.team8410.subsystems.WinchSubsystem;
 
 
-/*import frc.robot.team8410.commands.RaiseIntakeCmd;
+/*
 import frc.robot.team8410.commands.DriverAutoCmd;
-import frc.robot.team8410.commands.LowerIntakeCmd;
-import frc.robot.team8410.commands.RollerPull;
-import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.UnwindWinchCommand;
-
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
-import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 */
 
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
-
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
-import edu.wpi.first.wpilibj.AnalogInput;
-
-
-
-
+import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.sensors.PotSensor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 
 
@@ -102,9 +91,11 @@ private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubs
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
 private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
 private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
-private final AnalogInput POT = new AnalogInput(0);
 private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, POT);
+private final PotSensor potSensor = new PotSensor();
+
+private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
+private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
 
   // The robot's subsystems and commands are defined here...
 
@@ -136,32 +127,11 @@ private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSys
     hangButton.whenPressed(hang);
 
      //POVButton winchButton = new POVButton(joystick, 0);
-    JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
-    JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     JoystickButton AutoButton = new JoystickButton(joystick, Constants.DRIVER_ASSIST_BUTTON);
     // System.out.println("intake button pressed");
      //sets POV Button at angle 0 (top of the dpad on xbox controller)
 
      AutoButton.whenPressed(autostraightCmd);
-     intakeButtonrise.whenPressed(raiseIntakeCmd);
-     intakeButtonlower.whenPressed(lowerIntakeCmd);
-
-     Trigger rollerPullButton = new Trigger() {
-      @Override
-      public boolean get() {
-        return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
-      }
-     };
-      rollerPullButton.whenActive(rollerPull);
-
-      Trigger rollerPushButton = new Trigger() {
-        @Override
-        public boolean get() {
-          return joystick.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
-        }
-       };
-        rollerPushButton.whenActive(rollerPush);
-
    
     //  winchButton.whenReleased(stop);
     */
@@ -188,7 +158,9 @@ private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSys
 
 
         JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
+        JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
         intakeButtonrise.whenPressed(raiseIntakeCmd);
+        intakeButtonlower.whenPressed(lowerIntakeCmd);
 
 
 
