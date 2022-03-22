@@ -33,6 +33,7 @@ import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
+import frc.robot.team8410.commands.RollerStop;
 
 
 
@@ -95,6 +96,7 @@ public class RobotContainer {
 private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
 private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
+private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 
   // The robot's subsystems and commands are defined here...
 
@@ -165,6 +167,7 @@ private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
       }
      };
       rollerPullButton.whenActive(rollerPull);
+      rollerPullButton.whenInactive(rollerStop);
 
      Trigger rollerPushButton = new Trigger() {
         @Override
@@ -173,6 +176,7 @@ private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
         }
        };
         rollerPushButton.whenActive(rollerPush);
+        rollerPushButton.whenInactive(rollerStop);
 
 
 
