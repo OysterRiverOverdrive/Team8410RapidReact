@@ -32,6 +32,9 @@ import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
+import frc.robot.team8410.commands.RollerPush;
+
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -91,6 +94,7 @@ public class RobotContainer {
 
 private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
+private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
 
   // The robot's subsystems and commands are defined here...
 
@@ -161,6 +165,14 @@ private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
       }
      };
       rollerPullButton.whenActive(rollerPull);
+
+     Trigger rollerPushButton = new Trigger() {
+        @Override
+        public boolean get() {
+          return joystick.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
+        }
+       };
+        rollerPushButton.whenActive(rollerPush);
 
 
 
