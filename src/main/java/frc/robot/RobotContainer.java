@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-//import frc.robot.team8410.commands.AutoSequeCmd;
-//import edu.wpi.first.wpilibj.PowerDistribution;
+import frc.robot.team8410.commands.AutoSequeCmd;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-//import frc.robot.team8410.subsystems.WinchSubsystem;
+import frc.robot.team8410.subsystems.WinchSubsystem;
 
 
-/*import frc.robot.team8410.commands.RaiseIntakeCmd;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.commands.LowerIntakeCmd;
 import frc.robot.team8410.commands.RollerPull;
@@ -28,7 +28,7 @@ import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
-*/
+
 
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
@@ -43,13 +43,9 @@ import frc.robot.Constants;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 
 
-/*import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.subsystems.OneStageClimber;
-import frc.robot.team8410.subsystems.TwoStageClimber;*/
-
-
-//package frc.robot.team8410.sensors;
-
+import frc.robot.team8410.subsystems.TwoStageClimber;
 
 
 /**
@@ -63,26 +59,23 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
 
-  //private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
+  private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
 
 
 
-  //  ashish commented private final PowerDistribution powerDistribution = new PowerDistribution();
+  private final PowerDistribution powerDistribution = new PowerDistribution();
 
 
   
 
-  // private final XboxController joystick = new XboxController(0);
+  private final XboxController joystick1 = new XboxController(0);
   private final Joystick joystick = new Joystick(0);
 
   // creating an instance of this will allow for the subsystem perodic method to run in the Diagnostic subsystem
   // so the diagnostic logic is in one place.
  // private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
   
-  /*private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-  private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
-  private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
-  private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
+  private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem);
   private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
@@ -91,7 +84,7 @@ public class RobotContainer {
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
   private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
-*/
+
 
 private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
@@ -121,7 +114,7 @@ private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-   /* Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
     POVButton hangButton = new POVButton(joystick, 0);
     //sets POV Button at angle 0 (top of the dpad on xbox controller)
     System.out.println("hang button pressed");
@@ -136,29 +129,9 @@ private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 
      AutoButton.whenPressed(autostraightCmd);
      intakeButtonrise.whenPressed(raiseIntakeCmd);
-     intakeButtonlower.whenPressed(lowerIntakeCmd);
-
-     Trigger rollerPullButton = new Trigger() {
-      @Override
-      public boolean get() {
-        return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
-      }
-     };
-      rollerPullButton.whenActive(rollerPull);
-
-      Trigger rollerPushButton = new Trigger() {
-        @Override
-        public boolean get() {
-          return joystick.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
-        }
-       };
-        rollerPushButton.whenActive(rollerPush);
-
-   
+     intakeButtonlower.whenPressed(lowerIntakeCmd);   
     //  winchButton.whenReleased(stop);
-    */
-
-    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+    
 
     Trigger rollerPullButton = new Trigger() {
       @Override
