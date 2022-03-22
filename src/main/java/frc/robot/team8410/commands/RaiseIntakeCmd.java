@@ -18,10 +18,10 @@ public class RaiseIntakeCmd extends CommandBase
   private double speed;
 
   /** Creates a new RaiseIntakeCmd. */
-  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, double POTVoltage) 
+  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, AnalogInput POT) 
   {
     intakeArmSubSys = intakeSubSystem;
-    currPOTVoltage = POTVoltage;
+    m_potentiometer = POT;
     speed = 0;
     //m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
     addRequirements(intakeSubSystem);
@@ -40,7 +40,7 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public void execute()
   {
-    //currPOTVoltage = m_potentiometer.getAverageVoltage();
+    currPOTVoltage = m_potentiometer.getAverageVoltage();
 
     SmartDashboard.putNumber("POT", currPOTVoltage);
     
@@ -79,17 +79,17 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public boolean isFinished() 
   {
-   // boolean retVal = false;
-    //currPOTVoltage = m_potentiometer.getAverageVoltage();
+    boolean retVal = false;
+    currPOTVoltage = m_potentiometer.getAverageVoltage();
 
-    //if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
-    //{
+    if(currPOTVoltage >= 1.9001)// this should go to constants
+    {
 
-      //retVal = true;
-      //intakeArmSubSys.stop();
+      retVal = true;
+      intakeArmSubSys.stop();
 
-    //}
-    //return retVal;
-    return false;
+    }
+    return retVal;
+    
   }
 }

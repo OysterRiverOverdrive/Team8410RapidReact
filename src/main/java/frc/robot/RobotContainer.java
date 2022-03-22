@@ -104,7 +104,7 @@ private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
 private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 private final AnalogInput POT = new AnalogInput(0);
 private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, POT.getAverageVoltage());
+private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, POT);
 
   // The robot's subsystems and commands are defined here...
 
