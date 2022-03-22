@@ -3,8 +3,6 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.team8410.sensors.PotSensor;
 
 public class LowerIntakeCmd extends CommandBase 
