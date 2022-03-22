@@ -3,21 +3,19 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.team8410.sensors.PotSensor;
 
 public class RaiseIntakeCmd extends CommandBase 
 {
   private PotSensor pot;
   private IntakeArmSubSystem intakeArmSubSys;
-  private double currPOTVoltage ;
   private double speed;
 
   /** Creates a new RaiseIntakeCmd. */
-  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem) 
+  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, PotSensor potSensor) 
   {
     intakeArmSubSys = intakeSubSystem;
+    pot = potSensor;
     speed = 0;
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -27,17 +25,14 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public void initialize() 
   {
-    
-
+    speed = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute()
   {
-    currPOTVoltage = pot.getPOTVoltage();
-
-    // SmartDashboard.putNumber("POT", currPOTVoltage);
+    double currPOTVoltage = pot.getPOTVoltage();
     
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
     {
@@ -60,8 +55,6 @@ public class RaiseIntakeCmd extends CommandBase
       
     }
 
-    // SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
- 
     intakeArmSubSys.rise(speed); 
 
   }
@@ -75,7 +68,7 @@ public class RaiseIntakeCmd extends CommandBase
   public boolean isFinished() 
   {
     boolean retVal = false;
-    currPOTVoltage = pot.getPOTVoltage();
+    double currPOTVoltage = pot.getPOTVoltage();
 
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
     {
