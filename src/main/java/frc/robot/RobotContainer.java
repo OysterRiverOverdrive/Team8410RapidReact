@@ -162,6 +162,6 @@ private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;// TODO change this to the name of the auto command
+    return auto;// TODO change this to the name of the auto command
   }
 }
