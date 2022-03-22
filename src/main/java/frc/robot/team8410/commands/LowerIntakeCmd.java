@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -9,10 +5,11 @@ import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.team8410.sensors.PotSensor;
 
 public class LowerIntakeCmd extends CommandBase 
 {
-  private AnalogInput m_potentiometer;
+  private PotSensor pot;
   private IntakeArmSubSystem intakeArmSubSys;
   private double currPOTVoltage ;
   private double speed;
@@ -22,7 +19,6 @@ public class LowerIntakeCmd extends CommandBase
   {
     intakeArmSubSys = intakeSubSystem;
     speed = 0;
-    m_potentiometer = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -39,9 +35,9 @@ public class LowerIntakeCmd extends CommandBase
   @Override
   public void execute()
   {
-    currPOTVoltage = m_potentiometer.getAverageVoltage();
+    currPOTVoltage = pot.getPOTVoltage();
 
-    SmartDashboard.putNumber("POT", currPOTVoltage);
+    // SmartDashboard.putNumber("POT", currPOTVoltage);
     
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION)
     {
@@ -64,7 +60,7 @@ public class LowerIntakeCmd extends CommandBase
       
     }
 
-    SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
+    // SmartDashboard.putNumber("Speed", speed); //TODO Better Name?
  
     intakeArmSubSys.lower(speed); 
 
@@ -79,7 +75,7 @@ public class LowerIntakeCmd extends CommandBase
   public boolean isFinished() 
   {
     boolean retVal = false;
-    currPOTVoltage = m_potentiometer.getAverageVoltage();
+    currPOTVoltage = pot.getPOTVoltage();
 
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)//Value needs to be tweaked
     {
