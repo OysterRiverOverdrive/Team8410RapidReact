@@ -14,9 +14,10 @@ public class UnwindWinchCommand extends CommandBase {
   private WinchEncoder winchEncoder;
   private double unwindWinchDist;
 
-  public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist) {
+  public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist, WinchEncoder winchEncoder) {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.winch = winch;
+    this.winchEncoder = winchEncoder;
     this.unwindWinchDist = unwindWinchDist;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,7 +25,7 @@ public class UnwindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    winchEncoder.encoderReset();
+    this.winchEncoder.encoderReset();
 
   }
 

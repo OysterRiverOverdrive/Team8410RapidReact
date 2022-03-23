@@ -19,6 +19,7 @@ import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.sensors.PotSensor;
+import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
@@ -48,6 +49,7 @@ public class RobotContainer {
   // private final PowerDistribution powerDistribution = new PowerDistribution();
 
   private final PotSensor potSensor = new PotSensor();
+  private final WinchEncoder winchEncoder = new WinchEncoder();
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
   private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the
@@ -55,7 +57,7 @@ public class RobotContainer {
   private final WinchSubsystem winch = new WinchSubsystem();
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
-  private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
+  private final hangCmd hang = new hangCmd(winch, twoStage, oneStage, winchEncoder);
 
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
