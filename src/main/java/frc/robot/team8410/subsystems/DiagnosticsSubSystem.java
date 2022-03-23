@@ -5,22 +5,16 @@
 package frc.robot.team8410.subsystems;
 
 import com.revrobotics.ColorSensorV3;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
-
 import frc.robot.team8410.sensors.Color_RevroboticsVer3;
 import frc.robot.team8410.sensors.Color_TCS34725_I2C;
-
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.sensors.SensorValues;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import frc.robot.Constants;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DiagnosticsSubSystem extends SubsystemBase {

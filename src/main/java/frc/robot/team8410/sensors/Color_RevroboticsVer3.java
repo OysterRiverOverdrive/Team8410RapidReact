@@ -4,13 +4,11 @@
 
 package frc.robot.team8410.sensors;
 
-/** Add your docs here. */
-
 import com.revrobotics.ColorSensorV3;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 
+/** Add your docs here. */
 public class Color_RevroboticsVer3 {
 
   /**

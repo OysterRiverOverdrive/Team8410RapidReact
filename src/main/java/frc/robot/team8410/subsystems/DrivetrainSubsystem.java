@@ -5,11 +5,9 @@
 package frc.robot.team8410.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; // this is real bot
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.team8410.sensors.UltrasonicFront;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

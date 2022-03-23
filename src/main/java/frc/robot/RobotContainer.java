@@ -21,7 +21,6 @@ import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.OneStageClimber;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.team8410.commands.LowerIntakeCmd;

@@ -6,7 +6,6 @@ package frc.robot.team8410.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class IntakeArmSubSystem extends SubsystemBase {

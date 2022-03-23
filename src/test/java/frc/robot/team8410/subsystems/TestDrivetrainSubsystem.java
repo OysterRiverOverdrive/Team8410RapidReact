@@ -1,7 +1,6 @@
 package frc.robot.team8410.subsystems;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import frc.robot.Constants;
 
