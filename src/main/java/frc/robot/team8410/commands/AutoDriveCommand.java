@@ -4,10 +4,10 @@
 
 package frc.robot.team8410.commands;
 
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveCommand extends CommandBase {
   private DrivetrainSubsystem drive;

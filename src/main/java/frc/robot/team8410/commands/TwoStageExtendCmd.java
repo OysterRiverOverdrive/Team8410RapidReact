@@ -5,8 +5,8 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.sensors.TwoStageEncoder;
+import frc.robot.team8410.subsystems.TwoStageClimber;
 
 public class TwoStageExtendCmd extends CommandBase {
   /** Creates a new TwoStageExtendCmd. */

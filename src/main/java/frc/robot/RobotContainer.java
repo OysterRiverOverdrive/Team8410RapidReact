@@ -5,27 +5,27 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-import frc.robot.team8410.commands.RaiseIntakeCmd;
-import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
-import frc.robot.team8410.commands.DriverAutoCmd;
-import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
-import frc.robot.team8410.subsystems.WinchSubsystem;
-import frc.robot.team8410.subsystems.TwoStageClimber;
-import frc.robot.team8410.subsystems.OneStageClimber;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.team8410.commands.LowerIntakeCmd;
-import frc.robot.team8410.sensors.PotSensor;
 import frc.robot.team8410.commands.TeleopDriveCommand;
+import frc.robot.team8410.sensors.PotSensor;
+import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import frc.robot.team8410.subsystems.OneStageClimber;
+import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.subsystems.WinchSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since

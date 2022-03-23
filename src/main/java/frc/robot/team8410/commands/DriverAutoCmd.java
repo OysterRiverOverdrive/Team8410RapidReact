@@ -5,9 +5,9 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.sensors.PotSensor;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

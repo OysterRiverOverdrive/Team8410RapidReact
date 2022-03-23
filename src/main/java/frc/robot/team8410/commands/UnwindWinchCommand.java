@@ -5,8 +5,8 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.sensors.WinchEncoder;
+import frc.robot.team8410.subsystems.WinchSubsystem;
 
 public class UnwindWinchCommand extends CommandBase {
   /** Creates a new UnwindWinch. */

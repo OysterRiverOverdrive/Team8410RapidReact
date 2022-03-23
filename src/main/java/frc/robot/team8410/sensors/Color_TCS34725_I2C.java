@@ -4,11 +4,11 @@
 
 package frc.robot.team8410.sensors;
 
+import edu.wpi.first.wpilibj.*;
 import java.nio.ByteBuffer;
+import java.util.concurrent.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.*;
-import edu.wpi.first.wpilibj.*;
 
 /**
  * Driver for the TCS34725 RGB color sensor. Adapted for roboRio/WPILib

@@ -2,8 +2,8 @@ package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.sensors.PotSensor;
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 
 public class LowerIntakeCmd extends CommandBase {
   private PotSensor pot;

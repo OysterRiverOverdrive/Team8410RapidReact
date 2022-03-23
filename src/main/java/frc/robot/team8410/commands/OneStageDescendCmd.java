@@ -4,9 +4,9 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.sensors.OneStageLeftEncoder;
 import frc.robot.team8410.sensors.OneStageRightEncoder;
+import frc.robot.team8410.subsystems.OneStageClimber;
 
 public class OneStageDescendCmd extends CommandBase {
   /** Creates a new OneStageExtendCmd. */

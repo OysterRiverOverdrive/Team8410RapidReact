@@ -7,8 +7,8 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.Constants;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
 
 public class TeleopDriveCommand extends CommandBase {
