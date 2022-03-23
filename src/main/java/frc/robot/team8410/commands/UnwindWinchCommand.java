@@ -15,13 +15,14 @@ public class UnwindWinchCommand extends CommandBase {
   private DutyCycleEncoder winchEncoder;
   private double unwindWinchDist;
   
-  public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist) 
+  public UnwindWinchCommand(WinchSubsystem winch, double winchDist) 
   {
     winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);
     winchEncoder.setDistancePerRotation(1.0);
-    System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    
     this.winch = winch; 
-    this.unwindWinchDist = unwindWinchDist;
+    unwindWinchDist = winchDist;
+    addRequirements(winch);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -56,10 +57,10 @@ public class UnwindWinchCommand extends CommandBase {
   public boolean isFinished() 
   {
     boolean retVal = false;
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+Math.abs(winchEncoder.getDistance()));
+   
 
 
-    if(Math.abs(winchEncoder.getDistance()) >= unwindWinchDist)
+    if(Math.abs(winchEncoder.getDistance()) >= unwindWinchDist)// change and mesure encoder value
     {
       //TODO check # of rotations needed
       winch.stopMotor();

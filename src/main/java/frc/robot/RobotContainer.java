@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 //import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.commands.TeleopDriveCommand;
 //import frc.robot.team8410.subsystems.WinchSubsystem;
+
 
 
 /*
@@ -28,13 +30,25 @@ import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
+
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.LowerIntakeCmd;
 import frc.robot.team8410.sensors.PotSensor;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.team8410.commands.TeleopDriveCommand;
+
+import frc.robot.team8410.subsystems.OneStageClimber;
+import frc.robot.team8410.commands.OneStageExtendCmd;
+import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.subsystems.WinchSubsystem;
+import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.commands.TwoStageExtendCmd;
+
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+
+
 
 
 /*import frc.robot.team8410.commands.hangCmd;
@@ -96,6 +110,18 @@ private final PotSensor potSensor = new PotSensor();
 
 private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
 private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
+
+
+private final OneStageClimber oneStage = new OneStageClimber();
+
+private final TwoStageClimber twoStageSub = new TwoStageClimber();
+//private final TwoStageExtendCmd twoStageExtCmd = new TwoStageExtendCmd(twoStageSub);
+private final WinchSubsystem winchSub = new WinchSubsystem();
+private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
+private final hangCmd hang = new hangCmd(winchSub, twoStageSub, oneStage, oneStageLeftEncoder);
+private final OneStageExtendCmd oneStageExtendCmd  = new OneStageExtendCmd(oneStage,11,oneStageLeftEncoder );// change enc value
+
+
 
   // The robot's subsystems and commands are defined here...
 
@@ -162,7 +188,13 @@ private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSys
         intakeButtonrise.whenPressed(raiseIntakeCmd);
         intakeButtonlower.whenPressed(lowerIntakeCmd);
 
+        POVButton oneStageUp = new POVButton(joystick, 1);
+        oneStageUp.whenPressed(oneStageExtendCmd);
 
+        
+
+        POVButton startHang = new POVButton(joystick, 2);
+        startHang.whenPressed(hang);
 
 
 

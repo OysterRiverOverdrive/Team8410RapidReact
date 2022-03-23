@@ -20,17 +20,19 @@ public final class Constants
    public static int LEFT_MOTOR_2_CANID = 2;// second motor ont he left that runs drivetrain
    public static int RIGHT_MOTOR_1_CANID = 3;// first motor that runs drivetrain on the right
    public static int RIGHT_MOTOR_2_CANID = 4;// second motor that runs drivetrain on the right
+
    public static int INTAKE_LIFTER_MOTOR_CANID = 5;// motor to raise intake 
    public static int INTAKE_ROLLER_MOTOR_CANID = 6;// motor to run the intake rollers
+
    public static int WINCH_MOTOR_CANID = 7;// the motor for winch
    public static int TWO_STAGE_HANGER_MOTOR_CANID = 8;// the motor for two stage
    public static int ONE_STAGE_LEFT_HANGER_MOTOR_CANID = 9;// the motor for left one stage
    public static int ONE_STAGE_RIGHT_HANGER_MOTOR_CANID = 10;//the motor for right one stage
 
    public static int INTAKE_ARM_POT_PORT_ID = 0; // Analog for intake ARM port
+
    public static int HANGER_WINCH_ENCODER_PORT = 5;//the winch for hanging
    public static int HANGER_ONE_STAGE_LEFT_ENCODER_PORT = 6; //left one stage for hanging
-   public static int HANGER_ONE_STAGE_RIGHT_ENCODER_PORT = 7; //right one stage for hanging
    public static int HANGER_TWO_STAGE_ENCODER_PORT = 8; //the two stage for hanging
 
    public static int BALL_IS_RED = 3; // this is the threshold for red color ball
