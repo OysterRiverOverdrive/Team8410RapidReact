@@ -12,10 +12,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
+import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+import frc.robot.team8410.subsystems.WinchSubsystem;
+import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.subsystems.OneStageClimber;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -41,20 +47,15 @@ public class RobotContainer {
   //private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
   //private final PowerDistribution powerDistribution = new PowerDistribution();
 
-  // creating an instance of this will allow for the subsystem perodic method to run in the Diagnostic subsystem
-  // so the diagnostic logic is in one place.
- // private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
-
+  private final PotSensor potSensor = new PotSensor();
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem);
+  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
   private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
   private final WinchSubsystem winch = new WinchSubsystem();
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
   private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
 
-  private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-  private final PotSensor potSensor = new PotSensor();
 
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
