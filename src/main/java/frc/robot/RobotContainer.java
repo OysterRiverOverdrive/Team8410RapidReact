@@ -4,15 +4,18 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.commands.OneStageExtendCmd;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
@@ -57,7 +60,6 @@ public class RobotContainer {
   private final WinchSubsystem winch = new WinchSubsystem();
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
-  private final hangCmd hang = new hangCmd(winch, twoStage, oneStage, winchEncoder);
 
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
@@ -66,6 +68,17 @@ public class RobotContainer {
   private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
   private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
   private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
+
+  private final TwoStageClimber twoStageSub = new TwoStageClimber();
+  // private final TwoStageExtendCmd twoStageExtCmd = new
+  // TwoStageExtendCmd(twoStageSub);
+  private final WinchSubsystem winchSub = new WinchSubsystem();
+  private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
+      Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
+  private final hangCmd hang = new hangCmd(winchSub, twoStageSub, oneStage, oneStageLeftEncoder);
+  private final OneStageExtendCmd oneStageExtendCmd = new OneStageExtendCmd(oneStage, 11, oneStageLeftEncoder);// change
+                                                                                                               // enc
+                                                                                                               // value
 
   // The robot's subsystems and commands are defined here...
 
@@ -117,6 +130,12 @@ public class RobotContainer {
     };
     rollerPullButton.whenActive(rollerPull);
     rollerPullButton.whenInactive(rollerStop);
+
+    POVButton oneStageUp = new POVButton(joystick, 1);
+    oneStageUp.whenPressed(oneStageExtendCmd);
+
+    POVButton startHang = new POVButton(joystick, 2);
+    startHang.whenPressed(hang);
 
     Trigger rollerPushButton = new Trigger() {
       @Override

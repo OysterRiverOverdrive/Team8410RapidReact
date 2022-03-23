@@ -4,29 +4,38 @@
 
 package frc.robot.team8410.commands;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.sensors.OneStageLeftEncoder;
-import frc.robot.team8410.sensors.OneStageRightEncoder;
+import frc.robot.Constants;
 import frc.robot.team8410.subsystems.OneStageClimber;
 
 public class OneStageExtendCmd extends CommandBase {
   /** Creates a new OneStageExtendCmd. */
   private OneStageClimber oneStage;
-  private OneStageLeftEncoder oneStageLeftEncoder;
-  private OneStageRightEncoder oneStageRightEncoder;
+  private DutyCycleEncoder oneStageLeftEncoder;
   private double oneStageExtendDist;
+  
+  public OneStageExtendCmd(OneStageClimber stageOne, double dist, DutyCycleEncoder enc) {
+    oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
+    
+    oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402); //double check this value
 
-  public OneStageExtendCmd(OneStageClimber oneStage, double oneStageExtendDist) {
-    System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    this.oneStage = oneStage;
-    this.oneStageExtendDist = oneStageExtendDist;
+    oneStage = stageOne;
+    oneStageExtendDist = dist;
+    oneStageLeftEncoder = enc;
 
+
+    addRequirements(oneStage);
     // Use addRequirements() here to declare subsystem dependencies.
+
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() 
+  {
+    oneStageLeftEncoder.reset();
+    oneStageLeftEncoder.isConnected();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,9 +55,9 @@ public class OneStageExtendCmd extends CommandBase {
     boolean retVal = false;
     // System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if (oneStageLeftEncoder.get1LeftSideEncoder() >= oneStageExtendDist
-        && oneStageRightEncoder.get1RightSideEncoder() >= oneStageExtendDist) {
-      // TODO check # of rotations needed
+    if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageExtendDist)// change number to real encoder number
+    {
+      //TODO check # of rotations needed
       oneStage.stopMotor();
       retVal = true;
     }

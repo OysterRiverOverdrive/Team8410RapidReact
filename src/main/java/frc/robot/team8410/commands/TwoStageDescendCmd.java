@@ -4,6 +4,7 @@
 
 package frc.robot.team8410.commands;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.sensors.TwoStageEncoder;
 import frc.robot.team8410.subsystems.TwoStageClimber;
@@ -11,20 +12,29 @@ import frc.robot.team8410.subsystems.TwoStageClimber;
 public class TwoStageDescendCmd extends CommandBase {
   /** Creates a new TwoStageDescendCmd. */
   private TwoStageClimber twoStage;
-  private TwoStageEncoder twoStageEncoder;
+  private DutyCycleEncoder twoStageEncoder;
   private double twoStageDescendDist;
 
-  public TwoStageDescendCmd(TwoStageClimber twoStage, double twoStageDescendDist) {
-    System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+  public TwoStageDescendCmd(TwoStageClimber twoStage,double DescendDist, DutyCycleEncoder enc) {
+    //twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
+    enc.setDistancePerRotation(Math.PI * 0.787402);
+
+    twoStageEncoder = enc;
+    twoStageDescendDist = DescendDist;
     this.twoStage = twoStage;
-    this.twoStageDescendDist = twoStageDescendDist;
+    addRequirements(twoStage);
+
+
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() 
+  {
+    twoStageEncoder.reset();
+    twoStageEncoder.isConnected();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,9 +53,8 @@ public class TwoStageDescendCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println(twoStageEncoder.getTwoStageEncoder());
 
-    if (twoStageEncoder.getTwoStageEncoder() >= twoStageDescendDist) // two stage needs to descend 28.5 in
+    if(Math.abs(twoStageEncoder.getDistance()) >= twoStageDescendDist) //two stage needs to descend 28.5 in need to change encoder values
     {
       // TODO check # of rotations needed
       twoStage.stopMotor();
