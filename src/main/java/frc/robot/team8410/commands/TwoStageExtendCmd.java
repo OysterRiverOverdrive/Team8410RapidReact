@@ -13,11 +13,11 @@ public class TwoStageExtendCmd extends CommandBase {
   private TwoStageClimber twoStage;
   private TwoStageEncoder twoStageEncoder;
   private double twoStageExtendDist;
- 
+
   public TwoStageExtendCmd(TwoStageClimber twoStage, double twoStageExtendDist) {
-     //circumference of two stage is 0.787204 pi inches
+    // circumference of two stage is 0.787204 pi inches
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    this.twoStage = twoStage; 
+    this.twoStage = twoStage;
     this.twoStageExtendDist = twoStageExtendDist;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,7 +26,8 @@ public class TwoStageExtendCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    twoStageEncoder.encoderReset();;
+    twoStageEncoder.encoderReset();
+    ;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,7 +39,8 @@ public class TwoStageExtendCmd extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
@@ -46,10 +48,9 @@ public class TwoStageExtendCmd extends CommandBase {
     boolean retVal = false;
     System.out.println(twoStageEncoder.getTwoStageEncoder());
 
-
-    if(twoStageEncoder.getTwoStageEncoder() >= twoStageExtendDist) //two stage needs to extend 28.5 in
+    if (twoStageEncoder.getTwoStageEncoder() >= twoStageExtendDist) // two stage needs to extend 28.5 in
     {
-     //TODO check # of rotations needed
+      // TODO check # of rotations needed
       twoStage.stopMotor();
       retVal = true;
     }

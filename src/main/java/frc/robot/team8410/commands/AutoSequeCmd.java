@@ -8,10 +8,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
-
-
-
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -20,6 +16,6 @@ public class AutoSequeCmd extends SequentialCommandGroup {
   public AutoSequeCmd(DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoDriveCommand(drive,0.8,10)); // test these numbers
+    addCommands(new AutoDriveCommand(drive, 0.8, 10)); // test these numbers
   }
 }

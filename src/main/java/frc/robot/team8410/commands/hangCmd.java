@@ -19,30 +19,29 @@ public class hangCmd extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
-    //ground to mid
-    new UnwindWinchCommand(winch, 1.0),
-    new TwoStageExtendCmd(twoStage, 15.79),
-    new WindWinchCommand(winch, 1.0),    //TODO verify distances
-    new TwoStageDescendCmd(twoStage, 15.79),
-    new OneStageExtendCmd(oneStage, 3.0), 
-    new OneStageDescendCmd(oneStage, 3.0),
-    //mid to highs
-    new UnwindWinchCommand(winch, 5.0),
-    new TwoStageExtendCmd(twoStage, 28.5), 
-    new WindWinchCommand(winch, 5.0),
-    new TwoStageDescendCmd(twoStage, 28.5),
-    new OneStageExtendCmd(oneStage, 3.0),
-    new WindWinchCommand(winch, 5.0),
-    new OneStageDescendCmd(oneStage, 3.0),
-    //high to traversal
-    new UnwindWinchCommand(winch, 5.0),
-    new TwoStageExtendCmd(twoStage, 28.5), 
-    new WindWinchCommand(winch, 5.0),
-    new TwoStageDescendCmd(twoStage, 28.5),
-    new OneStageExtendCmd(oneStage, 3.0),
-    new WindWinchCommand(winch, 5.0),
-    new OneStageDescendCmd(oneStage, 3.0));
-    
+        // ground to mid
+        new UnwindWinchCommand(winch, 1.0),
+        new TwoStageExtendCmd(twoStage, 15.79),
+        new WindWinchCommand(winch, 1.0), // TODO verify distances
+        new TwoStageDescendCmd(twoStage, 15.79),
+        new OneStageExtendCmd(oneStage, 3.0),
+        new OneStageDescendCmd(oneStage, 3.0),
+        // mid to highs
+        new UnwindWinchCommand(winch, 5.0),
+        new TwoStageExtendCmd(twoStage, 28.5),
+        new WindWinchCommand(winch, 5.0),
+        new TwoStageDescendCmd(twoStage, 28.5),
+        new OneStageExtendCmd(oneStage, 3.0),
+        new WindWinchCommand(winch, 5.0),
+        new OneStageDescendCmd(oneStage, 3.0),
+        // high to traversal
+        new UnwindWinchCommand(winch, 5.0),
+        new TwoStageExtendCmd(twoStage, 28.5),
+        new WindWinchCommand(winch, 5.0),
+        new TwoStageDescendCmd(twoStage, 28.5),
+        new OneStageExtendCmd(oneStage, 3.0),
+        new WindWinchCommand(winch, 5.0),
+        new OneStageDescendCmd(oneStage, 3.0));
+
   }
 }
-

@@ -4,9 +4,7 @@
 
 package frc.robot.team8410.commands;
 
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.sensors.WinchEncoder;
 
@@ -18,7 +16,7 @@ public class WindWinchCommand extends CommandBase {
 
   public WindWinchCommand(WinchSubsystem winch, double windWinchDist) {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    this.winch = winch; 
+    this.winch = winch;
     this.windWinchDist = windWinchDist;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -39,17 +37,17 @@ public class WindWinchCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+winchEncoder.getWinchEncoder());
+    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + winchEncoder.getWinchEncoder());
 
-    if(winchEncoder.getWinchEncoder() >= windWinchDist)
-    {
-      //TODO check # of rotations needed
+    if (winchEncoder.getWinchEncoder() >= windWinchDist) {
+      // TODO check # of rotations needed
       winch.stopMotor();
       retVal = true;
     }

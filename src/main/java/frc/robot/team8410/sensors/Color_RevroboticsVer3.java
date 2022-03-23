@@ -11,8 +11,7 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 
-public class Color_RevroboticsVer3
-{
+public class Color_RevroboticsVer3 {
 
   /**
    * Change the I2C port below to match the connection of your color sensor
@@ -21,28 +20,24 @@ public class Color_RevroboticsVer3
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
   /**
-   * A Rev Color Sensor V3 object is constructed with an I2C port as a 
-   * parameter. The device will be automatically initialized with default 
+   * A Rev Color Sensor V3 object is constructed with an I2C port as a
+   * parameter. The device will be automatically initialized with default
    * parameters.
    */
 
-
-  public String getBallColor()  // else its blue
+  public String getBallColor() // else its blue
   {
-  
+
     String retVal = "UNKNOWN";
 
     Color detectedColor = m_colorSensor.getColor();
-    double redOverBlue = detectedColor.red/detectedColor.blue;
+    double redOverBlue = detectedColor.red / detectedColor.blue;
 
-   if (redOverBlue>3)
-   {
-    retVal = "RED";
-   } 
-   else if(redOverBlue <1)
-   {
-    retVal = "BLUE";
-   } 
-   return retVal;
-  } 
+    if (redOverBlue > 3) {
+      retVal = "RED";
+    } else if (redOverBlue < 1) {
+      retVal = "BLUE";
+    }
+    return retVal;
+  }
 }

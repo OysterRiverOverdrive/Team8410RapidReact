@@ -4,9 +4,7 @@
 
 package frc.robot.team8410.commands;
 
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.sensors.TwoStageEncoder;
 
@@ -14,7 +12,7 @@ public class TwoStageDescendCmd extends CommandBase {
   /** Creates a new TwoStageDescendCmd. */
   private TwoStageClimber twoStage;
   private TwoStageEncoder twoStageEncoder;
-  private  double twoStageDescendDist;
+  private double twoStageDescendDist;
 
   public TwoStageDescendCmd(TwoStageClimber twoStage, double twoStageDescendDist) {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
@@ -26,7 +24,8 @@ public class TwoStageDescendCmd extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -37,7 +36,8 @@ public class TwoStageDescendCmd extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
@@ -45,10 +45,10 @@ public class TwoStageDescendCmd extends CommandBase {
     boolean retVal = false;
     System.out.println(twoStageEncoder.getTwoStageEncoder());
 
-    if(twoStageEncoder.getTwoStageEncoder() >= twoStageDescendDist) //two stage needs to descend 28.5 in
+    if (twoStageEncoder.getTwoStageEncoder() >= twoStageDescendDist) // two stage needs to descend 28.5 in
     {
-      //TODO check # of rotations needed
-     twoStage.stopMotor();
+      // TODO check # of rotations needed
+      twoStage.stopMotor();
       retVal = true;
     }
     return retVal;

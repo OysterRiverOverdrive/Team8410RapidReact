@@ -5,9 +5,9 @@
 package frc.robot.team8410.sensors;
 
 /** Add your docs here. */
-public class TCS34725_Values 
+public class TCS34725_Values
 
- {
+{
     private int r, b, g, c;
 
     public TCS34725_Values(int r, int b, int g, int c) {

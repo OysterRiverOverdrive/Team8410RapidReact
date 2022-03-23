@@ -10,27 +10,24 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-
 public class IntakeRollerSubsystem extends SubsystemBase {
   /** Creates a new IntakeRollerSubsystem. */
-  
+
   private final WPI_TalonSRX m_roller = new WPI_TalonSRX(6);
-  
-  
+
   public IntakeRollerSubsystem() {
-    
+
   }
-  public void pull()
-  {
+
+  public void pull() {
     m_roller.set(-0.8);// was 0.8 speed
   }
 
-  public void push()
-  {
+  public void push() {
     m_roller.set(0.8);
   }
-  public void stop()
-  {
+
+  public void stop() {
     m_roller.set(0);
   }
 

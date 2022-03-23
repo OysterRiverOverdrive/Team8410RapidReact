@@ -13,11 +13,10 @@ public class UnwindWinchCommand extends CommandBase {
   private WinchSubsystem winch;
   private WinchEncoder winchEncoder;
   private double unwindWinchDist;
-  
-  public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist) 
-  {
+
+  public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist) {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    this.winch = winch; 
+    this.winch = winch;
     this.unwindWinchDist = unwindWinchDist;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -25,14 +24,13 @@ public class UnwindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    winchEncoder.encoderReset();   
+    winchEncoder.encoderReset();
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() 
-  {
+  public void execute() {
     System.out.println("Command executed");
     winch.unWind();
 
@@ -41,19 +39,17 @@ public class UnwindWinchCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
 
-  public void end(boolean interrupted){}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() 
-  {
+  public boolean isFinished() {
     boolean retVal = false;
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+winchEncoder.getWinchEncoder());
+    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + winchEncoder.getWinchEncoder());
 
-
-    if(winchEncoder.getWinchEncoder() >= unwindWinchDist)
-    {
-      //TODO check # of rotations needed
+    if (winchEncoder.getWinchEncoder() >= unwindWinchDist) {
+      // TODO check # of rotations needed
       winch.stopMotor();
       retVal = true;
     }

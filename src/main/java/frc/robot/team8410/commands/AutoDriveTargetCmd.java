@@ -15,8 +15,7 @@ public class AutoDriveTargetCmd extends CommandBase {
   private final DrivetrainSubsystem driveSub;
   private double targetDist;
 
-  public AutoDriveTargetCmd(DrivetrainSubsystem drive) 
-  {
+  public AutoDriveTargetCmd(DrivetrainSubsystem drive) {
     driveSub = drive;
     addRequirements(driveSub);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,14 +29,14 @@ public class AutoDriveTargetCmd extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() 
-  {
+  public void execute() {
     driveSub.autoDriveStraight_until_wall(targetDist, Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
