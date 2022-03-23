@@ -33,6 +33,7 @@ public class LowerIntakeCmd extends CommandBase
   @Override
   public void execute()
   {
+
     double currPOTVoltage = pot.getPOTVoltage();
 
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION)

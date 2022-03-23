@@ -32,6 +32,7 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public void execute()
   {
+
     double currPOTVoltage = pot.getPOTVoltage();
     
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
@@ -69,6 +70,7 @@ public class RaiseIntakeCmd extends CommandBase
   {
     boolean retVal = false;
     double currPOTVoltage = pot.getPOTVoltage();
+
 
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
     {

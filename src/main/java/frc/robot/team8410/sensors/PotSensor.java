@@ -9,3 +9,4 @@ public class PotSensor {
       return  m_potentiometer.getAverageVoltage();
    } 
 }
+

@@ -4,23 +4,19 @@
 
 package frc.robot.team8410.commands;
 
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.team8410.subsystems.OneStageClimber;
+import frc.robot.team8410.sensors.OneStageLeftEncoder;
+import frc.robot.team8410.sensors.OneStageRightEncoder;
 
 public class OneStageExtendCmd extends CommandBase {
   /** Creates a new OneStageExtendCmd. */
   private OneStageClimber oneStage;
-  private DutyCycleEncoder oneStageLeftEncoder;
-  private DutyCycleEncoder oneStageRightEncoder;
+  private OneStageLeftEncoder oneStageLeftEncoder;
+  private OneStageRightEncoder oneStageRightEncoder;
   private double oneStageExtendDist;
   
   public OneStageExtendCmd(OneStageClimber oneStage, double oneStageExtendDist) {
-    oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
-    oneStageRightEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_RIGHT_ENCODER_PORT);
-    oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402); //double check this value
-    oneStageRightEncoder.setDistancePerRotation(Math.PI * 0.787402);
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.oneStage = oneStage;
     this.oneStageExtendDist = oneStageExtendDist;
@@ -48,7 +44,8 @@ public class OneStageExtendCmd extends CommandBase {
     boolean retVal = false;
     //System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageExtendDist && Math.abs(oneStageRightEncoder.getDistance()) >= oneStageExtendDist)
+    if(oneStageLeftEncoder.get1LeftSideEncoder() >= oneStageExtendDist 
+    && oneStageRightEncoder.get1RightSideEncoder() >= oneStageExtendDist)
     {
       //TODO check # of rotations needed
       oneStage.stopMotor();

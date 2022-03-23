@@ -12,17 +12,22 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
+import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+import frc.robot.team8410.subsystems.WinchSubsystem;
+import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.subsystems.OneStageClimber;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.team8410.commands.LowerIntakeCmd;
 import frc.robot.team8410.sensors.PotSensor;
 import frc.robot.team8410.commands.TeleopDriveCommand;
-
-
 
 
 /**
@@ -35,25 +40,32 @@ public class RobotContainer {
 
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
+
   private final XboxController joystick1 = new XboxController(0);
   private final Joystick joystick = new Joystick(0);
 
   //private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
   //private final PowerDistribution powerDistribution = new PowerDistribution();
 
-  // creating an instance of this will allow for the subsystem perodic method to run in the Diagnostic subsystem
-  // so the diagnostic logic is in one place.
- // private DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();
-  
-  private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
-  private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
-  private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
-  private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
-  private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final PotSensor potSensor = new PotSensor();
+  private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
+  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
+  private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
+  private final WinchSubsystem winch = new WinchSubsystem();
+  private final TwoStageClimber twoStage = new TwoStageClimber();
+  private final OneStageClimber oneStage = new OneStageClimber();
+  private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
+
 
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
+
+
+
+private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
+private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
+private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
+private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 
   // The robot's subsystems and commands are defined here...
 
@@ -91,12 +103,12 @@ public class RobotContainer {
     */
 
     Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
-
     Trigger rollerPullButton = new Trigger() {
       @Override
       public boolean get() {
         return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
       }
+
     };
     rollerPullButton.whenActive(rollerPull);
     rollerPullButton.whenInactive(rollerStop);
@@ -115,6 +127,7 @@ public class RobotContainer {
     JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
+
 
 
   }
