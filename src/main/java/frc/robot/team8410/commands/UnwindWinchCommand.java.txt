@@ -14,15 +14,15 @@ public class UnwindWinchCommand extends CommandBase {
   /** Creates a new UnwindWinch. */
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
-  private double unwindWinchDist;
+  private double unwindWinchRot;
   
-  public UnwindWinchCommand(WinchSubsystem winch, double winchDist) 
+  public UnwindWinchCommand(WinchSubsystem winch, double winchRotation, DutyCycleEncoder enc) 
   {
-    winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);  //TODO move this out to robot container
-    winchEncoder.setDistancePerRotation(1.0);
+      //TODO move this out to robot container
+  
     
     this.winch = winch; 
-    unwindWinchDist = winchDist;
+    unwindWinchRot = winchRotation;
     addRequirements(winch);
     // Use addRequirements() here to declare subsystem dependencies.
   }

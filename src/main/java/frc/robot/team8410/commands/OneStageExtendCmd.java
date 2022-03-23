@@ -13,15 +13,14 @@ public class OneStageExtendCmd extends CommandBase {
   /** Creates a new OneStageExtendCmd. */
   private OneStageClimber oneStage;
   private DutyCycleEncoder oneStageLeftEncoder;
-  private double oneStageExtendDist;
+  private double oneStageExtendRotation;
   
-  public OneStageExtendCmd(OneStageClimber stageOne, double dist, DutyCycleEncoder enc) {
+  public OneStageExtendCmd(OneStageClimber stageOne, double rotation, DutyCycleEncoder enc) {
     oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
     
-    oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402); //double check this value
-
+  
     oneStage = stageOne;
-    oneStageExtendDist = dist;
+    oneStageExtendRotation = rotation;
     oneStageLeftEncoder = enc;
 
 
@@ -47,6 +46,7 @@ public class OneStageExtendCmd extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    oneStage.stopMotor();
   }
 
   // Returns true when the command should end.
@@ -55,10 +55,10 @@ public class OneStageExtendCmd extends CommandBase {
     boolean retVal = false;
     // System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageExtendDist)// change number to real encoder number
+    if(Math.abs(oneStageLeftEncoder.get()) >= oneStageExtendRotation)// change number to real encoder number
     {
       //TODO check # of rotations needed
-      oneStage.stopMotor();
+      
       retVal = true;
     }
     return retVal;

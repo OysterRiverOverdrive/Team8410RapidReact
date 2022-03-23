@@ -12,9 +12,10 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.team8410.commands.DriverAutoCmd;
-import frc.robot.team8410.commands.hangCmd;
+//import frc.robot.team8410.commands.DriverAutoCmd;
+//import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.commands.OneStageDescendCmd;
 import frc.robot.team8410.commands.OneStageExtendCmd;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.RollerPull;
@@ -54,7 +55,7 @@ public class RobotContainer {
   private final PotSensor potSensor = new PotSensor();
   private final WinchEncoder winchEncoder = new WinchEncoder();
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
+  //private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
   private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the
                                                                                    // diagnstic will be run
   private final WinchSubsystem winch = new WinchSubsystem();
@@ -75,8 +76,9 @@ public class RobotContainer {
   private final WinchSubsystem winchSub = new WinchSubsystem();
   private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
       Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
-  private final hangCmd hang = new hangCmd(winchSub, twoStageSub, oneStage, oneStageLeftEncoder);
-  private final OneStageExtendCmd oneStageExtendCmd = new OneStageExtendCmd(oneStage, 11, oneStageLeftEncoder);// change
+  //private final hangCmd hang = new hangCmd(winchSub, twoStageSub, oneStage, oneStageLeftEncoder);
+  private final OneStageDescendCmd oneStageDecendCmd = new OneStageDescendCmd(oneStage, 7.7, oneStageLeftEncoder);
+  private final OneStageExtendCmd oneStageExtendCmd = new OneStageExtendCmd(oneStage, 7.7, oneStageLeftEncoder);// change
                                                                                                                // enc
                                                                                                                // value
 
@@ -131,11 +133,16 @@ public class RobotContainer {
     rollerPullButton.whenActive(rollerPull);
     rollerPullButton.whenInactive(rollerStop);
 
-    POVButton oneStageUp = new POVButton(joystick, 1);
+    POVButton oneStageUp = new POVButton(joystick, 0);
     oneStageUp.whenPressed(oneStageExtendCmd);
 
-    POVButton startHang = new POVButton(joystick, 2);
-    startHang.whenPressed(hang);
+    POVButton oneStageDown = new POVButton(joystick, 180);
+    oneStageDown.whenReleased(oneStageDecendCmd);
+
+
+
+   // POVButton startHang = new POVButton(joystick, 2);
+    //startHang.whenPressed(hang);
 
     Trigger rollerPushButton = new Trigger() {
       @Override

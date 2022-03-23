@@ -16,6 +16,7 @@ public class OneStageClimber extends SubsystemBase {
   MotorControllerGroup oneStageGroup = new MotorControllerGroup(oneStageMotor1, oneStageMotor2);
 
   public OneStageClimber() {
+    oneStageMotor2.setInverted(true);
   }
 
   @Override
@@ -24,13 +25,13 @@ public class OneStageClimber extends SubsystemBase {
   }
 
   public void extend() {
-    oneStageGroup.set(0.4);
+    oneStageGroup.set(0.6);
     // TODO verify rotation and speed
 
   }
 
   public void descend() {
-    oneStageGroup.set(-0.4);
+    oneStageGroup.set(-0.6);
     // TODO verify rotation and speed
 
   }
