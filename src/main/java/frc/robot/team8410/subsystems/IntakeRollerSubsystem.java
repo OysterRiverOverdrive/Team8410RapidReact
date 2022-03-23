@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class IntakeRollerSubsystem extends SubsystemBase {
   /** Creates a new IntakeRollerSubsystem. */
@@ -19,11 +20,11 @@ public class IntakeRollerSubsystem extends SubsystemBase {
   }
 
   public void pull() {
-    m_roller.set(-0.8);// was 0.8 speed
+    m_roller.set(-(Constants.INTAKE_ROLLER_MOTOR_SPEED));// was 0.8 speed
   }
 
   public void push() {
-    m_roller.set(0.8);
+    m_roller.set(Constants.INTAKE_ROLLER_MOTOR_SPEED);
   }
 
   public void stop() {
