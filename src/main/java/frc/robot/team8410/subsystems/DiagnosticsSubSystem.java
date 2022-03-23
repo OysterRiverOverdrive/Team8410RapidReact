@@ -25,8 +25,8 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   private final PowerDistribution powerDistribution = new PowerDistribution(Constants.PDP_CAN_ID,
       PowerDistribution.ModuleType.kCTRE);
 
-  private final AddressableLED m_led = new AddressableLED(4);
-  private final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(144);
+  private final AddressableLED m_led = new AddressableLED(Constants.M_LED_PORT);
+  private final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(Constants.LED_BUFFER_LEGNTH);
 
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
