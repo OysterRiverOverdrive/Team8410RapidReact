@@ -24,13 +24,13 @@ public class OneStageClimber extends SubsystemBase {
   }
 
   public void extend() {
-    oneStageGroup.set(0.4);
+    oneStageGroup.set(0.2);
     // TODO verify rotation and speed
 
   }
 
   public void descend() {
-    oneStageGroup.set(-0.4);
+    oneStageGroup.set(-0.2);
     // TODO verify rotation and speed
 
   }

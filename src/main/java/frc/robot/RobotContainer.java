@@ -27,6 +27,9 @@ import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 
+import frc.robot.team8410.commands.OneStageDescendCmd;
+import frc.robot.team8410.commands.TwoStageDescendCmd;
+
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a
@@ -55,6 +58,12 @@ public class RobotContainer {
   private final WinchSubsystem winch = new WinchSubsystem();
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
+
+  private final OneStageDescendCmd oneStageDecendCmd = new OneStageDescendCmd(oneStage, 5);
+  private final TwoStageDescendCmd twoStageDescendCmd = new TwoStageDescendCmd(twoStage, 5);
+
+
+
   private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
 
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
@@ -129,6 +138,11 @@ public class RobotContainer {
     JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
+
+    JoystickButton moveAllHanggersDown = new JoystickButton(joystick, 1);
+    moveAllHanggersDown.whenPressed(oneStageDecendCmd);
+    JoystickButton moveStage2Down = new JoystickButton(joystick, 2);
+    moveStage2Down.whenPressed(twoStageDescendCmd);
 
   }
 
