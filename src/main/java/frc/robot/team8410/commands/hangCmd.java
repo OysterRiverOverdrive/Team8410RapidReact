@@ -4,8 +4,8 @@
 
 package frc.robot.team8410.commands;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.WinchSubsystem;
@@ -15,34 +15,38 @@ import frc.robot.team8410.subsystems.WinchSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class hangCmd extends SequentialCommandGroup {
   /** Creates a new SequentialTest. */
-  public hangCmd(WinchSubsystem winch, TwoStageClimber twoStage, OneStageClimber oneStage, WinchEncoder winchEncoder) {
+
+  //private  DutyCycleEncoder EncoderSensor;
+
+  public hangCmd(WinchSubsystem winch, TwoStageClimber twoStage, OneStageClimber oneStage, DutyCycleEncoder enc) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
-        // ground to mid
-        new UnwindWinchCommand(winch, 1.0, winchEncoder),
-        new TwoStageExtendCmd(twoStage, 15.79),
-        new WindWinchCommand(winch, 1.0), // TODO verify distances
-        new TwoStageDescendCmd(twoStage, 15.79),
-        new OneStageExtendCmd(oneStage, 3.0),
-        new OneStageDescendCmd(oneStage, 3.0),
-        // mid to highs
-        new UnwindWinchCommand(winch, 5.0, winchEncoder),
-        new TwoStageExtendCmd(twoStage, 28.5),
-        new WindWinchCommand(winch, 5.0),
-        new TwoStageDescendCmd(twoStage, 28.5),
-        new OneStageExtendCmd(oneStage, 3.0),
-        new WindWinchCommand(winch, 5.0),
-        new OneStageDescendCmd(oneStage, 3.0),
-        // high to traversal
-        new UnwindWinchCommand(winch, 5.0, winchEncoder),
-        new TwoStageExtendCmd(twoStage, 28.5),
-        new WindWinchCommand(winch, 5.0),
-        new TwoStageDescendCmd(twoStage, 28.5),
-        new OneStageExtendCmd(oneStage, 3.0),
-        new WindWinchCommand(winch, 5.0),
-        new OneStageDescendCmd(oneStage, 3.0));
-
+    //ground to mid
+    new UnwindWinchCommand(winch, 5),
+    new TwoStageExtendCmd(twoStage,11,enc),
+    new WindWinchCommand(winch,11),    //TODO verify distances
+    new TwoStageDescendCmd(twoStage,11,enc),
+    new OneStageExtendCmd(oneStage,11,enc), 
+    new OneStageDescendCmd(oneStage, 3.0,enc),
+    //mid to highs
+    new UnwindWinchCommand(winch, 5.0),
+    new TwoStageExtendCmd(twoStage, 28.5,enc), 
+    new WindWinchCommand(winch, 5.0),
+    new TwoStageDescendCmd(twoStage, 28.5,enc),
+    new OneStageExtendCmd(oneStage, 3.0, enc),
+    new WindWinchCommand(winch, 5.0),
+    new OneStageDescendCmd(oneStage, 3.0, enc),
+    //high to traversal
+    new UnwindWinchCommand(winch, 5.0),
+    new TwoStageExtendCmd(twoStage, 28.5, enc), 
+    new WindWinchCommand(winch, 5.0),
+    new TwoStageDescendCmd(twoStage, 28.5,enc),
+    new OneStageExtendCmd(oneStage, 3.0, enc),
+    new WindWinchCommand(winch, 5.0),
+    new OneStageDescendCmd(oneStage, 3.0,enc));
+    
   }
 }
+

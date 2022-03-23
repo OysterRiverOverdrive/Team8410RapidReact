@@ -4,6 +4,7 @@
 
 package frc.robot.team8410.commands;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.sensors.TwoStageEncoder;
 import frc.robot.team8410.subsystems.TwoStageClimber;
@@ -11,14 +12,20 @@ import frc.robot.team8410.subsystems.TwoStageClimber;
 public class TwoStageExtendCmd extends CommandBase {
   /** Creates a new TwoStageExtendCmd. */
   private TwoStageClimber twoStage;
-  private TwoStageEncoder twoStageEncoder;
-  private double twoStageExtendDist;
+ private DutyCycleEncoder twoStageEnc;
+  private double dist;
 
-  public TwoStageExtendCmd(TwoStageClimber twoStage, double twoStageExtendDist) {
-    // circumference of two stage is 0.787204 pi inches
-    System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    this.twoStage = twoStage;
-    this.twoStageExtendDist = twoStageExtendDist;
+
+  
+ 
+  public TwoStageExtendCmd(TwoStageClimber twoStage, double EncoderValue, DutyCycleEncoder twoStageEncoder) {
+    //twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
+    twoStageEncoder.setDistancePerRotation(Math.PI * 0.787204); //circumference of two stage is 0.787204 pi inches
+   
+    this.twoStage = twoStage; 
+    dist = EncoderValue;
+    twoStageEnc = twoStageEncoder;
+    addRequirements(twoStage);
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -26,8 +33,8 @@ public class TwoStageExtendCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    twoStageEncoder.encoderReset();
-    ;
+    twoStageEnc.reset();
+    twoStageEnc.isConnected();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,9 +53,10 @@ public class TwoStageExtendCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println(twoStageEncoder.getTwoStageEncoder());
+    System.out.println(Math.abs(twoStageEnc.getDistance()));
 
-    if (twoStageEncoder.getTwoStageEncoder() >= twoStageExtendDist) // two stage needs to extend 28.5 in
+
+    if(Math.abs(twoStageEnc.getDistance()) >= dist) //two stage needs to extend 28.5 in need to fix encoder value
     {
       // TODO check # of rotations needed
       twoStage.stopMotor();

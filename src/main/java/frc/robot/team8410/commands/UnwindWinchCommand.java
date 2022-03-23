@@ -4,29 +4,34 @@
 
 package frc.robot.team8410.commands;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 
 public class UnwindWinchCommand extends CommandBase {
   /** Creates a new UnwindWinch. */
   private WinchSubsystem winch;
-  private WinchEncoder winchEncoder;
+  private DutyCycleEncoder winchEncoder;
   private double unwindWinchDist;
-
-  public UnwindWinchCommand(WinchSubsystem winch, double unwindWinchDist, WinchEncoder winchEncoder) {
-    System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    this.winch = winch;
-    this.winchEncoder = winchEncoder;
-    this.unwindWinchDist = unwindWinchDist;
+  
+  public UnwindWinchCommand(WinchSubsystem winch, double winchDist) 
+  {
+    winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);  //TODO move this out to robot container
+    winchEncoder.setDistancePerRotation(1.0);
+    
+    this.winch = winch; 
+    unwindWinchDist = winchDist;
+    addRequirements(winch);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.winchEncoder.encoderReset();
-
+    winchEncoder.reset();
+    winchEncoder.isConnected();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,10 +52,12 @@ public class UnwindWinchCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + winchEncoder.getWinchEncoder());
+   
 
-    if (winchEncoder.getWinchEncoder() >= unwindWinchDist) {
-      // TODO check # of rotations needed
+
+    if(Math.abs(winchEncoder.getDistance()) >= unwindWinchDist)// change and mesure encoder value
+    {
+      //TODO check # of rotations needed
       winch.stopMotor();
       retVal = true;
     }
