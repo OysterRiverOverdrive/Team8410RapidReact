@@ -8,16 +8,15 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.sensors.TwoStageEncoder;
 
 public class TwoStageDescendCmd extends CommandBase {
   /** Creates a new TwoStageDescendCmd. */
   private TwoStageClimber twoStage;
-  private DutyCycleEncoder twoStageEncoder;
+  private TwoStageEncoder twoStageEncoder;
   private  double twoStageDescendDist;
 
   public TwoStageDescendCmd(TwoStageClimber twoStage, double twoStageDescendDist) {
-    twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
-    twoStageEncoder.setDistancePerRotation(Math.PI * 0.787402);
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.twoStage = twoStage;
     this.twoStageDescendDist = twoStageDescendDist;
@@ -44,9 +43,9 @@ public class TwoStageDescendCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println(Math.abs(twoStageEncoder.getDistance()));
+    System.out.println(twoStageEncoder.getTwoStageEncoder());
 
-    if(Math.abs(twoStageEncoder.getDistance()) >= twoStageDescendDist) //two stage needs to descend 28.5 in
+    if(twoStageEncoder.getTwoStageEncoder() >= twoStageDescendDist) //two stage needs to descend 28.5 in
     {
       //TODO check # of rotations needed
      twoStage.stopMotor();
