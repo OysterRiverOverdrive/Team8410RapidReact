@@ -5,9 +5,9 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.sensors.OneStageLeftEncoder;
 import frc.robot.team8410.sensors.OneStageRightEncoder;
+import frc.robot.team8410.subsystems.OneStageClimber;
 
 public class OneStageExtendCmd extends CommandBase {
   /** Creates a new OneStageExtendCmd. */
@@ -15,7 +15,7 @@ public class OneStageExtendCmd extends CommandBase {
   private OneStageLeftEncoder oneStageLeftEncoder;
   private OneStageRightEncoder oneStageRightEncoder;
   private double oneStageExtendDist;
-  
+
   public OneStageExtendCmd(OneStageClimber oneStage, double oneStageExtendDist) {
     System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     this.oneStage = oneStage;
@@ -26,7 +26,8 @@ public class OneStageExtendCmd extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -36,18 +37,18 @@ public class OneStageExtendCmd extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    //System.out.println(Math.abs(twoStageEncoder.getDistance()));
+    // System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if(oneStageLeftEncoder.get1LeftSideEncoder() >= oneStageExtendDist 
-    && oneStageRightEncoder.get1RightSideEncoder() >= oneStageExtendDist)
-    {
-      //TODO check # of rotations needed
+    if (oneStageLeftEncoder.get1LeftSideEncoder() >= oneStageExtendDist
+        && oneStageRightEncoder.get1RightSideEncoder() >= oneStageExtendDist) {
+      // TODO check # of rotations needed
       oneStage.stopMotor();
       retVal = true;
     }

@@ -10,6 +10,7 @@ import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 public class RollerStop extends CommandBase {
   /** Creates a new RollerPull. */
   IntakeRollerSubsystem roller;
+
   public RollerStop(IntakeRollerSubsystem rollers) {
     roller = rollers;
     addRequirements(roller);
@@ -18,7 +19,8 @@ public class RollerStop extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -28,7 +30,8 @@ public class RollerStop extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

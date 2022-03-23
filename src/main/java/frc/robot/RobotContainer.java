@@ -4,36 +4,36 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-import frc.robot.team8410.commands.RaiseIntakeCmd;
-import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.commands.hangCmd;
+import frc.robot.team8410.commands.LowerIntakeCmd;
+import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.RollerPull;
 import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
-import frc.robot.team8410.commands.DriverAutoCmd;
-import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
-import frc.robot.team8410.subsystems.WinchSubsystem;
-import frc.robot.team8410.subsystems.TwoStageClimber;
-import frc.robot.team8410.subsystems.OneStageClimber;
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.team8410.commands.LowerIntakeCmd;
-import frc.robot.team8410.sensors.PotSensor;
 import frc.robot.team8410.commands.TeleopDriveCommand;
-
+import frc.robot.team8410.sensors.PotSensor;
+import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+import frc.robot.team8410.subsystems.OneStageClimber;
+import frc.robot.team8410.subsystems.TwoStageClimber;
+import frc.robot.team8410.subsystems.WinchSubsystem;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -44,63 +44,66 @@ public class RobotContainer {
   private final XboxController joystick1 = new XboxController(0);
   private final Joystick joystick = new Joystick(0);
 
-  //private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
-  //private final PowerDistribution powerDistribution = new PowerDistribution();
+  // private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
+  // private final PowerDistribution powerDistribution = new PowerDistribution();
 
   private final PotSensor potSensor = new PotSensor();
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
-  private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the diagnstic will be run
+  private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the
+                                                                                   // diagnstic will be run
   private final WinchSubsystem winch = new WinchSubsystem();
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
   private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
 
-
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
 
-
-
-private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
-private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
-private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
-private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
+  private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
+  private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
+  private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
+  private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 
   // The robot's subsystems and commands are defined here...
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() 
-  {
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
+  public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
     drivetrain.setDefaultCommand(teleopCommand);
-    
+
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-   /* Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
-    POVButton hangButton = new POVButton(joystick, 0);
-    //sets POV Button at angle 0 (top of the dpad on xbox controller)
-    System.out.println("hang button pressed");
-    hangButton.whenPressed(hang);
-
-     //POVButton winchButton = new POVButton(joystick, 0);
-    JoystickButton AutoButton = new JoystickButton(joystick, Constants.DRIVER_ASSIST_BUTTON);
-    // System.out.println("intake button pressed");
-     //sets POV Button at angle 0 (top of the dpad on xbox controller)
-
-     AutoButton.whenPressed(autostraightCmd);
-   
-    //  winchButton.whenReleased(stop);
-    */
+    /*
+     * Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+     * POVButton hangButton = new POVButton(joystick, 0);
+     * //sets POV Button at angle 0 (top of the dpad on xbox controller)
+     * System.out.println("hang button pressed");
+     * hangButton.whenPressed(hang);
+     * 
+     * //POVButton winchButton = new POVButton(joystick, 0);
+     * JoystickButton AutoButton = new JoystickButton(joystick,
+     * Constants.DRIVER_ASSIST_BUTTON);
+     * // System.out.println("intake button pressed");
+     * //sets POV Button at angle 0 (top of the dpad on xbox controller)
+     * 
+     * AutoButton.whenPressed(autostraightCmd);
+     * 
+     * // winchButton.whenReleased(stop);
+     */
 
     Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
     Trigger rollerPullButton = new Trigger() {
@@ -122,13 +125,10 @@ private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
     rollerPushButton.whenActive(rollerPush);
     rollerPushButton.whenInactive(rollerStop);
 
-
     JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
     JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
-
-
 
   }
 

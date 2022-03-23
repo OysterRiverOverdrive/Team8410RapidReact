@@ -10,11 +10,12 @@ import frc.robot.Constants;
 /** Add your docs here. */
 public class OneStageRightEncoder {
   private double oneStageExtendDist;
-  public double get1RightSideEncoder(){
+
+  public double get1RightSideEncoder() {
     DutyCycleEncoder oneStageRightEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_RIGHT_ENCODER_PORT);
-  oneStageRightEncoder.setDistancePerRotation(Math.PI * 0.787402);
-  oneStageExtendDist = Math.abs(oneStageRightEncoder.getDistance());
-  return oneStageExtendDist;
+    oneStageRightEncoder.setDistancePerRotation(Math.PI * 0.787402);
+    oneStageExtendDist = Math.abs(oneStageRightEncoder.getDistance());
+    return oneStageExtendDist;
   }
-  
+
 }
