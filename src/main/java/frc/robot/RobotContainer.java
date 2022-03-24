@@ -34,6 +34,10 @@ import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.HangPart1Cmd;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.team8410.commands.TeleopDriveCommand;
+import frc.robot.team8410.commands.TwoStageExtendCmd;
+import frc.robot.team8410.commands.TwoStageDescendCmd;
+import frc.robot.team8410.commands.WindWinchCommand;
+import frc.robot.team8410.commands.UnwindWinchCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -84,12 +88,12 @@ public class RobotContainer {
   // private final PowerDistribution powerDistribution = new PowerDistribution();
 
  // private final PotSensor potSensor = new PotSensor();
-  //private final WinchEncoder winchEncoder = new WinchEncoder();
+  // private final WinchEncoder winchEncoder = new WinchEncoder();
   //private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   //private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
   //private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the
                                                                                    // diagnstic will be run
-  //private final WinchSubsystem winch = new WinchSubsystem();
+  private final WinchSubsystem winch = new WinchSubsystem();
 
 
   //private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
@@ -100,10 +104,12 @@ public class RobotContainer {
   //private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
   //private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
 
-  //private final TwoStageClimber twoStageSub = new TwoStageClimber();
-  // private final TwoStageExtendCmd twoStageExtCmd = new
-  // TwoStageExtendCmd(twoStageSub);
-  //private final WinchSubsystem winchSub = new WinchSubsystem();
+  private final TwoStageClimber twoStageSub = new TwoStageClimber();
+  private final TwoStageExtendCmd twoStageExtCmd = new TwoStageExtendCmd(twoStageSub, 4,encTwoStage);
+  private final TwoStageDescendCmd twoStageDeCmd = new TwoStageDescendCmd(twoStageSub, 4,encTwoStage);
+  private final WindWinchCommand windwinch = new WindWinchCommand(winch, 1.6,encWinch);
+  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winch, 1.6, encWinch);
+  // private final WinchSubsystem winchSub = new WinchSubsystem();
   //private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
     //  Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
   //private final hangCmd hang = new hangCmd(winchSub, twoStageSub, oneStage, oneStageLeftEncoder);
@@ -175,8 +181,8 @@ public class RobotContainer {
     // then pulls in the two stage so the robot is hanging from the two stage and the 
     // one stage are off from the lower bar. 
 
-    POVButton oneStageDown = new POVButton(joystick, 180);
-    oneStageDown.whenReleased(hangAutonomousCommand); // this button will 
+    POVButton hangPartTwo = new POVButton(joystick, 180);
+    hangPartTwo.whenReleased(hangAutonomousCommand); // this button will 
 
     Trigger rollerPushButton = new Trigger() {
       @Override
@@ -189,6 +195,12 @@ public class RobotContainer {
 
     JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
     JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
+    JoystickButton oneStageDown = new JoystickButton(joystick, 8);
+    JoystickButton twostagedescend = new JoystickButton(joystick, 7);
+    POVButton twostagewinch = new POVButton(joystick, 90);
+    oneStageDown.whenPressed(oneStageDecendCmd);
+    twostagedescend.whenPressed(twoStageDeCmd);
+    twostagewinch.whenReleased(unwindwinch);
     //intakeButtonrise.whenPressed(raiseIntakeCmd);
     //intakeButtonlower.whenPressed(lowerIntakeCmd);
 
