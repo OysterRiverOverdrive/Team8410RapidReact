@@ -21,12 +21,12 @@ public class TwoStageClimber extends SubsystemBase {
   }
 
   public void extend() {
-    twoStageMotor.set(0.4);
+    twoStageMotor.set(Constants.TWO_STAGE_MOTOR_SPEED);
     // TODO verify rotation and speed
   }
 
   public void descend() {
-    twoStageMotor.set(-0.4);
+    twoStageMotor.set(-(Constants.TWO_STAGE_MOTOR_SPEED));
     // TODO verify rotation and speed
   }
 

@@ -43,6 +43,11 @@ public final class Constants {
    public static int BALL_IS_RED = 3; // this is the threshold for red color ball
    public static int BALL_IS_BLUE = 1; // this is the threshold for Blue color ball
 
+   public static double ONE_STAGE_MOTOR_SPEED = 0.4;
+   public static double TWO_STAGE_MOTOR_SPEED = 0.4;
+
+   public static double INTAKE_ROLLER_MOTOR_SPEED = 0.8;
+
    public static int JOYSTICK_PORT = 0;
 
    public static int WINCH_BUTTON = 1;
