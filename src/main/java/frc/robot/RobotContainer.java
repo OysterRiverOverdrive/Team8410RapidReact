@@ -44,9 +44,8 @@ import frc.robot.team8410.subsystems.WinchSubsystem;
  */
 public class RobotContainer {
 
-
-  private final XboxController joystick1 = new XboxController(0);
-  private final Joystick joystick = new Joystick(0);
+  private final Joystick driver = new Joystick(0);
+  private final Joystick operator = new Joystick(1);
 
   // private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
   // private final PowerDistribution powerDistribution = new PowerDistribution();
@@ -125,34 +124,34 @@ public class RobotContainer {
      * // winchButton.whenReleased(stop);
      */
 
-    Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+    // Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
     Trigger rollerPullButton = new Trigger() {
       @Override
       public boolean get() {
-        return joystick.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
+        return driver.getRawAxis(Constants.JOYSTICK_LEFT_TRIGGER) > 0.2;
       }
 
     };
     rollerPullButton.whenActive(rollerPull);
     rollerPullButton.whenInactive(rollerStop);
 
-    POVButton oneStageUp = new POVButton(joystick, 1);
+    POVButton oneStageUp = new POVButton(operator, 0);
     oneStageUp.whenPressed(oneStageExtendCmd);
 
-    POVButton startHang = new POVButton(joystick, 2);
+    POVButton startHang = new POVButton(operator, 90);
     startHang.whenPressed(hang);
 
     Trigger rollerPushButton = new Trigger() {
       @Override
       public boolean get() {
-        return joystick.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
+        return driver.getRawAxis(Constants.JOYSTICK_RIGHT_TRIGGER) > 0.2;
       }
     };
     rollerPushButton.whenActive(rollerPush);
     rollerPushButton.whenInactive(rollerStop);
 
-    JoystickButton intakeButtonrise = new JoystickButton(joystick, Constants.INTAKE_BUTTON_RISE);
-    JoystickButton intakeButtonlower = new JoystickButton(joystick, Constants.INTAKE_BUTTON_LOWER);
+    JoystickButton intakeButtonrise = new JoystickButton(operator, Constants.INTAKE_BUTTON_RISE);
+    JoystickButton intakeButtonlower = new JoystickButton(operator, Constants.INTAKE_BUTTON_LOWER);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
 
