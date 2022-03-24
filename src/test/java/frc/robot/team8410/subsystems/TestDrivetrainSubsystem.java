@@ -8,6 +8,9 @@ import frc.robot.Constants;
 import frc.robot.team8410.sensors.Ultrasonic;
 
 public class TestDrivetrainSubsystem {
+
+    // This runs the risk of hitting the "Analog Input 0 previously allocated." error in testing.
+    // TODO: allow DrivetrainSubsystem to be instantiated without access to AnalogInput 0.    
     private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem(new Ultrasonic(new AnalogInput(0)));
 
     // test to check approach speed
