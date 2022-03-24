@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; // this is real bot
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.team8410.sensors.UltrasonicFront;
+import frc.robot.team8410.sensors.Ultrasonic;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -29,9 +29,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
   // we use diffrential drive
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
 
+  private Ultrasonic ultrasonicFront;
+
   /** Creates a new DrivetrainSubsystem. */
-  public DrivetrainSubsystem() {
+  public DrivetrainSubsystem(Ultrasonic ultrasonicFront) {
     rightSide.setInverted(true);
+    this.ultrasonicFront = ultrasonicFront;
 
   }
 
@@ -166,7 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
       double speed = calculateApproachSpeed(targetDist, approachAlg);
       m_robotDrive.arcadeDrive(speed, 0);
 
-      targetDist = UltrasonicFront.getFrontSensorDistance();
+      targetDist = ultrasonicFront.getFrontSensorDistance();
     }
     m_robotDrive.arcadeDrive(0, 0);
   }

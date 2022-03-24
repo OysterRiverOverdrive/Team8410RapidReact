@@ -2,10 +2,16 @@ package frc.robot.team8410.subsystems;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Constants;
+import frc.robot.team8410.sensors.Ultrasonic;
 
 public class TestDrivetrainSubsystem {
-    private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+
+    // This runs the risk of hitting the "Analog Input 0 previously allocated." error in testing.
+    // TODO: allow DrivetrainSubsystem to be instantiated without access to AnalogInput 0.    
+    private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem(new Ultrasonic(new AnalogInput(0)));
 
     // test to check approach speed
     @Test

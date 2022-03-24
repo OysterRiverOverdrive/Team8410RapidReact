@@ -8,10 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-// import frc.robot.team8410.sensors.UltrasonicFront;
-// import frc.robot.team8410.sensors.UltrasonicLeft;
-// import frc.robot.team8410.sensors.UltrasonicRight;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to

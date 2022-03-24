@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,6 +23,7 @@ import frc.robot.team8410.commands.RollerPush;
 import frc.robot.team8410.commands.RollerStop;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.sensors.PotSensor;
+import frc.robot.team8410.sensors.Ultrasonic;
 import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
@@ -42,8 +44,6 @@ import frc.robot.team8410.subsystems.WinchSubsystem;
  */
 public class RobotContainer {
 
-  private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
-  private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
 
   private final XboxController joystick1 = new XboxController(0);
   private final Joystick joystick = new Joystick(0);
@@ -52,9 +52,14 @@ public class RobotContainer {
   // private final PowerDistribution powerDistribution = new PowerDistribution();
 
   private final PotSensor potSensor = new PotSensor();
+  private final Ultrasonic ultrasonicLeft = new Ultrasonic(new AnalogInput(Constants.ULTRASONIC_LEFT_PORT_ID));
+  private final Ultrasonic ultrasonicRight = new Ultrasonic(new AnalogInput(Constants.ULTRASONIC_RIGHT_PORT_ID));
+  private final Ultrasonic ultrasonicFront = new Ultrasonic(new AnalogInput(Constants.ULTRASONIC_FRONT_PORT_ID));
   private final WinchEncoder winchEncoder = new WinchEncoder();
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
+  private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem(ultrasonicFront);
+  private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor, ultrasonicFront);
+  private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
   private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the
                                                                                    // diagnstic will be run
   private final WinchSubsystem winch = new WinchSubsystem();

@@ -32,6 +32,9 @@ public final class Constants {
    public static int ONE_STAGE_RIGHT_HANGER_MOTOR_CANID = 10;// the motor for right one stage
 
    public static int INTAKE_ARM_POT_PORT_ID = 0; // Analog for intake ARM port
+   public static int ULTRASONIC_LEFT_PORT_ID = 1;
+   public static int ULTRASONIC_RIGHT_PORT_ID = 2;
+   public static int ULTRASONIC_FRONT_PORT_ID = 3;
 
    public static int HANGER_WINCH_ENCODER_PORT = 5;//the winch for hanging
    public static int HANGER_ONE_STAGE_LEFT_ENCODER_PORT = 6; //left one stage for hanging
