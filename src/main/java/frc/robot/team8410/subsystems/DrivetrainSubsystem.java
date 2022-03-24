@@ -169,7 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
       double speed = calculateApproachSpeed(targetDist, approachAlg);
       m_robotDrive.arcadeDrive(speed, 0);
 
-      targetDist = this.ultrasonicFront.getFrontSensorDistance();
+      targetDist = ultrasonicFront.getFrontSensorDistance();
     }
     m_robotDrive.arcadeDrive(0, 0);
   }
