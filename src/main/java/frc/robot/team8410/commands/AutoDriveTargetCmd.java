@@ -6,7 +6,7 @@ package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.team8410.sensors.UltrasonicFront;
+import frc.robot.team8410.sensors.Ultrasonic;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveTargetCmd extends CommandBase {
@@ -14,9 +14,11 @@ public class AutoDriveTargetCmd extends CommandBase {
 
   private final DrivetrainSubsystem driveSub;
   private double targetDist;
+  private Ultrasonic ultrasonicFront;
 
-  public AutoDriveTargetCmd(DrivetrainSubsystem drive) {
+  public AutoDriveTargetCmd(DrivetrainSubsystem drive, Ultrasonic ultrasonicFront) {
     driveSub = drive;
+    this.ultrasonicFront = ultrasonicFront;
     addRequirements(driveSub);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,7 +26,7 @@ public class AutoDriveTargetCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    targetDist = UltrasonicFront.getFrontSensorDistance();
+    targetDist = this.ultrasonicFront.getFrontSensorDistance();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
