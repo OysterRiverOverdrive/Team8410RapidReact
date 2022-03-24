@@ -57,6 +57,11 @@ public final class Constants {
    public static int JOYSTICK_LEFT_TRIGGER = 2;
    public static int JOYSTICK_RIGHT_TRIGGER = 3;
 
+   public static double SLR_FOR_TURN = 3.0;
+   public static double SLR_FOR_DRIVE = 2.2;
+   public static int SLR_FOR_TURN_RAW_AXIS = 4;
+   public static int SLR_FOR_DRIVE_RAW_AXIS = 1;
+
    // Intake prameters
    public static double INTAKE_RAISE_MAX_SPEED = 0.3; // The fastest in both directions we want the motor to run.
    public static double INTAKE_POT_HIGH_STOP = 0.290; // The point we consider fully up.
