@@ -5,6 +5,7 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 
@@ -47,6 +48,7 @@ public class TwoStageExtendCmd extends CommandBase {
   public void end(boolean interrupted) 
   {
     twoStage.stopMotor();
+    SmartDashboard.putString("two stage extend", "done");
   }
 
   // Returns true when the command should end.

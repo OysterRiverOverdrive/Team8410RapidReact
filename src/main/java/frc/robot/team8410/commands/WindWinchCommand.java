@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.WinchSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class WindWinchCommand extends CommandBase {
   /** Creates a new WinchWindCommand. */
@@ -45,6 +46,8 @@ public class WindWinchCommand extends CommandBase {
   public void end(boolean interrupted) 
   {
     winch.stopMotor();
+    SmartDashboard.putString("winch","winch wind is done");
+    
   }
 
   // Returns true when the command should end.

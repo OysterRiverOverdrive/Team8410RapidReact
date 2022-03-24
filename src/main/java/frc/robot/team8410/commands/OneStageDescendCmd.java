@@ -4,6 +4,7 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import frc.robot.team8410.sensors.OneStageLeftEncoder;
 import frc.robot.team8410.subsystems.OneStageClimber;
@@ -45,6 +46,7 @@ public class OneStageDescendCmd extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("one stage decend", "done");
   }
 
   // Returns true when the command should end.

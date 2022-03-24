@@ -5,6 +5,7 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.OneStageClimber;
@@ -47,6 +48,7 @@ public class OneStageExtendCmd extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     oneStage.stopMotor();
+    SmartDashboard.putString("one stage", "one stage extend done");
   }
 
   // Returns true when the command should end.
