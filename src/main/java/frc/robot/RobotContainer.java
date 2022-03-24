@@ -32,6 +32,8 @@ import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.HangPart1Cmd;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.commands.TeleopDriveCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -75,6 +77,9 @@ public class RobotContainer {
                                                                  encWinch,
                                                                  encSingleStage);
 
+
+  private final DrivetrainSubsystem drivetrainSubSys = new DrivetrainSubsystem();
+  private final TeleopDriveCommand teleop = new TeleopDriveCommand(drivetrainSubSys);
   // private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
   // private final PowerDistribution powerDistribution = new PowerDistribution();
 
@@ -116,7 +121,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    //drivetrain.setDefaultCommand(teleopCommand);
+    drivetrainSubSys.setDefaultCommand(teleop);
 
   }
 

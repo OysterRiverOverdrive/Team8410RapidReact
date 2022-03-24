@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; // this is real bot
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.team8410.sensors.UltrasonicFront;
+//import frc.robot.team8410.sensors.UltrasonicFront;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -42,7 +42,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   }
 
-  public double calculateApproachSpeed(double targetDist, int approachAlg) {
+  /*public double calculateApproachSpeed(double targetDist, int approachAlg) {
     double speed = 0;
     double slope = 0;
     double intercept = 0;
@@ -54,7 +54,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     } else if (targetDist <= Constants.DRIVER_ASSIST_STOP_DISTANCE) {
       // If at or inside the stop distance, stop.
       return 0.0;
-    }
+    }*/
 
     // The following section defines the speed profile between the caution
     // and stop distances where the profiles go through the following
@@ -63,14 +63,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     // (x1, y1) = (stop distance, min drive speed)
     // (x2, y2) = (caution distance, max drive speed)
 
-    if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR) {
+    //if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_LINEAR) {
       // Linear - The speed is proportional to the distance away.
       //
       // y = m * x + b
       // speed = m * (distance from target) + b
 
       // m = (y2 - y1) / (x2 - x1)
-      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
+     /* slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
           (Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE);
 
       // b = y2 - (m * x2)
@@ -79,7 +79,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
       // y = m * x + b
       speed = (slope * targetDist) + intercept;
 
-    } else if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB) {
+    } else if (approachAlg == Constants.DRIVER_ASSIST_APPROACH_ALG_PARAB) {*/
       // Parabola
       //
       // This is a parabola that opens up and centered on (x1, y1) the stop distance
@@ -108,14 +108,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
       // y - y1 = slope (x - x1)^2
       // (y - y1) / (x - x1)^2 = slope
       // slope = (y - y1) / (x - x1)^2
-      slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
+     /* slope = (Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED - Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED) /
           Math.pow(Constants.DRIVER_ASSIST_CAUTION_DISTANCE - Constants.DRIVER_ASSIST_STOP_DISTANCE, 2);
 
       // speed = slope (target distance - x1)^2 + y1
       speed = (slope * Math.pow(targetDist - Constants.DRIVER_ASSIST_STOP_DISTANCE, 2))
           + Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED;
 
-    } else {
+    } else {*/
       // Inverse Parabola
       //
       // This is an upside down parabola with a vertex (x2, y2) the caution distance
@@ -145,7 +145,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
       // y - y2 = slope (x - x2)^2
       // (y - y2) / (x - x2)^2 = slope
       // slope = (y - y2) / (x - x2)^2
-      slope = (Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED - Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED) /
+      /*slope = (Constants.DRIVER_ASSIST_MIN_DRIVE_SPEED - Constants.DRIVER_ASSIST_MAX_DRIVE_SPEED) /
           Math.pow(Constants.DRIVER_ASSIST_STOP_DISTANCE - Constants.DRIVER_ASSIST_CAUTION_DISTANCE, 2);
 
       // speed = slope (target distance - x2)^2 + y2
@@ -169,7 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
       targetDist = UltrasonicFront.getFrontSensorDistance();
     }
     m_robotDrive.arcadeDrive(0, 0);
-  }
+  }*/
 
   @Override
   public void periodic() {

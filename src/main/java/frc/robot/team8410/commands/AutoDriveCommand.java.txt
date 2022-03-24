@@ -14,13 +14,10 @@ public class AutoDriveCommand extends CommandBase {
   private double speedForDrive;
   private double distanceInInches;
 
-  private final Encoder leftSideEncoder = new Encoder(Constants.LEFT_ENCODER_0, Constants.LEFT_ENCODER_1);
-  private final Encoder rightSideEncoder = new Encoder(Constants.RIGHT_ENCODER_2, Constants.RIGHT_ENCODER_3);
-
-  public AutoDriveCommand(DrivetrainSubsystem drv, double speed, double distance) {
+  public AutoDriveCommand(DrivetrainSubsystem drv, double speed) {
     drive = drv;
     speedForDrive = speed;
-    distanceInInches = distance;
+    
     addRequirements(drv);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,11 +25,7 @@ public class AutoDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    leftSideEncoder.reset();
-    rightSideEncoder.reset();
-    leftSideEncoder.setDistancePerPulse(Math.PI * 6 / 360);// pi * wheel dia / counts per a revulution
-    rightSideEncoder.setDistancePerPulse(Math.PI * 6 / 360);// pi * wheel dia / counts per a revulution
-    System.out.println("encoders reset and distance set");
+    
 
   }
 
@@ -53,12 +46,7 @@ public class AutoDriveCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    if ((leftSideEncoder.getDistance() + rightSideEncoder.getDistance()) / 2 <= distanceInInches) {
-      retVal = true;
-      drive.driveTheBot(0, 0);
-      System.out.println("i have reached the distance i had to go");
-    }
-
+    
     return retVal;
   }
 }
