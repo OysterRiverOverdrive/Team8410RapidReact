@@ -68,6 +68,12 @@ public final class Constants {
    public static int RIGHT_ENCODER_2 = 2;
    public static int RIGHT_ENCODER_3 = 3;
 
+   public static double SLR_FOR_TURN = 3.0;
+   public static double SLR_FOR_DRIVE = 2.2;
+   public static int SLR_FOR_TURN_RAW_AXIS = 4;
+   public static int SLR_FOR_DRIVE_RAW_AXIS = 1;
+
+
    // Parameters to adjust driver assist algorithms.
    public static double DRIVER_ASSIST_STOP_DISTANCE = 20.0; // inches
    public static double DRIVER_ASSIST_CAUTION_DISTANCE = 150.0; // inches
