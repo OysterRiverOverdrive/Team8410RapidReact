@@ -77,4 +77,8 @@ public final class Constants {
    public static int DRIVER_ASSIST_APPROACH_ALG_PARAB = 1;
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
 
+   // costants 4 diagnostics stuff
+   public static final int M_LED_PORT = 4;
+   public static final int LED_BUFFER_LEGNTH = 144;
+
 }
