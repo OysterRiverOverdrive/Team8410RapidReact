@@ -7,19 +7,18 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 
 public class WindWinchCommand extends CommandBase {
   /** Creates a new WinchWindCommand. */
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
-  private double windWinchDist;
+  private double rotations;
 
-  public WindWinchCommand(WinchSubsystem winch, double dist) {
-    winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT); // TODO move this to RobotContainer
-    winchEncoder.setDistancePerRotation(1.0);
-    windWinchDist = dist;
+  public WindWinchCommand(WinchSubsystem winch, double rotations, DutyCycleEncoder encoder ) 
+  {
+    winchEncoder = encoder;
+    this.rotations = rotations;
     this.winch = winch; 
     
     addRequirements(winch);
@@ -39,11 +38,13 @@ public class WindWinchCommand extends CommandBase {
   public void execute() {
     
     winch.wind();
-  }
+    }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted) 
+  {
+    winch.stopMotor();
   }
 
   // Returns true when the command should end.
@@ -51,7 +52,7 @@ public class WindWinchCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    if(Math.abs(winchEncoder.getDistance()) >= windWinchDist)// change encoder value
+    if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
     {
       //TODO check # of rotations needed
       winch.stopMotor();

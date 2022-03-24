@@ -5,7 +5,7 @@ package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.sensors.OneStageLeftEncoder;
+//import frc.robot.team8410.sensors.OneStageLeftEncoder;
 import frc.robot.team8410.subsystems.OneStageClimber;
 
 public class OneStageDescendCmd extends CommandBase {
@@ -18,9 +18,9 @@ public class OneStageDescendCmd extends CommandBase {
   public OneStageDescendCmd(OneStageClimber oneStage, double EncValue, DutyCycleEncoder enc) {
   //oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
 
-  oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402);
+  //oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402);
 
-  System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+  //System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
   this.oneStage = oneStage;
   dist = EncValue;
   oneStageLeftEncoder = enc;

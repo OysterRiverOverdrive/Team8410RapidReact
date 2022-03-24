@@ -16,7 +16,7 @@ public class OneStageExtendCmd extends CommandBase {
   private double oneStageExtendRotation;
   
   public OneStageExtendCmd(OneStageClimber stageOne, double rotation, DutyCycleEncoder enc) {
-    oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
+    //oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
     
   
     oneStage = stageOne;

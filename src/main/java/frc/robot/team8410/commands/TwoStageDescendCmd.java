@@ -6,21 +6,21 @@ package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.sensors.TwoStageEncoder;
+//import frc.robot.team8410.sensors.TwoStageEncoder;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 
 public class TwoStageDescendCmd extends CommandBase {
   /** Creates a new TwoStageDescendCmd. */
   private TwoStageClimber twoStage;
   private DutyCycleEncoder twoStageEncoder;
-  private double twoStageDescendDist;
+  private double rotations;
 
   public TwoStageDescendCmd(TwoStageClimber twoStage,double DescendDist, DutyCycleEncoder enc) {
     //twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
-    enc.setDistancePerRotation(Math.PI * 0.787402);
+    //enc.setDistancePerRotation(Math.PI * 0.787402);
 
     twoStageEncoder = enc;
-    twoStageDescendDist = DescendDist;
+    rotations = DescendDist;
     this.twoStage = twoStage;
     addRequirements(twoStage);
 
@@ -39,14 +39,16 @@ public class TwoStageDescendCmd extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    System.out.println("Command executed");
+  public void execute() 
+  {
     twoStage.descend();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted) 
+  {
+    twoStage.stopMotor();
   }
 
   // Returns true when the command should end.
@@ -54,10 +56,10 @@ public class TwoStageDescendCmd extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    if(Math.abs(twoStageEncoder.getDistance()) >= twoStageDescendDist) //two stage needs to descend 28.5 in need to change encoder values
+    if(Math.abs(twoStageEncoder.get()) >= rotations) //two stage needs to descend 28.5 in need to change encoder values
     {
       // TODO check # of rotations needed
-      twoStage.stopMotor();
+      //twoStage.stopMotor();
       retVal = true;
     }
     return retVal;
