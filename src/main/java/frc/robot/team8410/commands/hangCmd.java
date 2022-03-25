@@ -56,11 +56,12 @@ public class hangCmd extends SequentialCommandGroup {
     new WindWinchCommand(winch, 5.0),
     new OneStageDescendCmd(oneStage, 3.0,enc));*/
 
-
+    new TwoStageExtendCmd(twoStage, 8.0, encTwoStage), // this is extend the two stage
+    
     new OneStageDescendCmd(oneStage, 8.5, encSingleStage),  // pull down the one stages
     //new WindWinchCommand(winch, 1.66, encWinch), // drop the fatty
     
-    new TwoStageExtendCmd(twoStage, 8.0, encTwoStage), // this is extend the two stage
+    
     new UnwindWinchCommand(winch, 1.1, encWinch), // pull the fatty
      
     new TwoStageDescendCmd(twoStage, 7.00, encTwoStage), // pull down the two stage 
