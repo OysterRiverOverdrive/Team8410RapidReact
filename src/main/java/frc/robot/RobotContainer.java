@@ -4,10 +4,11 @@
 
 package frc.robot;
 
-
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 //import frc.robot.team8410.commands.AutoSequeCmd;
@@ -18,6 +19,9 @@ import frc.robot.team8410.commands.AutoDriveCommand;
 import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.LowerIntakeCmd;
 import frc.robot.team8410.commands.OneStageDescendCmd;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.Command;
+// import frc.robot.team8410.commands.DriverAutoCmd;
 import frc.robot.team8410.commands.OneStageExtendCmd;
 import frc.robot.team8410.commands.RaiseIntakeCmd;
 import frc.robot.team8410.commands.RollerPull;
@@ -38,9 +42,7 @@ import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.HangPart1Cmd;
 import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.commands.WindWinchCommand;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+
 //import frc.robot.team8410.subsystems.WinchSubsystem;
 
 
@@ -50,7 +52,6 @@ import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 */
 
-import edu.wpi.first.wpilibj.Joystick;
 
 
 /*import frc.robot.team8410.commands.hangCmd;
@@ -63,9 +64,12 @@ import frc.robot.team8410.subsystems.TwoStageClimber;*/
 
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -73,7 +77,11 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
 
+  private final Joystick driver = new Joystick(0);
+  private final Joystick operator = new Joystick(1);
 
+  // private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
+  // private final PowerDistribution powerDistribution = new PowerDistribution();
 
 
   //  ashish commented private final PowerDistribution powerDistribution = new PowerDistribution();
@@ -145,24 +153,23 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
       encSingleStage);
   // The robot's subsystems and commands are defined here...
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() 
-  {
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
+  public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
-
     drivetrain.setDefaultCommand(teleopCommand);
-    
-
-    
 
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() 
@@ -243,6 +250,6 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return auto;// TODO change this to the name of the auto command
+    return null;// TODO change this to the name of the auto command
   }
 }

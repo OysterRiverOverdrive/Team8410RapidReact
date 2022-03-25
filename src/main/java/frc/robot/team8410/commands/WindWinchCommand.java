@@ -7,6 +7,7 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+// import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

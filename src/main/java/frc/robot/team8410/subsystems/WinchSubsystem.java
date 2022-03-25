@@ -20,8 +20,7 @@ public class WinchSubsystem extends SubsystemBase
   }
 
   @Override
-  public void periodic() 
-  {
+  public void periodic() {
     // This method will be called once per scheduler run
   }
 
@@ -39,8 +38,7 @@ public class WinchSubsystem extends SubsystemBase
 
   // stop the winch motor
 
-  public void stopMotor() 
-  {
+  public void stopMotor() {
     winchMotor.stopMotor();
   }
 

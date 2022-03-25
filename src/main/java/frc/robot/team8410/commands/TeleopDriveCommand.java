@@ -7,8 +7,8 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import frc.robot.Constants;
+import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 
 
 public class TeleopDriveCommand extends CommandBase {
@@ -35,8 +35,8 @@ public class TeleopDriveCommand extends CommandBase {
   @Override
   public void execute() 
   {
-      double turn = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
-      double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+      double turn = slrForTurn.calculate(m_stick.getRawAxis(Constants.SLR_FOR_TURN_RAW_AXIS)*0.75);
+      double speed = slrForDrive.calculate (m_stick.getRawAxis(Constants.SLR_FOR_DRIVE_RAW_AXIS)*-0.85);
       driveSub.driveTheBot(speed, turn);
 
     

@@ -4,8 +4,6 @@
 
 package frc.robot.team8410.commands;
 
-
-
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.team8410.subsystems.OneStageClimber;
