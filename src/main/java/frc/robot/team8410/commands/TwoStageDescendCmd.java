@@ -52,6 +52,7 @@ public class TwoStageDescendCmd extends CommandBase {
   public void end(boolean interrupted) 
   {
     twoStage.stopMotor();
+    
     SmartDashboard.putString("two stage decend", "done");
   }
 
