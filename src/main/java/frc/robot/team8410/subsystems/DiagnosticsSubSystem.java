@@ -128,6 +128,28 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
       // SmartDashboard.putString("Testing Shuffleboard", "Testing Now");
 
+
+      //replacement 4 LED code since it's not being used for this comp
+      if (colorTCSSensor.getBallColor() == "RED") {
+
+        SmartDashboard.putBoolean("Ball Color 1", false);
+
+      } else if (colorTCSSensor.getBallColor() == "BLUE") {
+        SmartDashboard.putBoolean("Ball Color 1", true);
+      }
+
+
+      if (colorRevSensor.getBallColor() == "RED") {
+
+        SmartDashboard.putBoolean("Ball Color 2", false);
+
+      } else if (colorRevSensor.getBallColor() == "BLUE" ) {
+        
+        SmartDashboard.putBoolean("Ball Color 2", true);
+      }
+
+
+
       bakeVanillaGoldfish();
 
     }
