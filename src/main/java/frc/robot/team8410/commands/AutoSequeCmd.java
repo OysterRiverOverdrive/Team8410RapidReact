@@ -20,6 +20,6 @@ public class AutoSequeCmd extends SequentialCommandGroup {
   public AutoSequeCmd(DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoDriveCommand(drive,0.8,10)); // test these numbers
+    addCommands(new AutoDriveCommand(drive,0.5)); // test these numbers
   }
 }

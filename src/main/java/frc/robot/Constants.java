@@ -36,9 +36,8 @@ public final class Constants
    public static int BALL_IS_RED = 3; // this is the threshold for red color ball
    public static int BALL_IS_BLUE = 1; // this is the threshold for Blue color ball
 
- 
-
-   public static int JOYSTICK_PORT = 0;
+   public static int DRIVER_PORT = 0;//Xbox pro
+   public static int OPERATOR_PORT = 1;//Logi Dual action
 
    public static int WINCH_BUTTON = 1;
    public static int DRIVER_ASSIST_BUTTON = 8;
@@ -48,11 +47,11 @@ public final class Constants
    public static int JOYSTICK_RIGHT_TRIGGER = 3;
 
    // Intake prameters
-   public static double INTAKE_RAISE_MAX_SPEED = 0.3; // The fastest in both directions we want the motor to run.
-   public static double INTAKE_POT_HIGH_STOP = 0.290; // The point we consider fully up.
-   public static double INTAKE_POT_HIGH_CAUTION = 0.270; // The point during raise where we start slowing down.
-   public static double INTAKE_POT_LOW_CAUTION = 0.240; // The point during lowering where we start slowing down.
-   public static double INTAKE_POT_LOW_STOP = 0.220; // The point we consider fully down.
+   public static double INTAKE_RAISE_MAX_SPEED = 0.6; // The fastest in both directions we want the motor to run.
+   public static double INTAKE_POT_HIGH_STOP = 2.1; // The point we consider fully up.
+   public static double INTAKE_POT_HIGH_CAUTION = 1.8; // The point during raise where we start slowing down.
+   public static double INTAKE_POT_LOW_CAUTION = 1.8; // The point during lowering where we start slowing down.
+   public static double INTAKE_POT_LOW_STOP = 1.0; // The point we consider fully down.
 
    // these are when the goldfish bakes in the bakeChocolateGoldfish method
    public static int PDP_CAN_ID = 0;

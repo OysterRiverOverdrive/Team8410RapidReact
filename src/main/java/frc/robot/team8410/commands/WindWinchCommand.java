@@ -8,19 +8,21 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.WinchSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class WindWinchCommand extends CommandBase {
   /** Creates a new WinchWindCommand. */
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
-  private double windWinchDist;
+  private double rotations;
 
-  public WindWinchCommand(WinchSubsystem winch, double windWinchDist) {
-    winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);
-    winchEncoder.setDistancePerRotation(1.0);
-    System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+  public WindWinchCommand(WinchSubsystem winch, double rotations, DutyCycleEncoder encoder ) 
+  {
+    winchEncoder = encoder;
+    this.rotations = rotations;
     this.winch = winch; 
-    this.windWinchDist = windWinchDist;
+    
+    addRequirements(winch);
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -35,21 +37,25 @@ public class WindWinchCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Command executed");
+    
     winch.wind();
-  }
+    }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) 
+  {
+    winch.stopMotor();
+    SmartDashboard.putString("winch","winch wind is done");
+    
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+Math.abs(winchEncoder.getDistance()));
 
-    if(Math.abs(winchEncoder.getDistance()) >= windWinchDist)
+    if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
     {
       //TODO check # of rotations needed
       winch.stopMotor();

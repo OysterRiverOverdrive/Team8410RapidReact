@@ -19,14 +19,16 @@ public class TwoStageClimber extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void extend(){
-    twoStageMotor.set(0.4);
-    //TODO verify rotation and speed
+  public void extend() 
+  {
+    twoStageMotor.set(1.0);
+    // TODO verify rotation and speed
   }
 
-  public void descend(){
-    twoStageMotor.set(-0.4);
-    //TODO verify rotation and speed
+  public void descend() 
+  {
+    twoStageMotor.set(-1.0);
+    // TODO verify rotation and speed
   }
 
   public void stopMotor(){

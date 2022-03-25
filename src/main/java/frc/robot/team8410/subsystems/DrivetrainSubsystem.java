@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.team8410.sensors.UltrasonicFront;
+// import frc.robot.team8410.sensors.UltrasonicFront;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -165,21 +165,21 @@ public class DrivetrainSubsystem extends SubsystemBase {
     return speed;
   }
 
-  public void autoDriveStraight_until_wall(double targetDist, int approachAlg)
-  {
-    while (targetDist > Constants.DRIVER_ASSIST_STOP_DISTANCE)
-    {
-      SmartDashboard.putNumber("Ultrasonic", targetDist);
-      SmartDashboard.putNumber("Alg", approachAlg);
-      rightSide.setInverted(true);
+  // public void autoDriveStraight_until_wall(double targetDist, int approachAlg)
+  // {
+  //   while (targetDist > Constants.DRIVER_ASSIST_STOP_DISTANCE)
+  //   {
+  //     SmartDashboard.putNumber("Ultrasonic", targetDist);
+  //     SmartDashboard.putNumber("Alg", approachAlg);
+  //     rightSide.setInverted(true);
 
-      double speed = calculateApproachSpeed(targetDist, approachAlg);
-      m_robotDrive.arcadeDrive(speed, 0);
+  //     double speed = calculateApproachSpeed(targetDist, approachAlg);
+  //     m_robotDrive.arcadeDrive(speed, 0);
 
-      targetDist = UltrasonicFront.getFrontSensorDistance();
-    }
-    m_robotDrive.arcadeDrive(0, 0);
-  }
+  //     targetDist = UltrasonicFront.getFrontSensorDistance();
+  //   }
+  //   m_robotDrive.arcadeDrive(0, 0);
+  // }
 
 
   @Override

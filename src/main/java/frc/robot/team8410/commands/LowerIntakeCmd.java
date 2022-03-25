@@ -7,20 +7,21 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.sensors.PotSensor;
+// import frc.robot.team8410.sensors.PotSensor;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 public class LowerIntakeCmd extends CommandBase 
 {
-  private PotSensor pot;
+  private AnalogInput pot;
   private IntakeArmSubSystem intakeArmSubSys;
   private double currPOTVoltage ;
   private double speed;
 
   /** Creates a new LowerIntakeCmd. */
-  public LowerIntakeCmd(IntakeArmSubSystem intakeSubSystem, PotSensor potSensor) 
+  public LowerIntakeCmd(IntakeArmSubSystem intakeSubSystem, AnalogInput potSensor) 
   {
     intakeArmSubSys = intakeSubSystem;
-    pot = potSensor;
+    this.pot = potSensor;
     speed = 0;
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,16 +29,15 @@ public class LowerIntakeCmd extends CommandBase
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() 
-  {
-    speed = 0;
+  public void initialize() {
+    speed = 0.3;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute()
   {
-    double currPOTVoltage = pot.getPOTVoltage();
+    double currPOTVoltage = pot.getAverageVoltage();
 
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION)
     {
@@ -60,7 +60,7 @@ public class LowerIntakeCmd extends CommandBase
       
     }
 
-    intakeArmSubSys.lower(speed); 
+    intakeArmSubSys.lower(-0.3);
 
   }
 
@@ -73,7 +73,7 @@ public class LowerIntakeCmd extends CommandBase
   public boolean isFinished() 
   {
     boolean retVal = false;
-    currPOTVoltage = pot.getPOTVoltage();
+    currPOTVoltage = pot.getAverageVoltage();
 
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)//Value needs to be tweaked
     {

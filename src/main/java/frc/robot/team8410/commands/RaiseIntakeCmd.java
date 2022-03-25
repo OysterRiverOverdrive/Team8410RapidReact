@@ -7,16 +7,17 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
-import frc.robot.team8410.sensors.PotSensor;
+// import frc.robot.team8410.sensors.PotSensor;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 public class RaiseIntakeCmd extends CommandBase 
 {
-  private PotSensor pot;
+  private AnalogInput pot;
   private IntakeArmSubSystem intakeArmSubSys;
   private double speed;
 
   /** Creates a new RaiseIntakeCmd. */
-  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, PotSensor potSensor) 
+  public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, AnalogInput potSensor) 
   {
     intakeArmSubSys = intakeSubSystem;
     pot = potSensor;
@@ -27,16 +28,15 @@ public class RaiseIntakeCmd extends CommandBase
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() 
-  {
-    speed = 0;
+  public void initialize() {
+    speed = 0.3;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute()
   {
-    double currPOTVoltage = pot.getPOTVoltage();
+    double currPOTVoltage = pot.getAverageVoltage();
     
     if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
     {
@@ -59,7 +59,7 @@ public class RaiseIntakeCmd extends CommandBase
       
     }
 
-    intakeArmSubSys.rise(speed); 
+    intakeArmSubSys.rise(0.7);
 
   }
 
@@ -72,7 +72,7 @@ public class RaiseIntakeCmd extends CommandBase
   public boolean isFinished() 
   {
     boolean retVal = false;
-    double currPOTVoltage = pot.getPOTVoltage();
+    double currPOTVoltage = pot.getAverageVoltage();
 
     if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
     {
