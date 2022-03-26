@@ -109,13 +109,13 @@ public class DiagnosticsSubSystem extends SubsystemBase {
       SmartDashboard.putBoolean("Temp is Ok", true);
     }
 
-    if (powerDistribution.getTotalCurrent() < 20) {
+    if (powerDistribution.getTotalCurrent() < 30) {
       SmartDashboard.putBoolean("Current is High", false);
     } else {
       SmartDashboard.putBoolean("Current is Fine", true);
     }
 
-    if (powerDistribution.getVoltage() > 1) {
+    if (powerDistribution.getVoltage() > 40) {
       SmartDashboard.putBoolean("Voltage is High", true);
     } else {
       SmartDashboard.putBoolean("Voltage is Fine", false);

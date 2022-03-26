@@ -69,11 +69,11 @@ public final class Constants {
    public static double INTAKE_POT_LOW_CAUTION = 0.240; // The point during lowering where we start slowing down.
    public static double INTAKE_POT_LOW_STOP = 0.220; // The point we consider fully down.
 
-   // these are when the goldfish bakes in the bakeChocolateGoldfish method
+   // constants 4 powerdistribution stuff
    public static int PDP_CAN_ID = 0;
    public static int BAKE_POWER_TEMPERATURE = 35;
-   public static int BAKE_POWER_CURRENT = 20;
-   public static int BAKE_POWER_VOLTAGE = 1;
+   public static int BAKE_POWER_CURRENT = 30;
+   public static int BAKE_POWER_VOLTAGE = 40;
    public static int BAKE_TOTAL_POWER = 1;
 
    public static int LEFT_ENCODER_0 = 0;
