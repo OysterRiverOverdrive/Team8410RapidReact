@@ -172,6 +172,7 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
     JoystickButton rollerPullButton = new JoystickButton(operator, 9);
     JoystickButton twoStageExtend = new JoystickButton(operator, 2);
     POVButton twostagewinch = new POVButton(operator, 90);
+    POVButton twostageunwinch = new POVButton(operator, 270);
     rollerPullButton.whenPressed(rollerPull);
     rollerPullButton.whenReleased(rollerStop);
     rollerPushButton.whenPressed(rollerPush);
@@ -180,6 +181,7 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
     oneStageUp.whenPressed(oneStageExtendCmd);
     twostagedescend.whenPressed(twoStageDeCmd);
     twostagewinch.whenReleased(unwindwinch);
+    twostageunwinch.whenPressed(windwinch);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
     twoStageExtend.whenPressed(twoStageExtCmd); // extend the two stage  
