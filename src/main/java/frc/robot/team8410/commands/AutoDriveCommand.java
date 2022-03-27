@@ -55,7 +55,7 @@ public class AutoDriveCommand extends CommandBase {
 
     SmartDashboard.putNumber("time", currTime);
 
-    if (currTime >= 2)
+    if (currTime >= 2.5)
     {
       retVal = true;
     }else

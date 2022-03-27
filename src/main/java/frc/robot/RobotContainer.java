@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-//import frc.robot.team8410.commands.AutoSequeCmd;
+import frc.robot.team8410.commands.AutoSequeCmd;
 //import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -38,6 +38,7 @@ import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.HangPart1Cmd;
 import frc.robot.team8410.commands.UnwindWinchCommand;
+import frc.robot.team8410.commands.Winchstop;
 import frc.robot.team8410.commands.WindWinchCommand;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -57,8 +58,9 @@ public class RobotContainer {
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
 
   private final AutoDrivetrainSubSystem autoDrivetrain = new AutoDrivetrainSubSystem();
+  private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
   private final AutoDriveCommand auto = new AutoDriveCommand(autoDrivetrain, -0.8);
-
+  private final AutoSequeCmd sequ = new AutoSequeCmd(autoDrivetrain, intakeRollerSubSystem);
   
   private final DutyCycleEncoder encSingleStage = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
   private final DutyCycleEncoder encTwoStage = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT) ;
@@ -72,8 +74,6 @@ public class RobotContainer {
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
 
-
-private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
 private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
 private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
@@ -86,8 +86,9 @@ private final AnalogInput potSensor = new AnalogInput(Constants.INTAKE_ARM_POT_P
   private final TwoStageClimber twoStageSub = new TwoStageClimber();
   private final TwoStageExtendCmd twoStageExtCmd = new TwoStageExtendCmd(twoStageSub, 4,encTwoStage);
   private final TwoStageDescendCmd twoStageDeCmd = new TwoStageDescendCmd(twoStageSub, 4,encTwoStage);
-  private final WindWinchCommand windwinch = new WindWinchCommand(winchSubSys, 1.3,encWinch);
-  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winchSubSys, 1.6, encWinch);
+  private final WindWinchCommand windwinch = new WindWinchCommand(winchSubSys, encWinch);
+  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winchSubSys, encWinch);
+  private final Winchstop stopwinch = new Winchstop(winchSubSys);
   
   //private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
     //  Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
@@ -180,8 +181,10 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
     oneStageDown.whenPressed(oneStageDecendCmd);
     oneStageUp.whenPressed(oneStageExtendCmd);
     twostagedescend.whenPressed(twoStageDeCmd);
-    twostagewinch.whenReleased(unwindwinch);
+    twostagewinch.whenPressed(unwindwinch);
+    twostagewinch.whenReleased(stopwinch);
     twostageunwinch.whenPressed(windwinch);
+    twostageunwinch.whenReleased(stopwinch);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
     twoStageExtend.whenPressed(twoStageExtCmd); // extend the two stage  
@@ -197,7 +200,7 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
   {
     // An ExampleCommand will run in autonomous
 
-    return auto;// TODO change this to the name of the auto command
+    return sequ;// TODO change this to the name of the auto command
   }
 
 

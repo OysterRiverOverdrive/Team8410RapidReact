@@ -16,10 +16,10 @@ public class WindWinchCommand extends CommandBase {
   private DutyCycleEncoder winchEncoder;
   private double rotations;
 
-  public WindWinchCommand(WinchSubsystem winch, double rotations, DutyCycleEncoder encoder ) 
+  public WindWinchCommand(WinchSubsystem winch, DutyCycleEncoder encoder ) 
   {
-    winchEncoder = encoder;
-    this.rotations = rotations;
+    // winchEncoder = encoder;
+    // this.rotations = rotations;
     this.winch = winch; 
     
     addRequirements(winch);
@@ -30,8 +30,8 @@ public class WindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    winchEncoder.reset();
-    winchEncoder.isConnected();
+    // winchEncoder.reset();
+    // winchEncoder.isConnected();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,12 +55,12 @@ public class WindWinchCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
-    {
-      //TODO check # of rotations needed
-      winch.stopMotor();
-      retVal = true;
-    }
+    // if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
+    // {
+    //   //TODO check # of rotations needed
+    //   winch.stopMotor();
+    //   retVal = true;
+    // }
     return retVal;
   }
 }

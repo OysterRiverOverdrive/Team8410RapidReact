@@ -23,7 +23,7 @@ public class HangPart1Cmd extends SequentialCommandGroup {
   {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new WindWinchCommand(winch, 1.3,encWinch ), // this will drop the fatty out
+    addCommands(new WindWinchCommand(winch,encWinch ), // this will drop the fatty out
     //new OneStageExtendCmd(oneStage, 7.9, encSingleStage) // this will extend the one stage out
     new OneStageExtendCmd(oneStage, 7.9, encSingleStage)
 

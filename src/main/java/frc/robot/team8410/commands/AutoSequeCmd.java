@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.team8410.subsystems.AutoDrivetrainSubSystem;
 
 
+//import frc.robot.team8410.commands.RollerPushAuto;
+import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
+
+
 
 
 
@@ -17,9 +21,9 @@ import frc.robot.team8410.subsystems.AutoDrivetrainSubSystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoSequeCmd extends SequentialCommandGroup {
   /** Creates a new AutoSequeSubsystem. */
-  public AutoSequeCmd(AutoDrivetrainSubSystem drive) {
+  public AutoSequeCmd(AutoDrivetrainSubSystem drive, IntakeRollerSubsystem roller) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoDriveCommand(drive,0.5)); // test these numbers
+    addCommands(new RollerPushAuto(roller),new AutoDriveCommand(drive,0.5)); // test these numbers
   }
 }
