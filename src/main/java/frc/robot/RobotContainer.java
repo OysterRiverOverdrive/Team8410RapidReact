@@ -30,6 +30,7 @@ import frc.robot.team8410.commands.TwoStageDescendCmd;
 // import frc.robot.team8410.sensors.WinchEncoder;
 // import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.AutoDrivetrainSubSystem;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 import frc.robot.team8410.subsystems.OneStageClimber;
@@ -41,26 +42,8 @@ import frc.robot.team8410.commands.WindWinchCommand;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
-//import frc.robot.team8410.subsystems.WinchSubsystem;
-
-
-/*
-import frc.robot.team8410.commands.DriverAutoCmd;
-import frc.robot.team8410.commands.UnwindWinchCommand;
-import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
-*/
 
 import edu.wpi.first.wpilibj.Joystick;
-
-
-/*import frc.robot.team8410.commands.hangCmd;
-import frc.robot.team8410.subsystems.OneStageClimber;
-import frc.robot.team8410.subsystems.TwoStageClimber;*/
-
-
-//package frc.robot.team8410.sensors;
-
-
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -73,25 +56,14 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final TeleopDriveCommand teleopCommand = new TeleopDriveCommand(drivetrain);
 
+  private final AutoDrivetrainSubSystem autoDrivetrain = new AutoDrivetrainSubSystem();
+  private final AutoDriveCommand auto = new AutoDriveCommand(autoDrivetrain, -0.8);
 
-
-
-  //  ashish commented private final PowerDistribution powerDistribution = new PowerDistribution();
-
+  
   private final DutyCycleEncoder encSingleStage = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
   private final DutyCycleEncoder encTwoStage = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT) ;
   private final DutyCycleEncoder encWinch = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);
   
-
-
-  private final DrivetrainSubsystem drivetrainSubSys = new DrivetrainSubsystem();
-  private final TeleopDriveCommand teleop = new TeleopDriveCommand(drivetrainSubSys);
-  private final AutoDriveCommand auto = new AutoDriveCommand(drivetrainSubSys, -0.5);
-  // private final AutoSequeCmd auto = new AutoSequeCmd(drivetrain);
-  // private final PowerDistribution powerDistribution = new PowerDistribution();
-
-//  private final PotSensor potSensor = new PotSensor();
-  // private final WinchEncoder winchEncoder = new WinchEncoder();
   private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
   // private final DriverAutoCmd autostraightCmd = new DriverAutoCmd(drivetrain, intakeArmSubSystem, potSensor);
   //private final DiagnosticsSubSystem diagnosticSubSys = new DiagnosticsSubSystem();// this way the peroidic in the
@@ -99,25 +71,18 @@ public class RobotContainer {
   private final WinchSubsystem winchSubSys = new WinchSubsystem();
   private final TwoStageClimber twoStage = new TwoStageClimber();
   private final OneStageClimber oneStage = new OneStageClimber();
-  // private final hangCmd hang = new hangCmd(winch, twoStage, oneStage);
 
 
 private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
 private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
 private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
 private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
-// private final IntakeArmSubSystem intakeArmSubSystem = new IntakeArmSubSystem();
-// private final PotSensor potSensor = new PotSensor();
 private final AnalogInput potSensor = new AnalogInput(Constants.INTAKE_ARM_POT_PORT_ID);
 
   private final RaiseIntakeCmd raiseIntakeCmd = new RaiseIntakeCmd(intakeArmSubSystem, potSensor);
   private final LowerIntakeCmd lowerIntakeCmd = new LowerIntakeCmd(intakeArmSubSystem, potSensor);
 
-  // private final IntakeRollerSubsystem intakeRollerSubSystem = new IntakeRollerSubsystem();
-  // private final RollerPull rollerPull = new RollerPull(intakeRollerSubSystem);
-  // private final RollerPush rollerPush = new RollerPush(intakeRollerSubSystem);
-  // private final RollerStop rollerStop = new RollerStop(intakeRollerSubSystem);
-
+ 
   private final TwoStageClimber twoStageSub = new TwoStageClimber();
   private final TwoStageExtendCmd twoStageExtCmd = new TwoStageExtendCmd(twoStageSub, 4,encTwoStage);
   private final TwoStageDescendCmd twoStageDeCmd = new TwoStageDescendCmd(twoStageSub, 4,encTwoStage);
@@ -167,24 +132,7 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
    */
   private void configureButtonBindings() 
   {
-    /*
-      Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
-      // POVButton hangButton = new POVButton(joystick, 0);
-      //sets POV Button at angle 0 (top of the dpad on xbox controller)
-      System.out.println("hang button pressed");
-      // hangButton.whenPressed(hang);
-      
-      //POVButton winchButton = new POVButton(joystick, 0);
-      JoystickButton AutoButton = new JoystickButton(joystick,
-      Constants.DRIVER_ASSIST_BUTTON);
-      // System.out.println("intake button pressed");
-      //sets POV Button at angle 0 (top of the dpad on xbox controller)
-      
-      AutoButton.whenPressed(autostraightCmd);
-      
-      // winchButton.whenReleased(stop);
-     */
-
+    
     Joystick driver = new Joystick(Constants.DRIVER_PORT);
     Joystick operator = new Joystick(Constants.OPERATOR_PORT);
     // Trigger rollerPullButton = new Trigger() {
@@ -222,6 +170,7 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
     JoystickButton twostagedescend = new JoystickButton(operator, 1);
     JoystickButton rollerPushButton = new JoystickButton(operator, 10);
     JoystickButton rollerPullButton = new JoystickButton(operator, 9);
+    JoystickButton twoStageExtend = new JoystickButton(operator, 2);
     POVButton twostagewinch = new POVButton(operator, 90);
     rollerPullButton.whenPressed(rollerPull);
     rollerPullButton.whenReleased(rollerStop);
@@ -233,6 +182,7 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
     twostagewinch.whenReleased(unwindwinch);
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
+    twoStageExtend.whenPressed(twoStageExtCmd); // extend the two stage  
 
   }
 
@@ -241,8 +191,17 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousCommand() 
+  {
     // An ExampleCommand will run in autonomous
+
     return auto;// TODO change this to the name of the auto command
   }
+
+
+public TeleopDriveCommand getTeleOpCommand()
+{
+  return teleopCommand;
+}
+
 }
