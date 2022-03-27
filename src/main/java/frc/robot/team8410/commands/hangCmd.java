@@ -33,45 +33,16 @@ public class hangCmd extends SequentialCommandGroup {
     addCommands(
     //ground to mid
 
-    /*new UnwindWinchCommand(winch, 5),
-    new TwoStageExtendCmd(twoStage,11,enc),
-    new WindWinchCommand(winch,11),    //TODO verify distances
-    new TwoStageDescendCmd(twoStage,11,enc),
-    new OneStageExtendCmd(oneStage,11,enc), 
-    new OneStageDescendCmd(oneStage, 3.0,enc),
-    //mid to highs
-    new UnwindWinchCommand(winch, 5.0),
-    new TwoStageExtendCmd(twoStage, 28.5,enc), 
-    new WindWinchCommand(winch, 5.0),
-    new TwoStageDescendCmd(twoStage, 28.5,enc),
-    new OneStageExtendCmd(oneStage, 3.0, enc),
-    new WindWinchCommand(winch, 5.0),
-    new OneStageDescendCmd(oneStage, 3.0, enc),
-    //high to traversal
-    new UnwindWinchCommand(winch, 5.0),
-    new TwoStageExtendCmd(twoStage, 28.5, enc), 
-    new WindWinchCommand(winch, 5.0),
-    new TwoStageDescendCmd(twoStage, 28.5,enc),
-    new OneStageExtendCmd(oneStage, 3.0, enc),
-    new WindWinchCommand(winch, 5.0),
-    new OneStageDescendCmd(oneStage, 3.0,enc));*/
-
-    new TwoStageExtendCmd(twoStage, 8.0, encTwoStage), // this is extend the two stage
-    
+    //new TwoStageExtendCmd(twoStage, 8.0, encTwoStage), // this is extend the two stage
+    new TwoStageDescendCmd(twoStage, 8.00, encTwoStage),
     new OneStageDescendCmd(oneStage, 8.5, encSingleStage),  // pull down the one stages
-    //new WindWinchCommand(winch, 1.66, encWinch), // drop the fatty
-    
-    
-    new UnwindWinchCommand(winch, 1.1, encWinch), // pull the fatty
-     
+    new UnwindWinchCommand(winch, 1.1, encWinch), // pull the fatty back
     new TwoStageDescendCmd(twoStage, 7.00, encTwoStage), // pull down the two stage 
-    //new TwoStageDescendCmd(twoStage, 2.00, encTwoStage),// pull fatty just to get on bar
+    new OneStageExtendCmd(oneStage, 7.9, encSingleStage)); // let go of the one stage by extending
 
-    //new UnwindWinchCommand(winch, 1.1, encWinch),//winch fatty to get one stage off bar
-
-   // new TwoStageDescendCmd(twoStage, 5.00, encTwoStage));//pull the up on the high hang
-
-   new OneStageExtendCmd(oneStage, 7.9, encSingleStage));
+    // This is if we want to try the keep Hanging thing
+    //new KeepHangingTwoStageCommand(twoStage, encTwoStage.get(),encTwoStage));  // keep hanging
+   // this will keep the bot hanging
 
   }
 }

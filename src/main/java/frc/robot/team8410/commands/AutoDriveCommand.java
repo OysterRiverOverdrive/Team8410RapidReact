@@ -7,15 +7,16 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.AutoDrivetrainSubSystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoDriveCommand extends CommandBase {
-  private DrivetrainSubsystem drive;
+  private AutoDrivetrainSubSystem drive;
   private double speedForDrive;
   private Timer timer = new Timer();
 
-  public AutoDriveCommand(DrivetrainSubsystem drv, double speed) {
+  public AutoDriveCommand(AutoDrivetrainSubSystem drv, double speed) {
     drive = drv;
     speedForDrive = speed;
     
@@ -33,8 +34,10 @@ public class AutoDriveCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    drive.driveTheBot(speedForDrive, 0);
+  public void execute() 
+  {
+    SmartDashboard.putString("autoCommand","driving ");
+    drive.driveTheAutoBot(-0.5, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -48,7 +51,11 @@ public class AutoDriveCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    if (timer.get() >= 2)
+    double currTime = timer.get();
+
+    SmartDashboard.putNumber("time", currTime);
+
+    if (currTime >= 2)
     {
       retVal = true;
     }else

@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
-// import frc.robot.team8410.sensors.UltrasonicFront;
-// import frc.robot.team8410.sensors.UltrasonicLeft;
-// import frc.robot.team8410.sensors.UltrasonicRight;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -79,14 +76,19 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic() {}
 
   @Override
-  public void teleopInit() {
+  public void teleopInit() 
+  {
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
+    if (m_autonomousCommand != null) 
+    {
       m_autonomousCommand.cancel();
     }
+     
+    //set the tele op boolean variable to true;
+    m_robotContainer.getTeleOpCommand().setTeleOpMode(true);
 
   }
 
