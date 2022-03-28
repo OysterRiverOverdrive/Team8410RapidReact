@@ -26,6 +26,7 @@ import frc.robot.team8410.commands.RollerStop;
 import frc.robot.team8410.commands.TeleopDriveCommand;
 import frc.robot.team8410.commands.TwoStageExtendCmd;
 import frc.robot.team8410.commands.TwoStageDescendCmd;
+import frc.robot.team8410.sensors.SensorValues;
 // import frc.robot.team8410.sensors.PotSensor;
 // import frc.robot.team8410.sensors.WinchEncoder;
 // import frc.robot.team8410.subsystems.DiagnosticsSubSystem;
@@ -109,6 +110,8 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
       oneStage,
       encWinch,
       encSingleStage);
+
+  // private final SensorValues sensorValues = new SensorValues();
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

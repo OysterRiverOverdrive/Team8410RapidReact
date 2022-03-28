@@ -122,7 +122,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
     }
 
     //displaying sensor values
-    SmartDashboard.putNumber("Lidar Distance", sensorValues.getLidarDistanceInches());
+    // SmartDashboard.putNumber("Lidar Distance", sensorValues.getLidarDistanceInches());
     SmartDashboard.putNumber("Ultrasonic Back", sensorValues.getUltrasonicBackInches());
     SmartDashboard.putNumber("Ultrasonic Left", sensorValues.getUltrasonicLeftInches());
     SmartDashboard.putNumber("Ultrasonic Right", sensorValues.getUltrasonicRightInches());
