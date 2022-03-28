@@ -10,14 +10,14 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 
-// import frc.robot.team8410.sensors.Color_RevroboticsVer3;
-// import frc.robot.team8410.sensors.Color_TCS34725_I2C;
+import frc.robot.team8410.sensors.Color_RevroboticsVer3;
+import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.team8410.commands.TeleopDriveCommand;
-// import frc.robot.team8410.sensors.SensorValues;
+import frc.robot.team8410.sensors.SensorValues;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
@@ -43,8 +43,10 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
-  private ColorSensorV3 colorRevSensor;
-  private ColorSensorV3 colorTCSSensor;
+  private final SensorValues sensorValues = new SensorValues();
+
+  private Color_RevroboticsVer3 colorRevSensor;
+  private Color_TCS34725_I2C colorTCSSensor;
 
   private boolean isTCSSensorGood;
   private boolean isRevColorSensorGood;
@@ -52,13 +54,14 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   Color detectedColor = m_colorSensor.getColor();
   double redOverBlue = detectedColor.red/detectedColor.blue;
  
-  public DiagnosticsSubSystem(AnalogInput UltrasonicF, AnalogInput UltrasonicR, AnalogInput UltrasonicL, ColorSensorV3 TCS, ColorSensorV3) 
+  public DiagnosticsSubSystem() 
   {
 
   //  sensorValues = new SensorValues(); 
     // Reuse buffer
     // Default to a length of 60, start empty output
     // Length is expensive to set, so only set it once, then just update data
+    // AnalogInput UltrasonicF, AnalogInput UltrasonicR, AnalogInput UltrasonicL, ColorSensorV3 TCS, ColorSensorV3
      m_led.setLength(m_ledBuffer.getLength());
      m_led.setData(m_ledBuffer);
      m_led.start();
