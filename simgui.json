@@ -1,15 +1,34 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "Talon SRX[7]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/AutoDrivetrainSubSystem": "Subsystem",
       "/LiveWindow/DrivetrainSubsystem": "Subsystem",
-      "/LiveWindow/HangerSubsystem": "Subsystem",
+      "/LiveWindow/IntakeArmSubSystem": "Subsystem",
+      "/LiveWindow/IntakeRollerSubsystem": "Subsystem",
+      "/LiveWindow/OneStageClimber": "Subsystem",
+      "/LiveWindow/TwoStageClimber": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
-      "/LiveWindow/Ungrouped/DigitalInput[0]": "Digital Input",
-      "/LiveWindow/Ungrouped/DigitalInput[1]": "Digital Input",
-      "/LiveWindow/Ungrouped/MotorControllerGroup[1]": "Motor Controller",
-      "/LiveWindow/Ungrouped/MotorControllerGroup[2]": "Motor Controller",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+      "/LiveWindow/Ungrouped/DifferentialDrive[2]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/DigitalInput[5]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[6]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[8]": "Digital Input",
+      "/LiveWindow/Ungrouped/MotorControllerGroup[5]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon SRX [5]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [6]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [7]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [8]": "Motor Controller",
+      "/LiveWindow/WinchSubsystem": "Subsystem"
     }
   }
 }

@@ -7,20 +7,19 @@ package frc.robot.team8410.commands;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.subsystems.AutoDrivetrainSubSystem;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoDriveCommand extends CommandBase {
-  private DrivetrainSubsystem drive;
+  private AutoDrivetrainSubSystem drive;
   private double speedForDrive;
-  private double distanceInInches;
+  private Timer timer = new Timer();
 
-  private final Encoder leftSideEncoder = new Encoder(Constants.LEFT_ENCODER_0, Constants.LEFT_ENCODER_1);
-  private final Encoder rightSideEncoder = new Encoder(Constants.RIGHT_ENCODER_2, Constants.RIGHT_ENCODER_3);
-
-  public AutoDriveCommand(DrivetrainSubsystem drv, double speed, double distance) {
+  public AutoDriveCommand(AutoDrivetrainSubSystem drv, double speed) {
     drive = drv;
     speedForDrive = speed;
-    distanceInInches = distance;
+    
     addRequirements(drv);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -28,18 +27,17 @@ public class AutoDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    leftSideEncoder.reset();
-    rightSideEncoder.reset();
-    leftSideEncoder.setDistancePerPulse(Math.PI * 6 / 360);// pi * wheel dia / counts per a revulution
-    rightSideEncoder.setDistancePerPulse(Math.PI * 6 / 360);// pi * wheel dia / counts per a revulution
-    System.out.println("encoders reset and distance set");
+    timer.reset();
+    timer.start();   
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    drive.driveTheBot(speedForDrive, 0);
+  public void execute() 
+  {
+    SmartDashboard.putString("autoCommand","driving ");
+    drive.driveTheAutoBot(-0.5, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -53,12 +51,19 @@ public class AutoDriveCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    if ((leftSideEncoder.getDistance() + rightSideEncoder.getDistance()) / 2 <= distanceInInches) {
+    double currTime = timer.get();
+
+    SmartDashboard.putNumber("time", currTime);
+
+    if (currTime >= 2.5)
+    {
       retVal = true;
-      drive.driveTheBot(0, 0);
-      System.out.println("i have reached the distance i had to go");
+    }else
+    {
+      retVal = false;
     }
 
+    
     return retVal;
   }
 }

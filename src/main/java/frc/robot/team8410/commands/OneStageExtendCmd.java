@@ -5,6 +5,7 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.team8410.subsystems.OneStageClimber;
@@ -13,15 +14,15 @@ public class OneStageExtendCmd extends CommandBase {
   /** Creates a new OneStageExtendCmd. */
   private OneStageClimber oneStage;
   private DutyCycleEncoder oneStageLeftEncoder;
-  private double oneStageExtendDist;
+  private double oneStageExtendRotation;
+  private double previousValue;
   
-  public OneStageExtendCmd(OneStageClimber stageOne, double dist, DutyCycleEncoder enc) {
-    oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
+  public OneStageExtendCmd(OneStageClimber stageOne, double rotation, DutyCycleEncoder enc) {
+    //oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
     
-    oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402); //double check this value
-
+  
     oneStage = stageOne;
-    oneStageExtendDist = dist;
+    oneStageExtendRotation = rotation;
     oneStageLeftEncoder = enc;
 
 
@@ -36,6 +37,7 @@ public class OneStageExtendCmd extends CommandBase {
   {
     oneStageLeftEncoder.reset();
     oneStageLeftEncoder.isConnected();
+    previousValue = 1000.00;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,6 +49,8 @@ public class OneStageExtendCmd extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    oneStage.stopMotor();
+    SmartDashboard.putString("one stage", "one stage extend done");
   }
 
   // Returns true when the command should end.
@@ -55,12 +59,18 @@ public class OneStageExtendCmd extends CommandBase {
     boolean retVal = false;
     // System.out.println(Math.abs(twoStageEncoder.getDistance()));
 
-    if(Math.abs(oneStageLeftEncoder.getDistance()) >= oneStageExtendDist)// change number to real encoder number
+
+    double value = oneStageLeftEncoder.get();
+
+    SmartDashboard.putNumber("One stage enc extend", value);
+
+    if((value == previousValue) ||(Math.abs(value) >= oneStageExtendRotation))// change number to real encoder number
     {
       //TODO check # of rotations needed
-      oneStage.stopMotor();
+      
       retVal = true;
     }
+    previousValue = value;
     return retVal;
   }
 }

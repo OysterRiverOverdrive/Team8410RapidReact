@@ -6,24 +6,27 @@ package frc.robot.team8410.commands;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.Constants;
 
 
 public class TeleopDriveCommand extends CommandBase {
   /** Creates a new TeleopDriveCommand. */
 
   private final DrivetrainSubsystem driveSub;
-  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(Constants.SLR_FOR_TURN);// from 2 to 2.5
-  private final SlewRateLimiter slrForDrive = new SlewRateLimiter(Constants.SLR_FOR_DRIVE);
+  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(3.5);// from 2 to 2.5
+  private final SlewRateLimiter slrForDrive = new SlewRateLimiter(2.2);
 
-  private final Joystick m_stick = new Joystick(Constants.JOYSTICK_PORT);
+  private final Joystick m_stick = new Joystick(Constants.DRIVER_PORT);
+  private boolean isTeleOp = false;
 
-  public TeleopDriveCommand( DrivetrainSubsystem drive) 
+  public TeleopDriveCommand( DrivetrainSubsystem drive)  
   {
     driveSub = drive;
     addRequirements(drive);
+    
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -35,12 +38,21 @@ public class TeleopDriveCommand extends CommandBase {
   @Override
   public void execute() 
   {
-      double turn = slrForTurn.calculate(m_stick.getRawAxis(Constants.SLR_FOR_TURN_RAW_AXIS)*0.75);
-      double speed = slrForDrive.calculate (m_stick.getRawAxis(Constants.SLR_FOR_DRIVE_RAW_AXIS)*-0.85);
-      driveSub.driveTheBot(speed, turn);
 
-    
+    if(isTeleOp)
+    {
+      double turn = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
+      double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+      driveSub.driveTheBot(speed, turn);
+    }
+
   }
+
+  public void setTeleOpMode(boolean teleOPMode)
+  {
+    isTeleOp = teleOPMode;
+  }
+
 
   // Called once the command ends or is interrupted.
   @Override

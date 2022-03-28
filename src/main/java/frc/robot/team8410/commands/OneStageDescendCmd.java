@@ -4,8 +4,9 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.sensors.OneStageLeftEncoder;
+//import frc.robot.team8410.sensors.OneStageLeftEncoder;
 import frc.robot.team8410.subsystems.OneStageClimber;
 
 public class OneStageDescendCmd extends CommandBase {
@@ -13,14 +14,16 @@ public class OneStageDescendCmd extends CommandBase {
   private OneStageClimber oneStage;
   private DutyCycleEncoder oneStageLeftEncoder;
   private double dist;
+  private double previousValue;
+  
 
 
   public OneStageDescendCmd(OneStageClimber oneStage, double EncValue, DutyCycleEncoder enc) {
   //oneStageLeftEncoder = new DutyCycleEncoder(Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
 
-  oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402);
+  //oneStageLeftEncoder.setDistancePerRotation(Math.PI * 0.787402);
 
-  System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+  //System.out.println("Command called &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
   this.oneStage = oneStage;
   dist = EncValue;
   oneStageLeftEncoder = enc;
@@ -34,6 +37,7 @@ public class OneStageDescendCmd extends CommandBase {
   {
     oneStageLeftEncoder.reset();
     oneStageLeftEncoder.isConnected();
+    previousValue = 1000.00;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,20 +49,26 @@ public class OneStageDescendCmd extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putString("one stage decend", "done");
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() 
+  {
     boolean retVal = false;
-    // System.out.println(Math.abs(twoStageEncoder.getDistance()));
+    double value = oneStageLeftEncoder.get();
+    
+    SmartDashboard.putNumber("two stage enc descnd", value);
+    SmartDashboard.putNumber("Previous Value", value);
 
-    if(Math.abs(oneStageLeftEncoder.getDistance()) >= dist)// fix encoder value
+    if((value == previousValue) || (Math.abs(value) >= dist))// fix encoder value
     {
       //TODO check # of rotations needed
       oneStage.stopMotor();
       retVal = true;
     }
+    previousValue = value;
     return retVal;
   }
 }
