@@ -17,14 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
-public class DrivetrainSubsystem extends SubsystemBase {
+public class AutoDrivetrainSubSystem extends SubsystemBase {
 
   // in our robot we have two motors on left
   private final WPI_TalonSRX m_left1 = new WPI_TalonSRX(Constants.LEFT_MOTOR_1_CANID);
   private final WPI_TalonSRX m_left2 = new WPI_TalonSRX(Constants.LEFT_MOTOR_2_CANID);
 
-
-  
 
   MotorControllerGroup leftSide = new MotorControllerGroup(m_left1, m_left2);
   
@@ -43,7 +41,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
  
   /** Creates a new DrivetrainSubsystem. */
-  public DrivetrainSubsystem() 
+  public AutoDrivetrainSubSystem() 
   {
     
     rightSide.setInverted(true);
@@ -51,12 +49,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   }
 //allows to input speed and turn for the robot
-  public void driveTheBot (double speed, double turn)
+  public void driveTheAutoBot (double speed, double turn)
   {
-    SmartDashboard.putString("Driving sub system","Driving at subsystem");
-    SmartDashboard.putNumber("Speed",speed);
+    SmartDashboard.putString("Driving Auto sub system","Driving at subsystem");
+    SmartDashboard.putNumber(" Auto Speed",speed);
+    SmartDashboard.putString(" Auto Speed expected ","-0.5");
     
-    m_robotDrive.arcadeDrive(speed,turn);
+    m_robotDrive.arcadeDrive(-0.5,0);
     
   }
 

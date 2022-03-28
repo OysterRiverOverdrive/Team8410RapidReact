@@ -4,30 +4,33 @@
 
 package frc.robot.team8410.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 public class IntakeRollerSubsystem extends SubsystemBase {
   /** Creates a new IntakeRollerSubsystem. */
-
+  
   private final WPI_TalonSRX m_roller = new WPI_TalonSRX(6);
-
+  
+  
   public IntakeRollerSubsystem() {
-
+    
+  }
+  public void pull()
+  {
+    m_roller.set(-0.8);// was 0.8 speed
   }
 
-  public void pull() {
-    m_roller.set(-(Constants.INTAKE_ROLLER_MOTOR_SPEED));// was 0.8 speed
+  public void push()
+  {
+    m_roller.set(0.8);
   }
-
-  public void push() {
-    m_roller.set(Constants.INTAKE_ROLLER_MOTOR_SPEED);
-  }
-
-  public void stop() {
+  public void stop()
+  {
     m_roller.set(0);
   }
 

@@ -4,11 +4,14 @@
 
 package frc.robot.team8410.commands;
 
+
+
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.WinchSubsystem;
+//import frc.robot.team8410.commands.TwoStageExtendCmd;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,35 +21,29 @@ public class hangCmd extends SequentialCommandGroup {
 
   //private  DutyCycleEncoder EncoderSensor;
 
-  public hangCmd(WinchSubsystem winch, TwoStageClimber twoStage, OneStageClimber oneStage, DutyCycleEncoder enc) {
+  public hangCmd(WinchSubsystem winch, 
+                 TwoStageClimber twoStage, 
+                 OneStageClimber oneStage, 
+                 DutyCycleEncoder encSingleStage,
+                 DutyCycleEncoder encTwoStage,
+                 DutyCycleEncoder encWinch) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
     addCommands(
     //ground to mid
-    new UnwindWinchCommand(winch, 5),
-    new TwoStageExtendCmd(twoStage,11,enc),
-    new WindWinchCommand(winch,11),    //TODO verify distances
-    new TwoStageDescendCmd(twoStage,11,enc),
-    new OneStageExtendCmd(oneStage,11,enc), 
-    new OneStageDescendCmd(oneStage, 3.0,enc),
-    //mid to highs
-    new UnwindWinchCommand(winch, 5.0),
-    new TwoStageExtendCmd(twoStage, 28.5,enc), 
-    new WindWinchCommand(winch, 5.0),
-    new TwoStageDescendCmd(twoStage, 28.5,enc),
-    new OneStageExtendCmd(oneStage, 3.0, enc),
-    new WindWinchCommand(winch, 5.0),
-    new OneStageDescendCmd(oneStage, 3.0, enc),
-    //high to traversal
-    new UnwindWinchCommand(winch, 5.0),
-    new TwoStageExtendCmd(twoStage, 28.5, enc), 
-    new WindWinchCommand(winch, 5.0),
-    new TwoStageDescendCmd(twoStage, 28.5,enc),
-    new OneStageExtendCmd(oneStage, 3.0, enc),
-    new WindWinchCommand(winch, 5.0),
-    new OneStageDescendCmd(oneStage, 3.0,enc));
-    
+
+    //new TwoStageExtendCmd(twoStage, 8.0, encTwoStage), // this is extend the two stage
+    new TwoStageDescendCmd(twoStage, 8.00, encTwoStage),
+    new OneStageDescendCmd(oneStage, 8.5, encSingleStage),  // pull down the one stages
+    new UnwindWinchCommand(winch, encWinch), // pull the fatty back
+    new TwoStageDescendCmd(twoStage, 7.00, encTwoStage), // pull down the two stage 
+    new OneStageExtendCmd(oneStage, 7.9, encSingleStage)); // let go of the one stage by extending
+
+    // This is if we want to try the keep Hanging thing
+    //new KeepHangingTwoStageCommand(twoStage, encTwoStage.get(),encTwoStage));  // keep hanging
+   // this will keep the bot hanging
+
   }
 }
 

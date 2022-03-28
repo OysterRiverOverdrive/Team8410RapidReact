@@ -1,20 +1,27 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.team8410.sensors.PotSensor;
 import frc.robot.team8410.subsystems.IntakeArmSubSystem;
+// import frc.robot.team8410.sensors.PotSensor;
+import edu.wpi.first.wpilibj.AnalogInput;
 
-public class LowerIntakeCmd extends CommandBase {
-  private PotSensor pot;
+public class LowerIntakeCmd extends CommandBase 
+{
+  private AnalogInput pot;
   private IntakeArmSubSystem intakeArmSubSys;
-  private double currPOTVoltage;
+  private double currPOTVoltage ;
   private double speed;
 
   /** Creates a new LowerIntakeCmd. */
-  public LowerIntakeCmd(IntakeArmSubSystem intakeSubSystem, PotSensor potSensor) {
+  public LowerIntakeCmd(IntakeArmSubSystem intakeSubSystem, AnalogInput potSensor) 
+  {
     intakeArmSubSys = intakeSubSystem;
-    pot = potSensor;
+    this.pot = potSensor;
     speed = 0;
     addRequirements(intakeSubSystem);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,49 +30,52 @@ public class LowerIntakeCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    speed = 0;
+    speed = 0.3;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute()
+  {
+    double currPOTVoltage = pot.getAverageVoltage();
 
-    double currPOTVoltage = pot.getPOTVoltage();
-
-    if (currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION) {
+    if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_CAUTION)
+    {
       // Make the speed more negative until reaching -(max speed)
       speed = speed - 0.01;
-      if (speed <= -Constants.INTAKE_RAISE_MAX_SPEED)
-        speed = -Constants.INTAKE_RAISE_MAX_SPEED;
+      if(speed <= -Constants.INTAKE_RAISE_MAX_SPEED)
+         speed = -Constants.INTAKE_RAISE_MAX_SPEED;
     }
 
-    else if (currPOTVoltage > Constants.INTAKE_POT_LOW_CAUTION && currPOTVoltage <= Constants.INTAKE_POT_HIGH_CAUTION) {
+    else if(currPOTVoltage > Constants.INTAKE_POT_LOW_CAUTION && currPOTVoltage <= Constants.INTAKE_POT_HIGH_CAUTION)
+    {
       speed = -Constants.INTAKE_RAISE_MAX_SPEED;
     }
-    if (currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION) {
+    if(currPOTVoltage <= Constants.INTAKE_POT_LOW_CAUTION)
+    {
       // Slowly bring the speed back to zero.
-      speed = speed + 0.01;
-      if (speed <= 0)
+      speed = speed + 0.01 ;
+      if(speed <=0)
         speed = 0;
-
+      
     }
 
-    intakeArmSubSys.lower(speed);
+    intakeArmSubSys.lower(-0.3);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() 
+  {
     boolean retVal = false;
-    currPOTVoltage = pot.getPOTVoltage();
+    currPOTVoltage = pot.getAverageVoltage();
 
-    if (currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)// Value needs to be tweaked
+    if(currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)//Value needs to be tweaked
     {
 
       retVal = true;

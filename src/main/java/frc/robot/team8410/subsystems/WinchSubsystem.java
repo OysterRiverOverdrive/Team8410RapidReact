@@ -8,52 +8,40 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-/**
- * What does this class need to do
- * 
- * two method
- * 
- * method 1 - unwind()
- * Methiod 2 - wind()
- * Methid 3 - stop winding
- * 
- * 
- */
 
-public class WinchSubsystem extends SubsystemBase {
+public class WinchSubsystem extends SubsystemBase 
+{
   /** Creates a new Winch. */
-  // PWMVictorSPX winchMotor = new PWMVictorSPX(Constants.WINCH_MOTOR_CANID); This
-  // is real
-
   private final WPI_TalonSRX winchMotor = new WPI_TalonSRX(Constants.WINCH_MOTOR_CANID);
 
-  public WinchSubsystem() {
+  public WinchSubsystem() 
+  {
+    
   }
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     // This method will be called once per scheduler run
   }
 
   // wind motor
-  public void wind() {
+  public void wind() 
+  {
     winchMotor.set(0.4);
-    // TODO verify rotation and speed
-
   }
 
   // unwind
-  public void unWind() {
+  public void unWind() 
+  {
     winchMotor.set(-0.4);
-    // TODO verify rotation and speed
-
   }
 
   // stop the winch motor
 
-  public void stopMotor() {
+  public void stopMotor() 
+  {
     winchMotor.stopMotor();
-
   }
 
 }

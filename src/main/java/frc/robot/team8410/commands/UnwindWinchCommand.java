@@ -5,24 +5,25 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.team8410.sensors.WinchEncoder;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 
 public class UnwindWinchCommand extends CommandBase {
   /** Creates a new UnwindWinch. */
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
-  private double unwindWinchDist;
+  private double rotations;
   
-  public UnwindWinchCommand(WinchSubsystem winch, double winchDist) 
+  public UnwindWinchCommand(WinchSubsystem winch,  DutyCycleEncoder enc) 
+  // double winchRotation,
   {
-    winchEncoder = new DutyCycleEncoder(Constants.HANGER_WINCH_ENCODER_PORT);  //TODO move this out to robot container
-    winchEncoder.setDistancePerRotation(1.0);
+      //TODO move this out to robot container
+  
     
     this.winch = winch; 
-    unwindWinchDist = winchDist;
+    // rotations = winchRotation;
+    winchEncoder = enc;
     addRequirements(winch);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -30,8 +31,8 @@ public class UnwindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    winchEncoder.reset();
-    winchEncoder.isConnected();
+    // winchEncoder.reset();
+    // winchEncoder.isConnected();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,22 +46,24 @@ public class UnwindWinchCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
 
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted) 
+  {
+    winch.stopMotor();
+    SmartDashboard.putString("unwind winch", "done");
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished()
+   {
     boolean retVal = false;
-   
-
-
-    if(Math.abs(winchEncoder.getDistance()) >= unwindWinchDist)// change and mesure encoder value
-    {
-      //TODO check # of rotations needed
-      winch.stopMotor();
-      retVal = true;
-    }
+    
+    // if(Math.abs(winchEncoder.get()) >= rotations)// change and mesure encoder value
+    // {
+    //   //TODO check # of rotations needed
+      
+    //   retVal = true;
+    // }
     return retVal;
   }
 

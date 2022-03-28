@@ -5,22 +5,24 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.sensors.TwoStageEncoder;
+//import frc.robot.team8410.sensors.TwoStageEncoder;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 
 public class TwoStageDescendCmd extends CommandBase {
   /** Creates a new TwoStageDescendCmd. */
   private TwoStageClimber twoStage;
   private DutyCycleEncoder twoStageEncoder;
-  private double twoStageDescendDist;
+  private double rotations;
+  private double previousValue;
 
   public TwoStageDescendCmd(TwoStageClimber twoStage,double DescendDist, DutyCycleEncoder enc) {
     //twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
-    enc.setDistancePerRotation(Math.PI * 0.787402);
+    //enc.setDistancePerRotation(Math.PI * 0.787402);
 
     twoStageEncoder = enc;
-    twoStageDescendDist = DescendDist;
+    rotations = DescendDist;
     this.twoStage = twoStage;
     addRequirements(twoStage);
 
@@ -35,31 +37,42 @@ public class TwoStageDescendCmd extends CommandBase {
   {
     twoStageEncoder.reset();
     twoStageEncoder.isConnected();
+    previousValue = 1000.00;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    System.out.println("Command executed");
+  public void execute() 
+  {
     twoStage.descend();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted) 
+  {
+    twoStage.stopMotor();
+    
+    SmartDashboard.putString("two stage decend", "done");
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() 
+  {
     boolean retVal = false;
 
-    if(Math.abs(twoStageEncoder.getDistance()) >= twoStageDescendDist) //two stage needs to descend 28.5 in need to change encoder values
+    double value = twoStageEncoder.get();
+
+    SmartDashboard.putNumber("tow stage enc - descend", value);
+
+    if((previousValue == value) ||(Math.abs(value) >= rotations)) //two stage needs to descend 28.5 in need to change encoder values
     {
       // TODO check # of rotations needed
-      twoStage.stopMotor();
+      //twoStage.stopMotor();
       retVal = true;
     }
+    previousValue = value;
     return retVal;
   }
 

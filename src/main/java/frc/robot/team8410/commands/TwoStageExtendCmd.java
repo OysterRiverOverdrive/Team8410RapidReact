@@ -5,25 +5,25 @@
 package frc.robot.team8410.commands;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.team8410.sensors.TwoStageEncoder;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 
 public class TwoStageExtendCmd extends CommandBase {
   /** Creates a new TwoStageExtendCmd. */
   private TwoStageClimber twoStage;
- private DutyCycleEncoder twoStageEnc;
-  private double dist;
+  private DutyCycleEncoder twoStageEnc;
+  private double rotations;
+  private double previousValue;
 
 
   
  
   public TwoStageExtendCmd(TwoStageClimber twoStage, double EncoderValue, DutyCycleEncoder twoStageEncoder) {
     //twoStageEncoder = new DutyCycleEncoder(Constants.HANGER_TWO_STAGE_ENCODER_PORT);
-    twoStageEncoder.setDistancePerRotation(Math.PI * 0.787204); //circumference of two stage is 0.787204 pi inches
-   
+    
     this.twoStage = twoStage; 
-    dist = EncoderValue;
+    rotations = EncoderValue;
     twoStageEnc = twoStageEncoder;
     addRequirements(twoStage);
 
@@ -35,33 +35,38 @@ public class TwoStageExtendCmd extends CommandBase {
   public void initialize() {
     twoStageEnc.reset();
     twoStageEnc.isConnected();
+    previousValue = 1000.00;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    System.out.println("Command executed");
-    twoStage.extend();
+  public void execute()
+  {
+        twoStage.extend();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted) 
+  {
+    twoStage.stopMotor();
+    SmartDashboard.putString("two stage extend", "done");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     boolean retVal = false;
-    System.out.println(Math.abs(twoStageEnc.getDistance()));
+
+    double value = twoStageEnc.get();
+    SmartDashboard.putNumber("tow stage enc - descend", value);
 
 
-    if(Math.abs(twoStageEnc.getDistance()) >= dist) //two stage needs to extend 28.5 in need to fix encoder value
+    if((previousValue == value)||(Math.abs(value) >= rotations)) //two stage needs to extend 28.5 in need to fix encoder value
     {
-      // TODO check # of rotations needed
-      twoStage.stopMotor();
       retVal = true;
     }
+    previousValue= value;
     return retVal;
   }
 }

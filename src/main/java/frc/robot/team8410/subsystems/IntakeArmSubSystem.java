@@ -6,33 +6,46 @@ package frc.robot.team8410.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class IntakeArmSubSystem extends SubsystemBase {
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; 
 
-  private final WPI_TalonSRX intakeLifterMotor = new WPI_TalonSRX(Constants.INTAKE_LIFTER_MOTOR_CANID);
+
+
+public class IntakeArmSubSystem extends SubsystemBase 
+{
+
+  private final WPI_TalonSRX intakeLifterMotor = new WPI_TalonSRX(Constants.INTAKE_LIFTER_MOTOR_CANID);  
 
   /** Creates a new IntakeRiseSubSystem. */
-  public IntakeArmSubSystem() {
-
+  public IntakeArmSubSystem() 
+  {
+    intakeLifterMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     // This method will be called once per scheduler run
   }
 
+
   // this will run the motor
-  public void rise(double speed) {
+  public void rise(double speed)
+  {
     intakeLifterMotor.set(speed);
   }
 
-  public void lower(double speed) {
+  public void lower(double speed)
+  {
     intakeLifterMotor.set(speed);
   }
 
   // stop the motor
-  public void stop() {
+  public void stop()
+  {
     intakeLifterMotor.stopMotor();
   }
 
