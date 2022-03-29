@@ -13,13 +13,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.team8410.sensors.Color_RevroboticsVer3;
-import frc.robot.team8410.sensors.Color_TCS34725_I2C;
 import frc.robot.team8410.sensors.SensorValues;
+//import frc.robot.team8410.sensors.Color_RevroboticsVer3;
+//import frc.robot.team8410.sensors.Color_TCS34725_I2C;
+//import frc.robot.team8410.sensors.SensorValues;
 
 public class DiagnosticsSubSystem extends SubsystemBase {
   /** Creates a new DiagnosticsSubSystem. */
 
+  
   private final SensorValues sensorValues;
 
   private final PowerDistribution powerDistribution = new PowerDistribution(Constants.PDP_CAN_ID,
