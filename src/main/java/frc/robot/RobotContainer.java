@@ -37,6 +37,9 @@ import frc.robot.team8410.subsystems.OneStageClimber;
 import frc.robot.team8410.subsystems.TwoStageClimber;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.commands.HangPart1Cmd;
+import frc.robot.team8410.commands.HangPart3Cmd;
+import frc.robot.team8410.commands.HangPart4Cmd;
+import frc.robot.team8410.commands.hangCmd;
 import frc.robot.team8410.commands.UnwindWinchCommand;
 import frc.robot.team8410.commands.Winchstop;
 import frc.robot.team8410.commands.WindWinchCommand;
@@ -86,8 +89,8 @@ private final AnalogInput potSensor = new AnalogInput(Constants.INTAKE_ARM_POT_P
   private final TwoStageClimber twoStageSub = new TwoStageClimber();
   private final TwoStageExtendCmd twoStageExtCmd = new TwoStageExtendCmd(twoStageSub, 4,encTwoStage);
   private final TwoStageDescendCmd twoStageDeCmd = new TwoStageDescendCmd(twoStageSub, 4,encTwoStage);
-  private final WindWinchCommand windwinch = new WindWinchCommand(winchSubSys, encWinch);
-  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winchSubSys, encWinch);
+  private final WindWinchCommand windwinch = new WindWinchCommand(winchSubSys, encWinch, 2.00);// change value
+  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winchSubSys, encWinch,2.00);// change value
   private final Winchstop stopwinch = new Winchstop(winchSubSys);
   
   //private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
@@ -98,7 +101,7 @@ private final AnalogInput potSensor = new AnalogInput(Constants.INTAKE_ARM_POT_P
                                                                                                                // enc
                                                                                                                // value
 
-     private final hangCmd hangAutonomousCommand = new hangCmd(winchSubSys, 
+     private final hangCmd hang = new hangCmd(winchSubSys, 
      twoStage,
      oneStage,
      encSingleStage,
@@ -109,6 +112,12 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
       oneStage,
       encWinch,
       encSingleStage);
+
+
+private final HangPart3Cmd hangPart3 = new HangPart3Cmd(winchSubSys,twoStage,oneStage,encWinch,encTwoStage,encSingleStage);
+private final HangPart4Cmd hangPart4 = new HangPart4Cmd(winchSubSys, twoStage, oneStage, encWinch, encTwoStage, encSingleStage);
+
+
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -147,13 +156,13 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
     // rollerPullButton.whenInactive(rollerStop);
 
     // This button will drop the two stage and then raise the two onestage hangers.
-    POVButton hangPartOne = new POVButton(operator, 0);
+    POVButton hangPartOne = new POVButton(driver, 0);
     hangPartOne.whenPressed(hangPart1);  
 
 
 
-    POVButton hangPartTwo = new POVButton(operator, 180);
-    hangPartTwo.whenReleased(hangAutonomousCommand); // this button will 
+    POVButton hanger = new POVButton(driver, 90);
+    hanger.whenPressed(hang); // this button will 
 
     // Trigger rollerPushButton = new Trigger() {
     //   @Override
@@ -166,27 +175,42 @@ private final HangPart1Cmd hangPart1 =      new HangPart1Cmd(winchSubSys,
 
     JoystickButton intakeButtonrise = new JoystickButton(operator, Constants.INTAKE_BUTTON_RISE);
     JoystickButton intakeButtonlower = new JoystickButton(operator, Constants.INTAKE_BUTTON_LOWER);
-    JoystickButton oneStageDown = new JoystickButton(operator, 8);
-    JoystickButton oneStageUp = new JoystickButton(operator, 7);
+    JoystickButton oneStageDown = new JoystickButton(operator, 4);
+    JoystickButton oneStageUp = new JoystickButton(operator, 3);
     JoystickButton twostagedescend = new JoystickButton(operator, 1);
     JoystickButton rollerPushButton = new JoystickButton(operator, 10);
     JoystickButton rollerPullButton = new JoystickButton(operator, 9);
     JoystickButton twoStageExtend = new JoystickButton(operator, 2);
-    POVButton twostagewinch = new POVButton(operator, 90);
-    POVButton twostageunwinch = new POVButton(operator, 270);
+
+    POVButton hangerPart3 = new POVButton(driver, 270);
+    POVButton hangerPart4 = new POVButton(driver, 180);
+
+    
+
+
+
+
     rollerPullButton.whenPressed(rollerPull);
     rollerPullButton.whenReleased(rollerStop);
     rollerPushButton.whenPressed(rollerPush);
     rollerPushButton.whenReleased(rollerStop);
+
     oneStageDown.whenPressed(oneStageDecendCmd);
     oneStageUp.whenPressed(oneStageExtendCmd);
+
     twostagedescend.whenPressed(twoStageDeCmd);
-    twostagewinch.whenPressed(unwindwinch);
-    twostagewinch.whenReleased(stopwinch);
-    twostageunwinch.whenPressed(windwinch);
-    twostageunwinch.whenReleased(stopwinch);
+
+    
+
+
+    hangerPart3.whenPressed(hangPart3);
+    
+    hangerPart4.whenPressed(hangPart4);
+    
+
     intakeButtonrise.whenPressed(raiseIntakeCmd);
     intakeButtonlower.whenPressed(lowerIntakeCmd);
+
     twoStageExtend.whenPressed(twoStageExtCmd); // extend the two stage  
 
   }

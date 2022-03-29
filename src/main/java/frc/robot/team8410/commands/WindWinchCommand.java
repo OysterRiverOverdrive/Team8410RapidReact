@@ -16,11 +16,12 @@ public class WindWinchCommand extends CommandBase {
   private DutyCycleEncoder winchEncoder;
   private double rotations;
 
-  public WindWinchCommand(WinchSubsystem winch, DutyCycleEncoder encoder ) 
+  public WindWinchCommand(WinchSubsystem winch, DutyCycleEncoder encoder, double encValue ) 
   {
     // winchEncoder = encoder;
     // this.rotations = rotations;
     this.winch = winch; 
+    rotations = encValue;
     
     addRequirements(winch);
 
@@ -55,12 +56,12 @@ public class WindWinchCommand extends CommandBase {
   public boolean isFinished() {
     boolean retVal = false;
 
-    // if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
-    // {
-    //   //TODO check # of rotations needed
-    //   winch.stopMotor();
-    //   retVal = true;
-    // }
+     if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
+     {
+     //TODO check # of rotations needed
+     winch.stopMotor();
+     retVal = true;
+     }
     return retVal;
   }
 }

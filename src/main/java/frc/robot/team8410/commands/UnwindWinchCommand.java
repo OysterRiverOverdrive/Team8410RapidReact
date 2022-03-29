@@ -15,14 +15,14 @@ public class UnwindWinchCommand extends CommandBase {
   private DutyCycleEncoder winchEncoder;
   private double rotations;
   
-  public UnwindWinchCommand(WinchSubsystem winch,  DutyCycleEncoder enc) 
+  public UnwindWinchCommand(WinchSubsystem winch,  DutyCycleEncoder enc, double encValue) 
   // double winchRotation,
   {
       //TODO move this out to robot container
   
     
     this.winch = winch; 
-    // rotations = winchRotation;
+     rotations = encValue;
     winchEncoder = enc;
     addRequirements(winch);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -58,12 +58,12 @@ public class UnwindWinchCommand extends CommandBase {
    {
     boolean retVal = false;
     
-    // if(Math.abs(winchEncoder.get()) >= rotations)// change and mesure encoder value
-    // {
-    //   //TODO check # of rotations needed
+     if(Math.abs(winchEncoder.get()) >= rotations)// change and mesure encoder value
+     {
+       //TODO check # of rotations needed
       
-    //   retVal = true;
-    // }
+       retVal = true;
+     }
     return retVal;
   }
 
