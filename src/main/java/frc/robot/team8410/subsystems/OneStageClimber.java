@@ -32,12 +32,12 @@ public class OneStageClimber extends SubsystemBase
 
   public void extend() 
   {
-    oneStageGroup.set(0.9);
+    oneStageGroup.set(1);//  changed to 100 %
   }
 
   public void descend() 
   {
-    oneStageGroup.set(-0.9);
+    oneStageGroup.set(-1); // changed to 100 %
   }
 
   public void stopMotor() 

@@ -15,6 +15,7 @@ public class RaiseIntakeCmd extends CommandBase
   private AnalogInput pot;
   private IntakeArmSubSystem intakeArmSubSys;
   private double speed;
+  private double prevValue;
 
   /** Creates a new RaiseIntakeCmd. */
   public RaiseIntakeCmd(IntakeArmSubSystem intakeSubSystem, AnalogInput potSensor) 
@@ -30,6 +31,7 @@ public class RaiseIntakeCmd extends CommandBase
   @Override
   public void initialize() {
     speed = 0.3;
+    prevValue = 10000;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -59,7 +61,7 @@ public class RaiseIntakeCmd extends CommandBase
       
     }
 
-    intakeArmSubSys.rise(0.7);
+    intakeArmSubSys.rise(0.9);
 
   }
 
@@ -74,13 +76,15 @@ public class RaiseIntakeCmd extends CommandBase
     boolean retVal = false;
     double currPOTVoltage = pot.getAverageVoltage();
 
-    if(currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
+    if(prevValue == currPOTVoltage||currPOTVoltage >= Constants.INTAKE_POT_HIGH_STOP)
     {
 
       retVal = true;
       intakeArmSubSys.stop();
 
     }
+
+    prevValue = currPOTVoltage;
     return retVal;
   }
 }
