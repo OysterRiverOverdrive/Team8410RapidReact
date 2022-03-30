@@ -14,6 +14,7 @@ public class UnwindWinchCommand extends CommandBase {
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
   private double rotations;
+  private double previousValue;
   
   public UnwindWinchCommand(WinchSubsystem winch,  DutyCycleEncoder enc, double encValue) 
   // double winchRotation,
@@ -31,14 +32,15 @@ public class UnwindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // winchEncoder.reset();
-    // winchEncoder.isConnected();
+    winchEncoder.reset();
+    winchEncoder.isConnected();
+    previousValue = 1000;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Command executed");
+    System.out.println("unwind Command executed");
     winch.unWind();
 
   }
@@ -57,13 +59,17 @@ public class UnwindWinchCommand extends CommandBase {
   public boolean isFinished()
    {
     boolean retVal = false;
+    double value = winchEncoder.get();
+    System.out.println("encoder value: " + winchEncoder.get());
     
-     if(Math.abs(winchEncoder.get()) >= rotations)// change and mesure encoder value
+     if((previousValue == value || Math.abs(value) >= rotations))// change and mesure encoder value
      {
        //TODO check # of rotations needed
+       System.out.println("I am finished." + winchEncoder.get());
       
        retVal = true;
      }
+     previousValue = value;
     return retVal;
   }
 

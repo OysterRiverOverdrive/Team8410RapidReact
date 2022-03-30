@@ -4,6 +4,8 @@
 
 package frc.robot.team8410.commands;
 
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
+
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -15,6 +17,7 @@ public class WindWinchCommand extends CommandBase {
   private WinchSubsystem winch;
   private DutyCycleEncoder winchEncoder;
   private double rotations;
+  private double previousValue;
 
   public WindWinchCommand(WinchSubsystem winch, DutyCycleEncoder encoder, double encValue ) 
   {
@@ -22,6 +25,7 @@ public class WindWinchCommand extends CommandBase {
     // this.rotations = rotations;
     this.winch = winch; 
     rotations = encValue;
+    winchEncoder = encoder;
     
     addRequirements(winch);
 
@@ -31,8 +35,9 @@ public class WindWinchCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // winchEncoder.reset();
-    // winchEncoder.isConnected();
+    winchEncoder.reset();
+    winchEncoder.isConnected();
+    previousValue = 1000;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,13 +60,17 @@ public class WindWinchCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retVal = false;
+    double value = winchEncoder.get();
+    System.out.println(" Wind encoder value: " + winchEncoder.get());
 
-     if(Math.abs(winchEncoder.get()) >= rotations)// change encoder value
+
+     if((previousValue == value)||(Math.abs(value) >= rotations))// change encoder value
      {
      //TODO check # of rotations needed
      winch.stopMotor();
      retVal = true;
      }
+     previousValue = value;
     return retVal;
   }
 }

@@ -89,8 +89,8 @@ private final AnalogInput potSensor = new AnalogInput(Constants.INTAKE_ARM_POT_P
   private final TwoStageClimber twoStageSub = new TwoStageClimber();
   private final TwoStageExtendCmd twoStageExtCmd = new TwoStageExtendCmd(twoStageSub, 4,encTwoStage);
   private final TwoStageDescendCmd twoStageDeCmd = new TwoStageDescendCmd(twoStageSub, 4,encTwoStage);
-  private final WindWinchCommand windwinch = new WindWinchCommand(winchSubSys, encWinch, 2.00);// change value
-  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winchSubSys, encWinch,2.00);// change value
+  private final WindWinchCommand windwinch = new WindWinchCommand(winchSubSys, encWinch, 1.80);// change value
+  private final UnwindWinchCommand unwindwinch = new UnwindWinchCommand(winchSubSys, encWinch,1.80);// change value
   private final Winchstop stopwinch = new Winchstop(winchSubSys);
   
   //private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
@@ -163,6 +163,13 @@ private final HangPart4Cmd hangPart4 = new HangPart4Cmd(winchSubSys, twoStage, o
 
     POVButton hanger = new POVButton(driver, 90);
     hanger.whenPressed(hang); // this button will 
+
+    POVButton winchManualIn = new POVButton(operator, 90);
+    winchManualIn.whenPressed(windwinch);
+
+    POVButton winchManualOut = new POVButton(operator, 270);
+    winchManualOut.whenPressed(unwindwinch);
+
 
     // Trigger rollerPushButton = new Trigger() {
     //   @Override

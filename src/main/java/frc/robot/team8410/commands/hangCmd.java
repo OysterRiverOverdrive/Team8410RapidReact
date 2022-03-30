@@ -34,11 +34,12 @@ public class hangCmd extends SequentialCommandGroup {
     //ground to mid
 
     //new TwoStageExtendCmd(twoStage, 8.0, encTwoStage), 
-    new TwoStageDescendCmd(twoStage, 8.00, encTwoStage),// this is extend the two stage
+    new TwoStageExtendCmd(twoStage, 8.00, encTwoStage),// this is extend the two stage
     new OneStageDescendCmd(oneStage, 8.5, encSingleStage),  // pull down the one stages
     new UnwindWinchCommand(winch, encWinch, 2.00), // pull the fatty back// need to change values
     new TwoStageDescendCmd(twoStage, 7.00, encTwoStage), // pull down the two stage 
-    new OneStageExtendCmd(oneStage, 7.9, encSingleStage)); // let go of the one stage by extending
+    new OneStageExtendCmd(oneStage, 7.9, encSingleStage),
+    new WindWinchCommand(winch, encWinch, 2.00)); // let go of the one stage by extending
 
     // This is if we want to try the keep Hanging thing
     //new KeepHangingTwoStageCommand(twoStage, encTwoStage.get(),encTwoStage));  // keep hanging
