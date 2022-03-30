@@ -16,7 +16,7 @@ public class TeleopDriveCommand extends CommandBase {
   /** Creates a new TeleopDriveCommand. */
 
   private final DrivetrainSubsystem driveSub;
-  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(3.5);// from 2 to 2.5
+  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(4.0);// from 2 to 2.5 to 3.5 to 4.0
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(2.2);
 
   private final Joystick m_stick = new Joystick(Constants.DRIVER_PORT);
@@ -42,7 +42,9 @@ public class TeleopDriveCommand extends CommandBase {
     if(isTeleOp)
     {
       double turn = slrForTurn.calculate(m_stick.getRawAxis(4)*0.75);
-      double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+      //double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+      double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.95);//todo new value .95
+
       driveSub.driveTheBot(speed, turn);
     }
 
