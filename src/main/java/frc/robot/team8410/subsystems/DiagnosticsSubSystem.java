@@ -33,8 +33,6 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
-  private Color_RevroboticsVer3 colorRevSensor;
-  private Color_TCS34725_I2C colorTCSSensor;
 
   private boolean isTCSSensorGood;
   private boolean isRevColorSensorGood;
@@ -51,27 +49,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
     m_led.setLength(m_ledBuffer.getLength());
     m_led.setData(m_ledBuffer);
     m_led.start();
-    try {
-      // TODO this needs to be tested on real bot
-      colorTCSSensor = new Color_TCS34725_I2C();
-      colorTCSSensor.initialize(2, 1);
-      isTCSSensorGood = true;
-    } catch (Exception e) {
-      // initialization of the sensor failed - do not read this value
-      isTCSSensorGood = false;
-      System.out.println("Could not initi TCS sensor");
-      e.printStackTrace();
-    }
-
-    try {
-      // initialization of the sensor failed. Do not read this value
-      colorRevSensor = new Color_RevroboticsVer3();
-      isRevColorSensorGood = true;
-    } catch (Exception e) {
-      isRevColorSensorGood = false;
-      System.out.println("Could not initi Rev sensor");
-      e.printStackTrace();
-    }
+  
 
   }
 
@@ -79,17 +57,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    if (isTCSSensorGood) {
-      sensorValues.setBallColor_TSCSensor(colorTCSSensor.getBallColor());
-    } else {
-      sensorValues.setBallColor_TSCSensor("BAD");
-    }
-
-    if (isRevColorSensorGood) {
-      sensorValues.setBallColor_RevSensor(colorRevSensor.getBallColor());
-    } else {
-      sensorValues.setBallColor_RevSensor("BAD");
-    }
+  
 
     // displaying sensor values
     SmartDashboard.putNumber("Lidar Distance", sensorValues.getLidarDistanceInches());
@@ -132,23 +100,7 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
 
       //replacement 4 LED code since it's not being used for this comp
-      if (colorTCSSensor.getBallColor() == "RED") {
-
-        SmartDashboard.putBoolean("Ball Color 1", false);
-
-      } else if (colorTCSSensor.getBallColor() == "BLUE") {
-        SmartDashboard.putBoolean("Ball Color 1", true);
-      }
-
-
-      if (colorRevSensor.getBallColor() == "RED") {
-
-        SmartDashboard.putBoolean("Ball Color 2", false);
-
-      } else if (colorRevSensor.getBallColor() == "BLUE" ) {
-        
-        SmartDashboard.putBoolean("Ball Color 2", true);
-      }
+  
 
 
 
@@ -214,53 +166,9 @@ public class DiagnosticsSubSystem extends SubsystemBase {
       }
     }
 
-    if (colorTCSSensor.getBallColor() == "RED") {
+  
 
-      // Q3
-
-      for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
-        m_ledBuffer.setRGB(i, 255, 0, 0);
-      }
-
-    } else if (colorTCSSensor.getBallColor() == "Blue") {
-
-      for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
-
-        m_ledBuffer.setRGB(i, 0, 0, 255);
-
-      }
-
-    } else {
-
-      for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
-
-        m_ledBuffer.setRGB(i, 0, 0, 0);
-
-      }
-
-    }
-
-    if (colorRevSensor.getBallColor() == "RED") {
-
-      // Q4
-
-      for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
-
-        m_ledBuffer.setRGB(i, 255, 0, 0);
-
-      }
-    } else if (colorRevSensor.getBallColor() == "BLUE") {
-
-      for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
-
-        m_ledBuffer.setRGB(i, 0, 0, 255);
-      }
-    } else {
-
-      for (var i = 3 * m_ledBuffer.getLength() / 4; i < 4 * m_ledBuffer.getLength() / 4; i++) {
-
-        m_ledBuffer.setRGB(i, 0, 0, 0);
-      }
+  
 
     }
 
@@ -306,4 +214,3 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
   }
 
-}

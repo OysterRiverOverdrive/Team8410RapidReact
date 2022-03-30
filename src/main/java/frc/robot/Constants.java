@@ -75,4 +75,8 @@ public final class Constants
    public static int DRIVER_ASSIST_APPROACH_ALG_INVPARAB = 2;
    public boolean armTrue = true;
 
+   // adds LED constants
+   public static final int M_LED_PORT = 4; // assigns port 4 LEDs
+   public static final int LED_BUFFER_LEGNTH = 432; // sets LED buffer length
+
 }
