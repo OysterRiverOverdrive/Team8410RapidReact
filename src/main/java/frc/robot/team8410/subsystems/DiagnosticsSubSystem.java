@@ -166,6 +166,28 @@ public class DiagnosticsSubSystem extends SubsystemBase {
       }
     }
 
+
+   if (powerDistribution.getVoltage() > 10) {
+
+    for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
+
+      
+      m_ledBuffer.setRGB(i, 12, 232, 247);
+    }
+
+   } else if (powerDistribution.getVoltage() < 10) {
+
+      for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++) {
+
+      
+        m_ledBuffer.setRGB(i, 225, 52, 235);
+      }
+   } else {
+
+    for (var i = 2 * m_ledBuffer.getLength() / 4; i < 3 * m_ledBuffer.getLength() / 4; i++)
+    m_ledBuffer.setRGB(i, 0, 0, 0);
+
+   }
   
 
   
