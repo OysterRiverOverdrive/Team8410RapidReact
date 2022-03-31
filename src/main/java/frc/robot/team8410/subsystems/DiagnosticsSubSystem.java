@@ -33,9 +33,11 @@ public class DiagnosticsSubSystem extends SubsystemBase {
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
+  private int m_rainbowFirstPixelHue = 0;
 
-  private boolean isTCSSensorGood;
-  private boolean isRevColorSensorGood;
+
+  //private boolean isTCSSensorGood;
+  //private boolean isRevColorSensorGood;
 
   Color detectedColor = m_colorSensor.getColor();
   double redOverBlue = detectedColor.red / detectedColor.blue;
@@ -108,6 +110,27 @@ public class DiagnosticsSubSystem extends SubsystemBase {
 
     }
   }
+
+
+    public void rainbowGoldfish() {
+
+    // attempt at rainbow LED code
+
+    for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+      // Calculate the hue - hue is easier for rainbows because the color
+      // shape is a circle so only one value needs to precess
+      final var hue = (m_rainbowFirstPixelHue + (i * 180 / m_ledBuffer.getLength())) % 180;
+      // Set the value
+      m_ledBuffer.setHSV(i, 0, 255, 128);
+    }
+    // Increase by to make the rainbow "move"
+    m_rainbowFirstPixelHue += 3;
+
+    // Check bounds
+    m_rainbowFirstPixelHue %= 180;
+
+  }  
+
 
   public void bakeVanillaGoldfish() {
     // code 4 LED stuff
