@@ -24,6 +24,7 @@ public class AutoSequeCmd extends SequentialCommandGroup {
   public AutoSequeCmd(AutoDrivetrainSubSystem drive, IntakeRollerSubsystem roller) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new RollerPushAuto(roller),new AutoDriveCommand(drive,0.5)); // test these numbers
+    addCommands(new RollerPushAuto(roller),
+                new AutoDriveCommand(drive,0.5)); // test these numbers
   }
 }
