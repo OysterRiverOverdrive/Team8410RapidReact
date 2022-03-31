@@ -16,6 +16,7 @@ public class LowerIntakeCmd extends CommandBase
   private IntakeArmSubSystem intakeArmSubSys;
   private double currPOTVoltage ;
   private double speed;
+  private double prevValue;
 
   /** Creates a new LowerIntakeCmd. */
   public LowerIntakeCmd(IntakeArmSubSystem intakeSubSystem, AnalogInput potSensor) 
@@ -31,6 +32,7 @@ public class LowerIntakeCmd extends CommandBase
   @Override
   public void initialize() {
     speed = 0.3;
+    prevValue = 1000;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -75,13 +77,14 @@ public class LowerIntakeCmd extends CommandBase
     boolean retVal = false;
     currPOTVoltage = pot.getAverageVoltage();
 
-    if(currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)//Value needs to be tweaked
+    if(prevValue == currPOTVoltage||currPOTVoltage <= Constants.INTAKE_POT_LOW_STOP)//Value needs to be tweaked
     {
 
       retVal = true;
       intakeArmSubSys.stop();
 
     }
+    prevValue = currPOTVoltage;
     return retVal;
   }
 }

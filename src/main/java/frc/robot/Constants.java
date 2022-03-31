@@ -47,8 +47,8 @@ public final class Constants
    public static int JOYSTICK_RIGHT_TRIGGER = 3;
 
    // Intake prameters
-   public static double INTAKE_RAISE_MAX_SPEED = 0.6; // The fastest in both directions we want the motor to run.
-   public static double INTAKE_POT_HIGH_STOP = 2.1; // The point we consider fully up.
+   public static double INTAKE_RAISE_MAX_SPEED = 0.8; // The fastest in both directions we want the motor to run.// was 0.6 speed
+   public static double INTAKE_POT_HIGH_STOP = 2.2; // The point we consider fully up.// was 2.1
    public static double INTAKE_POT_HIGH_CAUTION = 1.8; // The point during raise where we start slowing down.
    public static double INTAKE_POT_LOW_CAUTION = 1.8; // The point during lowering where we start slowing down.
    public static double INTAKE_POT_LOW_STOP = 1.0; // The point we consider fully down.

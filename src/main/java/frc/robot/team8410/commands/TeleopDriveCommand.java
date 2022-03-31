@@ -16,7 +16,7 @@ public class TeleopDriveCommand extends CommandBase {
   /** Creates a new TeleopDriveCommand. */
 
   private final DrivetrainSubsystem driveSub;
-  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(4.0);// from 2 to 2.5 to 3.5 to 4.0
+  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(4.5);// from 2 to 2.5 to 3.5 to 4.0 to 4.5
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(2.2);
 
   private final Joystick m_stick = new Joystick(Constants.DRIVER_PORT);
