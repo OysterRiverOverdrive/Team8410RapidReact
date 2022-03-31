@@ -145,6 +145,8 @@ private final HangPart4Cmd hangPart4 = new HangPart4Cmd(winchSubSys, twoStage, o
     
     Joystick driver = new Joystick(Constants.DRIVER_PORT);
     Joystick operator = new Joystick(Constants.OPERATOR_PORT);
+
+
     // Trigger rollerPullButton = new Trigger() {
     //   @Override
     //   public boolean get() {
@@ -159,6 +161,7 @@ private final HangPart4Cmd hangPart4 = new HangPart4Cmd(winchSubSys, twoStage, o
     POVButton hangPartOne = new POVButton(driver, 0);
     hangPartOne.whenPressed(hangPart1);  
 
+   
 
 
     POVButton hanger = new POVButton(driver, 90);
@@ -191,6 +194,8 @@ private final HangPart4Cmd hangPart4 = new HangPart4Cmd(winchSubSys, twoStage, o
 
     POVButton hangerPart3 = new POVButton(driver, 270);
     POVButton hangerPart4 = new POVButton(driver, 180);
+
+    
 
     
 
