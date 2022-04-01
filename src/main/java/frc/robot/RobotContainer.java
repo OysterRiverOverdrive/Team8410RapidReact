@@ -46,6 +46,7 @@ import frc.robot.team8410.commands.WindWinchCommand;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import frc.robot.team8410.subsystems.DrivetrainSubsystem;
+import frc.robot.team8410.commands.OneStageStayCmd;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -96,6 +97,7 @@ private final AnalogInput potSensor = new AnalogInput(Constants.INTAKE_ARM_POT_P
   //private final DutyCycleEncoder oneStageLeftEncoder = new DutyCycleEncoder(
     //  Constants.HANGER_ONE_STAGE_LEFT_ENCODER_PORT);
   // private final hangCmd hang = new hangCmd(winchSub, twoStageSub, oneStage, oneStageLeftEncoder);
+  private final OneStageStayCmd oneStageStay = new OneStageStayCmd(oneStage, 7.9, encSingleStage);
   private final OneStageDescendCmd oneStageDecendCmd = new OneStageDescendCmd(oneStage, 7.9, encSingleStage);
   private final OneStageExtendCmd oneStageExtendCmd = new OneStageExtendCmd(oneStage, 7.9, encSingleStage);// change
                                                                                                                // enc
@@ -188,6 +190,15 @@ private final HangPart4Cmd hangPart4 = new HangPart4Cmd(winchSubSys, twoStage, o
     JoystickButton rollerPushButton = new JoystickButton(operator, 10);
     JoystickButton rollerPullButton = new JoystickButton(operator, 9);
     JoystickButton twoStageExtend = new JoystickButton(operator, 2);
+
+// for new staying hanging
+    JoystickButton singleStageStay = new JoystickButton(operator, 11);// change button
+    JoystickButton singleStopStay = new JoystickButton(operator, 12);// change button
+
+    singleStageStay.whenPressed(oneStageStay);
+
+    singleStopStay.cancelWhenActive(oneStageStay);// this will cancel the stay
+
 
     POVButton hangerPart3 = new POVButton(driver, 270);
     POVButton hangerPart4 = new POVButton(driver, 180);
