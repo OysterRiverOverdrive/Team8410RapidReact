@@ -8,6 +8,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.team8410.subsystems.WinchSubsystem;
 import frc.robot.team8410.subsystems.OneStageClimber;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import frc.robot.team8410.hangercommands.TwoStageExtendCmd;
+import frc.robot.team8410.hangercommands.TwoStageDescendCmd;
+import frc.robot.team8410.hangercommands.OneStageDescendCmd;
+import frc.robot.team8410.hangercommands.OneStageExtendCmd;
+import frc.robot.team8410.hangercommands.UnwindWinchCommand;
+import frc.robot.team8410.hangercommands.WindWinchCommand;
 
 
 
