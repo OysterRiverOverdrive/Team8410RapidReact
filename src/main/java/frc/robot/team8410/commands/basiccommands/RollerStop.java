@@ -2,15 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.team8410.commands;
+package frc.robot.team8410.commands.basiccommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.team8410.subsystems.IntakeRollerSubsystem;
 
-public class RollerPull extends CommandBase {
+public class RollerStop extends CommandBase {
   /** Creates a new RollerPull. */
   IntakeRollerSubsystem roller;
-  public RollerPull(IntakeRollerSubsystem rollers) {
+  public RollerStop(IntakeRollerSubsystem rollers) {
     roller = rollers;
     addRequirements(roller);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,7 +23,7 @@ public class RollerPull extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    roller.pull();
+    roller.stop();
   }
 
   // Called once the command ends or is interrupted.
